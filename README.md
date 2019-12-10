@@ -18,7 +18,7 @@ npm install accp -g
 
 ## Visual Code Extension
 
-Visual Code Extension Program accp api language ( preparing for distribution )
+Visual Code Extension Program accp api language **( preparing for distribution )**
 
 <br><br>
 
@@ -184,7 +184,7 @@ OBJ = {
 
 ## Language
 
-accp api language is provided as a visual code extension program.
+accp api language is provided as a visual code extension program. **( preparing for distribution )**
 
 #### .api
 
