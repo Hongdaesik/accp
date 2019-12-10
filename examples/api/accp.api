@@ -1,0 +1,232 @@
+
+import code/accp.code
+
+import struct/accp.struct
+
+API {
+  
+  /* mark 1 */
+  DEV_TEST_1 class 1 description {
+
+    BASE http://localhost:8080
+
+    TEST_API_1 1 function description {
+
+      COMP true
+
+      PROC {
+
+        2 DEV_TEST_1.TEST_API_2
+      }
+
+      POST test_1_1.api
+
+      MARK {
+
+        param1 mark variable explain
+      }
+
+      REQ {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 PARAM_DATA struct variable 
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+      }
+
+      RES {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 RES_DATA struct variable
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+        param8 [Int] int array variable
+        param9 [PARAM_DATA] struct array variable
+      }
+
+      OPT {
+
+        image true
+        option passed in the declared value
+      }
+    }
+
+    TEST_API_2 2 function description {
+
+      COMP true
+
+      PROC {
+
+        2 DEV_TEST_2.TEST_API_2
+      }
+
+      POST test_1_2.api
+
+      MARK {
+
+        param1 mark variable explain
+      }
+
+      REQ {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 PARAM_DATA struct variable 
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+      }
+
+      RES {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 RES_DATA struct variable
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+        param8 [Int] int array variable
+        param9 [PARAM_DATA] struct array variable
+      }
+    }
+  }
+
+  /* mark 2 */
+  DEV_TEST_2 class 2 description {
+
+    BASE http://localhost:8080
+
+    TEST_API_1 1 function description {
+
+      COMP true
+      
+      PROC {
+
+        2 DEV_TEST_1.TEST_API_2
+      }
+
+      MARK {
+
+        param1 mark variable explain
+      }
+
+      GET test_2_1.api
+
+      REQ {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 PARAM_DATA struct variable 
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+      }
+
+      RES {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 RES_DATA struct variable
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+        param8 [Int] int array variable
+        param9 [PARAM_DATA] struct array variable
+      }
+    }
+
+    TEST_API_2 2 function description {
+
+      COMP true
+      
+      MARK {
+
+        param1 mark variable explain
+      }
+
+      GET test_2_2.api
+
+      REQ {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 PARAM_DATA struct variable 
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+      }
+
+      RES {
+
+        param1 Int int variable
+        param2 Data data variable
+        param3 Float float variable
+        param4 Double double variable 
+        param5 String string variable
+        param6 RES_DATA struct variable
+        param7 Int description of the value {
+
+          0= explain value
+          1> explain value
+          2< explain value
+          3! explain value
+        }
+        param8 [Int] int array variable
+        param9 [PARAM_DATA] struct array variable
+      }
+    }
+  }
+}

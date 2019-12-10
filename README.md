@@ -1,0 +1,207 @@
+## Auto Create Code with Pattern files
+
+Built to automatically create API codes or documents using concise code. You can change the code to what you want by using the pattern.
+
+<br>
+
+<br>
+
+## Installation
+
+```bash
+npm install accp -g
+```
+
+<br>
+
+<br>
+
+## Visual Code Extension
+
+Visual Code Extension Program accp api language ( preparing for distribution )
+
+<br><br>
+
+## Example
+
+```bash
+accp --examples <folder>
+```
+
+An example file is created within the `<folder>`. Example project used a Swift pattern.
+
+The folder structure is as follows.
+
+| name      | description                            | ext                |
+| --------- | -------------------------------------- | ------------------ |
+| `api`     | Default document defining API.         | [.api](#api)       |
+| `code`    | Error Code Definition and Translation. | [.code](#code)     |
+| `struct`  | Structure used in API.                 | [.struct](#struct) |
+| `pattern` | Custom pattern files.                  | `.js`              |
+
+❗️  All files and folders are required.
+
+<br><br>
+
+## Compile
+
+```bash
+accp --compile
+```
+
+Compile progresses with reference to pattern file. Compilation results are returned to [OBJ](#obj) and [GEN](#gen).
+
+<img src="./img/compile.png" style="width: 50%; float: left" />
+
+<br>
+
+The following code shall be included in the pattern file.
+
+`pattern/*.js`
+
+```javascript
+module.exports = function( OBJ, GEN ) { 
+    
+	/* Please write your code */ 
+}
+```
+
+<br><br>
+
+## Return value
+
+#### GEN
+
+GEN is a function that helps you create files.
+
+##### initialization
+
+```javascript
+var api = new GEN( "file path" )
+```
+
+<br>
+
+##### method
+
+`api.open( encoding )` : Create write stream, default encoding `utf8`.
+
+`api.print( string )` : Write the content.
+
+`api.close()` : Close write stream.
+
+<br><br>
+
+#### OBJ
+
+Object created through `accp --compile`.
+
+```javascript
+OBJ = {
+
+	API: [ ( CLASS ) {
+		
+        BASE: String,
+        NAME: String,
+        MARK: String,
+        FUNC: [ ( FUNC ) {
+            
+            CODE: Int,
+            NAME: String,
+            DESC: String
+    		
+    		/* Request method: address */
+    		( POST | GET ): String
+    		
+    		/* Completion status */
+            COMP: ( true | false )
+    		
+    		/* Associative process */
+            PROC: [ {
+            	
+            	CODE: Int ( CLASS.FUNC.CODE ),
+            	NAME: String ( CLASS.FUNC.NAME )
+        	}, ... ],
+            
+            /* Comments about this function */
+            MARK: [ {
+                
+                NAME: String,
+                MARK: String
+            }, ... ],
+            
+            REQ: [ ( DATA ) {
+                
+                NAME: String,
+                MARK: String,
+                CLASS: String,
+                ARRAY: ( true | false ),
+                OPTION: {
+                    
+                    key: String,
+                    key: String, ...
+                }
+            }, ... ],
+            
+            /* Be the same as REQ */
+			RES: [ { ... } ],
+            
+            /* User defined value */
+            OPT: {
+            	
+                key: ( true | false ),
+                key: ( true | false ), ...
+            }
+        }, ... ]
+	}, ... ],
+	
+	CODE: [ ( CLASS ) {
+		
+        NAME: String,
+        MARK: String,
+        CODE: [ {
+            
+            CODE: Int,
+            NAME: String,
+            MARK: {
+                
+                key: String,
+                key: String, ...
+            }
+        } ],
+	}, ... ],
+	
+    STRUCT: [ {
+               
+    	NAME: String,
+        MARK: String,
+        
+        /* Be the same as REQ.DATA */
+        DATA: [ { ... } ]
+    }, ... ]
+}
+```
+
+<br><br>
+
+## Language
+
+accp api language is provided as a visual code extension program.
+
+#### .api
+
+![](https://blogfiles.pstatic.net/MjAxOTEyMTBfMjEw/MDAxNTc1OTU4Njc3MzEy.77TmebjcVPDqjJsPQ4_R3h2yksRjsaOu_3XMoBUS90og.195rNSOfkndzCSRf1G80EFeBkks77jzeLJnvKHnKj7og.PNG.8131010/api.png)
+
+#### .code
+
+![](https://blogfiles.pstatic.net/MjAxOTEyMTBfMjU3/MDAxNTc1OTU4Njc3MzA5.GcFn2pCGmKjcGRMT4gO83QcE0C-GmK5B-rao99KZ1g4g.o0vdJXDCqq5423qlm2XzcW8pKZ9qejBRbAw9b6KQYAwg.PNG.8131010/code.png)
+
+#### .struct
+
+![](https://blogfiles.pstatic.net/MjAxOTEyMTBfMjkx/MDAxNTc1OTU4Njc3MzEw.1ITOXYJW5QBnnH0n4ZFOv7NPRxl-VlICz8uYOYrxaRkg.8ASTvmu_BU6q9zmpiTjBG6VXFHLaiblG9WrCabPl_CYg.PNG.8131010/struct.png)
+
+<br><br>
+
+## License
+
+MIT

@@ -1,0 +1,37 @@
+STRUCT {
+
+  RES_DATA Response infomation {
+
+    param1 Int int variable
+    param2 Data data variable
+    param3 Float float variable
+    param4 Double double variable 
+    param5 String string variable
+    param6 PARAM_DATA struct variable 
+    param7 Int description of the value {
+
+      0= explain value
+      1> explain value
+      2< explain value
+      3! explain value
+    }
+    param8 [Int] int array variable
+    param9 [PARAM_DATA] struct array variable
+  }
+
+  PARAM_DATA Param infomation {
+
+    param1 Int int variable
+    param2 Data data variable
+    param3 Float float variable
+    param4 Double double variable
+    param5 String string variable
+    param6 Int description of the value {
+
+      0= explain value
+      1> explain value
+      2< explain value
+      3! explain value
+    }
+  }
+}

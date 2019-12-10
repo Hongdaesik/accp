@@ -1,0 +1,37 @@
+{
+  "name": "accp",
+  "main": "./lib/accp",
+  "bin": {
+    "accp": "./lib/accp.js"
+  },
+  "bugs": {
+    "email": "hongdaesik88@gmail.com"
+  },
+  "author": {
+    "name": "HONG DAESIK",
+    "email": "hongdaesik88@gmail.com"
+  },
+  "license": "MIT",
+  "version": "0.0.6-beta",
+  "keywords": [
+    "api",
+    "code",
+    "auto",
+    "swift",
+    "mysql",
+    "mssql",
+    "kotlin",
+    "nodejs",
+    "create",
+    "angular",
+    "pattern",
+    "generate"
+  ],
+  "description": "The code is generated automatically by referring to the pattern file.",
+  "preferGlobal": true,
+  "dependencies": {
+    "colors": "1.4.0",
+    "commander": "4.0.1",
+    "n-readlines": "1.0.0"
+  }
+}
