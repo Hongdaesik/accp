@@ -39,7 +39,7 @@ The folder structure is as follows.
 | `struct`  | Structure used in API.                 | [.struct](#struct) |
 | `pattern` | Custom pattern files.                  | `.js`              |
 
-❗️  All files and folders are required.
+**All files and folders are required.**
 
 <br><br>
 
@@ -51,7 +51,7 @@ accp --compile
 
 Compile progresses with reference to pattern file. Compilation results are returned to [OBJ](#obj) and [GEN](#gen).
 
-<img src="./img/compile.png" style="width: 50%; float: left" />
+<img src="https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.png" style="width: 50%; float: left" />
 
 <br>
 
@@ -190,15 +190,15 @@ accp api language is provided as a visual code extension program.
 
 #### .api
 
-![](https://blogfiles.pstatic.net/MjAxOTEyMTBfMjEw/MDAxNTc1OTU4Njc3MzEy.77TmebjcVPDqjJsPQ4_R3h2yksRjsaOu_3XMoBUS90og.195rNSOfkndzCSRf1G80EFeBkks77jzeLJnvKHnKj7og.PNG.8131010/api.png)
+![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/api.png)
 
 #### .code
 
-![](https://blogfiles.pstatic.net/MjAxOTEyMTBfMjU3/MDAxNTc1OTU4Njc3MzA5.GcFn2pCGmKjcGRMT4gO83QcE0C-GmK5B-rao99KZ1g4g.o0vdJXDCqq5423qlm2XzcW8pKZ9qejBRbAw9b6KQYAwg.PNG.8131010/code.png)
+![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/code.png)
 
 #### .struct
 
-![](https://blogfiles.pstatic.net/MjAxOTEyMTBfMjkx/MDAxNTc1OTU4Njc3MzEw.1ITOXYJW5QBnnH0n4ZFOv7NPRxl-VlICz8uYOYrxaRkg.8ASTvmu_BU6q9zmpiTjBG6VXFHLaiblG9WrCabPl_CYg.PNG.8131010/struct.png)
+![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/struct.png)
 
 <br><br>
 
