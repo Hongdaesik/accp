@@ -18,7 +18,13 @@ npm install accp -g
 
 ## Visual Code Extension
 
-Visual Code Extension Program accp api language **( preparing for distribution )**
+[Visual Code Extension Program accp api language](https://marketplace.visualstudio.com/items?itemName=Bettep.accp)
+
+Open the file with the extension. ( `.api`, `.code`, `.struct` )
+
+Enter the `ctrl` + `k` `m` (change language mode ) command.
+
+Select `Accp` and apply it.
 
 <br><br>
 
@@ -187,7 +193,7 @@ OBJ = {
 
 ## Language
 
-accp api language is provided as a visual code extension program. **( preparing for distribution )**
+accp api language is provided as a [visual code extension program](https://marketplace.visualstudio.com/items?itemName=Bettep.accp).
 
 #### .api
 
