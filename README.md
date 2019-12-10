@@ -51,7 +51,7 @@ accp --compile
 
 Compile progresses with reference to pattern file. Compilation results are returned to [OBJ](#obj) and [GEN](#gen).
 
-<img src="https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.png" style="width: 50%; float: left" />
+<img src="https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.png" style="width: 100%; float: left" />
 
 <br>
 
