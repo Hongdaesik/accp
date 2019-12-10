@@ -33,8 +33,11 @@ An example file is created within the `<folder>`. Example project used a Swift p
 The folder structure is as follows.
 
 `api` : Default document defining API. ( [.api](#api) )
+
 `code` : Error Code Definition and Translation. ( [.code](#code) )
+
 `struct` : Structure used in API. ( [.struct](#struct) )
+
 `pattern` : Custom pattern files. ( `.js` )
 
 **All files and folders are required.**
