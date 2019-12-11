@@ -27,7 +27,7 @@
     "pattern",
     "generate"
   ],
-  "homepage": "https://github.com/Hongdaesik/accp",
+  "homepage": "https://github.com/Hongdaesik/accp.git",
   "description": "The code is generated automatically by referring to the pattern file.",
   "preferGlobal": true,
   "dependencies": {
