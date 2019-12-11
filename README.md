@@ -212,3 +212,7 @@ accp language is provided as a [visual code extension program](https://marketpla
 ## License
 
 MIT
+
+## Other programs
+
+<https://hongdaesik.github.io/blog>
