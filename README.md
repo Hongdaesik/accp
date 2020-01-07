@@ -69,7 +69,7 @@ The following code shall be included in the pattern file.
 ```javascript
 module.exports = function( OBJ, GEN ) { 
     
-	/* Please write your code */ 
+  /* Please write your code */ 
 }
 ```
 
@@ -106,86 +106,86 @@ Object created through `accp --compile`.
 ```javascript
 OBJ = {
 
-	API: [ ( CLASS ) {
-		
-        BASE: String,
-        NAME: String,
-        MARK: String,
-        FUNC: [ ( FUNC ) {
+  API: [ ( CLASS ) {
+  
+      BASE: String,
+      NAME: String,
+      MARK: String,
+      FUNC: [ ( FUNC ) {
+          
+          CODE: Int,
+          NAME: String,
+          DESC: String
+      
+          /* Request method: address */
+          ( POST | GET ): String
+      
+          /* Completion status */
+          COMP: ( true | false )
+      
+          /* Associative process */
+          PROC: [ {
             
-            CODE: Int,
-            NAME: String,
-            DESC: String
-    		
-    		/* Request method: address */
-    		( POST | GET ): String
-    		
-    		/* Completion status */
-            COMP: ( true | false )
-    		
-    		/* Associative process */
-            PROC: [ {
-            	
-            	CODE: Int ( CLASS.FUNC.CODE ),
-            	NAME: String ( CLASS.FUNC.NAME )
-        	}, ... ],
+              CODE: Int ( CLASS.FUNC.CODE ),
+              NAME: String ( CLASS.FUNC.NAME )
+          }, ... ],
+          
+          /* Comments about this function */
+          MARK: [ {
+              
+              NAME: String,
+              MARK: String
+          }, ... ],
+          
+          REQ: [ ( DATA ) {
+              
+              NAME: String,
+              MARK: String,
+              CLASS: String,
+              ARRAY: ( true | false ),
+              OPTION: {
+
+                  key: String,
+                  key: String, ...
+              }
+          }, ... ],
+          
+          /* Be the same as REQ */
+          RES: [ { ... } ],
+          
+          /* User defined value */
+          OPT: {
             
-            /* Comments about this function */
-            MARK: [ {
-                
-                NAME: String,
-                MARK: String
-            }, ... ],
-            
-            REQ: [ ( DATA ) {
-                
-                NAME: String,
-                MARK: String,
-                CLASS: String,
-                ARRAY: ( true | false ),
-                OPTION: {
-                    
-                    key: String,
-                    key: String, ...
-                }
-            }, ... ],
-            
-            /* Be the same as REQ */
-			RES: [ { ... } ],
-            
-            /* User defined value */
-            OPT: {
-            	
-                key: ( true | false ),
-                key: ( true | false ), ...
-            }
-        }, ... ]
-	}, ... ],
-	
-	CODE: [ ( CLASS ) {
-		
-        NAME: String,
-        MARK: String,
-        CODE: [ {
-            
-            CODE: Int,
-            NAME: String,
-            MARK: {
-                
-                key: String,
-                key: String, ...
-            }
-        } ],
-	}, ... ],
-	
-    STRUCT: [ {
-               
-    	NAME: String,
-        MARK: String,
-        
-        /* Be the same as REQ.DATA */
-        DATA: [ { ... } ]
-    }, ... ]
+              key: ( true | false ),
+              key: ( true | false ), ...
+          }
+      }, ... ]
+  }, ... ],
+  
+  CODE: [ ( CLASS ) {
+    
+      NAME: String,
+      MARK: String,
+      CODE: [ {
+
+          CODE: Int,
+          NAME: String,
+          MARK: {
+              
+              key: String,
+              key: String, ...
+          }
+      } ],
+  }, ... ],
+    
+  STRUCT: [ {
+              
+      NAME: String,
+      MARK: String,
+      
+      /* Be the same as REQ.DATA */
+      DATA: [ { ... } ]
+  }, ... ]
 }
 ```
 
@@ -209,9 +209,27 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 <br><br>
 
+## Raw data provided
+
+`Int`
+
+`Data`
+
+`Float`
+
+`Double`
+
+`String`
+
+`Boolean`
+
+<br><br>
+
 ## License
 
 MIT
+
+<br><br>
 
 ## Other programs
 
