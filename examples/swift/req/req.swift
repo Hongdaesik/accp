@@ -1,5 +1,9 @@
 
 import Foundation
+
+/** 
+ * Notice: An example file. There may be syntax errors. */
+
 /** Description: class 1 description  */
 class DEV_TEST_1_REQ {
 
@@ -10,8 +14,9 @@ class DEV_TEST_1_REQ {
      - param3: float variable
      - param4: double variable
      - param5: string variable
-     - param6: struct variable
-     - param7: description of the value
+     - param6: boolean variable
+     - param7: struct variable
+     - param8: description of the value
        - 0=: explain
        - 1>: explain
        - 2<: explain
@@ -39,8 +44,12 @@ class DEV_TEST_1_REQ {
     var param5: String!
 
     /**
+    - boolean variable */
+    var param6: Boolean!
+
+    /**
     - struct variable */
-    var param6: PARAM_DATA!
+    var param7: PARAM_DATA!
 
     /**
     - description of the value
@@ -48,7 +57,7 @@ class DEV_TEST_1_REQ {
       - 1>: explain
       - 2<: explain
       - 3!: explain */
-    var param7: Int!
+    var param8: Int!
 
     init (
 
@@ -57,8 +66,9 @@ class DEV_TEST_1_REQ {
       param3: Float!,
       param4: Double!,
       param5: String!,
-      param6: PARAM_DATA!,
-      param7: Int!
+      param6: Boolean!,
+      param7: PARAM_DATA!,
+      param8: Int!
     ) {
 
       self.param1 = param1
@@ -68,6 +78,7 @@ class DEV_TEST_1_REQ {
       self.param5 = param5
       self.param6 = param6
       self.param7 = param7
+      self.param8 = param8
     }
   }
 
@@ -78,8 +89,9 @@ class DEV_TEST_1_REQ {
      - param3: float variable
      - param4: double variable
      - param5: string variable
-     - param6: struct variable
-     - param7: description of the value
+     - param6: boolean variable
+     - param7: struct variable
+     - param8: description of the value
        - 0=: explain
        - 1>: explain
        - 2<: explain
@@ -107,8 +119,12 @@ class DEV_TEST_1_REQ {
     var param5: String!
 
     /**
+    - boolean variable */
+    var param6: Boolean!
+
+    /**
     - struct variable */
-    var param6: PARAM_DATA!
+    var param7: PARAM_DATA!
 
     /**
     - description of the value
@@ -116,7 +132,7 @@ class DEV_TEST_1_REQ {
       - 1>: explain
       - 2<: explain
       - 3!: explain */
-    var param7: Int!
+    var param8: Int!
 
     init (
 
@@ -125,8 +141,9 @@ class DEV_TEST_1_REQ {
       param3: Float!,
       param4: Double!,
       param5: String!,
-      param6: PARAM_DATA!,
-      param7: Int!
+      param6: Boolean!,
+      param7: PARAM_DATA!,
+      param8: Int!
     ) {
 
       self.param1 = param1
@@ -136,6 +153,7 @@ class DEV_TEST_1_REQ {
       self.param5 = param5
       self.param6 = param6
       self.param7 = param7
+      self.param8 = param8
     }
   }
 }
@@ -149,8 +167,9 @@ class DEV_TEST_2_REQ {
      - param3: float variable
      - param4: double variable
      - param5: string variable
-     - param6: struct variable
-     - param7: description of the value
+     - param6: boolean variable
+     - param7: struct variable
+     - param8: description of the value
        - 0=: explain
        - 1>: explain
        - 2<: explain
@@ -178,8 +197,12 @@ class DEV_TEST_2_REQ {
     var param5: String!
 
     /**
+    - boolean variable */
+    var param6: Boolean!
+
+    /**
     - struct variable */
-    var param6: PARAM_DATA!
+    var param7: PARAM_DATA!
 
     /**
     - description of the value
@@ -187,7 +210,7 @@ class DEV_TEST_2_REQ {
       - 1>: explain
       - 2<: explain
       - 3!: explain */
-    var param7: Int!
+    var param8: Int!
 
     init (
 
@@ -196,8 +219,9 @@ class DEV_TEST_2_REQ {
       param3: Float!,
       param4: Double!,
       param5: String!,
-      param6: PARAM_DATA!,
-      param7: Int!
+      param6: Boolean!,
+      param7: PARAM_DATA!,
+      param8: Int!
     ) {
 
       self.param1 = param1
@@ -207,6 +231,7 @@ class DEV_TEST_2_REQ {
       self.param5 = param5
       self.param6 = param6
       self.param7 = param7
+      self.param8 = param8
     }
   }
 
@@ -217,8 +242,9 @@ class DEV_TEST_2_REQ {
      - param3: float variable
      - param4: double variable
      - param5: string variable
-     - param6: struct variable
-     - param7: description of the value
+     - param6: boolean variable
+     - param7: struct variable
+     - param8: description of the value
        - 0=: explain
        - 1>: explain
        - 2<: explain
@@ -246,8 +272,12 @@ class DEV_TEST_2_REQ {
     var param5: String!
 
     /**
+    - boolean variable */
+    var param6: Boolean!
+
+    /**
     - struct variable */
-    var param6: PARAM_DATA!
+    var param7: PARAM_DATA!
 
     /**
     - description of the value
@@ -255,7 +285,7 @@ class DEV_TEST_2_REQ {
       - 1>: explain
       - 2<: explain
       - 3!: explain */
-    var param7: Int!
+    var param8: Int!
 
     init (
 
@@ -264,8 +294,9 @@ class DEV_TEST_2_REQ {
       param3: Float!,
       param4: Double!,
       param5: String!,
-      param6: PARAM_DATA!,
-      param7: Int!
+      param6: Boolean!,
+      param7: PARAM_DATA!,
+      param8: Int!
     ) {
 
       self.param1 = param1
@@ -275,6 +306,7 @@ class DEV_TEST_2_REQ {
       self.param5 = param5
       self.param6 = param6
       self.param7 = param7
+      self.param8 = param8
     }
   }
 }

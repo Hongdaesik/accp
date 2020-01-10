@@ -1,4 +1,7 @@
 
+/** 
+ * Notice: An example file. There may be syntax errors. */
+
 /**
  * Description: Response infomation 
  
@@ -8,14 +11,15 @@
    - param3: float variable
    - param4: double variable
    - param5: string variable
-   - param6: struct variable
-   - param7: description of the value
+   - param6: boolean variable
+   - param7: struct variable
+   - param8: description of the value
      - 0=: explainvalue
      - 1>: explainvalue
      - 2<: explainvalue
      - 3!: explainvalue
-   - param8: int array variable
-   - param9: struct array variable*/
+   - param9: int array variable
+   - param10: struct array variable*/
 struct RES_DATA: Codable {
 
   /**
@@ -39,8 +43,12 @@ struct RES_DATA: Codable {
   var param5: String!
 
   /**
+  - boolean variable */
+  var param6: Boolean!
+
+  /**
   - struct variable */
-  var param6: PARAM_DATA!
+  var param7: PARAM_DATA!
 
   /**
   - description of the value
@@ -48,15 +56,15 @@ struct RES_DATA: Codable {
     - 1>: explainvalue
     - 2<: explainvalue
     - 3!: explainvalue */
-  var param7: Int!
+  var param8: Int!
 
   /**
   - int array variable */
-  var param8: [Int]!
+  var param9: [Int]!
 
   /**
   - struct array variable */
-  var param9: [PARAM_DATA]!
+  var param10: [PARAM_DATA]!
 
   init ( from decoder: Decoder ) throws {
 
@@ -67,10 +75,11 @@ struct RES_DATA: Codable {
     self.param3 = ( try? container.decode( Float.self, forKey: .param3 ) ) ?? nil
     self.param4 = ( try? container.decode( Double.self, forKey: .param4 ) ) ?? nil
     self.param5 = ( try? container.decode( String.self, forKey: .param5 ) ) ?? nil
-    self.param6 = ( try? container.decode( PARAM_DATA.self, forKey: .param6 ) ) ?? nil
-    self.param7 = ( try? container.decode( Int.self, forKey: .param7 ) ) ?? nil
-    self.param8 = ( try? container.decode( [Int].self, forKey: .param8 ) ) ?? nil
-    self.param9 = ( try? container.decode( [PARAM_DATA].self, forKey: .param9 ) ) ?? nil
+    self.param6 = ( try? container.decode( Boolean.self, forKey: .param6 ) ) ?? nil
+    self.param7 = ( try? container.decode( PARAM_DATA.self, forKey: .param7 ) ) ?? nil
+    self.param8 = ( try? container.decode( Int.self, forKey: .param8 ) ) ?? nil
+    self.param9 = ( try? container.decode( [Int].self, forKey: .param9 ) ) ?? nil
+    self.param10 = ( try? container.decode( [PARAM_DATA].self, forKey: .param10 ) ) ?? nil
   }
 }
 
@@ -83,7 +92,8 @@ struct RES_DATA: Codable {
    - param3: float variable
    - param4: double variable
    - param5: string variable
-   - param6: description of the value
+   - param6: boolean variable
+   - param7: description of the value
      - 0=: explainvalue
      - 1>: explainvalue
      - 2<: explainvalue
@@ -111,12 +121,16 @@ struct PARAM_DATA: Codable {
   var param5: String!
 
   /**
+  - boolean variable */
+  var param6: Boolean!
+
+  /**
   - description of the value
     - 0=: explainvalue
     - 1>: explainvalue
     - 2<: explainvalue
     - 3!: explainvalue */
-  var param6: Int!
+  var param7: Int!
 
   init ( from decoder: Decoder ) throws {
 
@@ -127,6 +141,7 @@ struct PARAM_DATA: Codable {
     self.param3 = ( try? container.decode( Float.self, forKey: .param3 ) ) ?? nil
     self.param4 = ( try? container.decode( Double.self, forKey: .param4 ) ) ?? nil
     self.param5 = ( try? container.decode( String.self, forKey: .param5 ) ) ?? nil
-    self.param6 = ( try? container.decode( Int.self, forKey: .param6 ) ) ?? nil
+    self.param6 = ( try? container.decode( Boolean.self, forKey: .param6 ) ) ?? nil
+    self.param7 = ( try? container.decode( Int.self, forKey: .param7 ) ) ?? nil
   }
 }

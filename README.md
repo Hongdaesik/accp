@@ -58,9 +58,9 @@ accp --compile
 
 Compile progresses with reference to pattern file. Compilation results are returned to [OBJ](#obj) and [GEN](#gen).
 
-<img src="https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.png" style="width: 100%; float: left" />
+<img src="https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.jpg" style="width: 100%; float: left" />
 
-<br>
+<br><br>
 
 The following code shall be included in the pattern file.
 
@@ -197,15 +197,15 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 #### .api
 
-![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/api.png)
+![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/api.jpg)
 
 #### .code
 
-![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/code.png)
+![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/code.jpg)
 
 #### .struct
 
-![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/struct.png)
+![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/struct.jpg)
 
 <br><br>
 
@@ -222,6 +222,12 @@ accp language is provided as a [visual code extension program](https://marketpla
 `String`
 
 `Boolean`
+
+<br><br>
+
+## Change Log
+
+1.0.4-beta: Replace sample files and images.
 
 <br><br>
 

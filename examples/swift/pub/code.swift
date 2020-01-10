@@ -1,4 +1,6 @@
 
+/** 
+ * Notice: An example file. There may be syntax errors. */
 
 /** 
  * Description: code description  */
@@ -6,7 +8,7 @@ class TEST_CODE_1 {
 
   enum CODE: Int {
 
-    case error_1 adfasdf = 1
+    case error_1 = 1
     case error_2 = 2
   }
 

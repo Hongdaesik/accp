@@ -1,6 +1,6 @@
 const PATH = require( 'path' )
 
-const DIR = PATH.join( __dirname, '../swift' )
+const BASE = PATH.join( __dirname, '../swift' )
 const TYPO = {
 
   LINE: '\n',
@@ -31,25 +31,35 @@ module.exports = function( OBJ, GEN ) {
 function gen( OBJ, GEN ) {
 
   // init
-  var req = new GEN( PATH.join( DIR, 'req', 'req.swift' ) )
-  var res = new GEN( PATH.join( DIR, 'res', 'res.swift' ) )
-  var api = new GEN( PATH.join( DIR, 'api', 'api.swift' ) )
+  var req = new GEN( PATH.join( BASE, 'req', 'req.swift' ) )
+  var res = new GEN( PATH.join( BASE, 'res', 'res.swift' ) )
+  var api = new GEN( PATH.join( BASE, 'api', 'api.swift' ) )
 
   // open
-  api.open()
   req.open()
   res.open()
-  
+  api.open()
+
   // start code
   req.print( `
-import Foundation` )
+import Foundation
+
+/** 
+ * Notice: An example file. There may be syntax errors. */
+` )
 
   res.print( `
-import Foundation` )
+import Foundation
+
+/** 
+ * Notice: An example file. There may be syntax errors. */
+` )
 
   api.print( `
 import Foundation
 
+/** 
+ * Notice: An example file. There may be syntax errors. */
 extension AlamofireModel {
 ` )
 
@@ -64,18 +74,22 @@ extension AlamofireModel {
 }` )
 
   // close
-  api.close()
   req.close()
   res.close()
+  api.close()
 }
 
 function code( OBJ, GEN ) {
 
   // init
-  var out = new GEN( PATH.join( DIR, 'pub', 'code.swift' ) )
+  var out = new GEN( PATH.join( BASE, 'pub', 'code.swift' ) )
 
   // open
   out.open()
+
+  out.print( `
+/** 
+ * Notice: An example file. There may be syntax errors. */` )
 
   // set struct
   for ( CODE of OBJ.CODE ) {
@@ -138,16 +152,21 @@ class ${ CODE.NAME } {
 function struct( OBJ, GEN ) {
 
   // init
-  var out = new GEN( PATH.join( DIR, 'pub', 'struct.swift' ) )
+  var out = new GEN( PATH.join( BASE, 'pub', 'struct.swift' ) )
 
   // open
   out.open()
+
+  out.print( `
+/** 
+ * Notice: An example file. There may be syntax errors. */` )
 
   // set struct
   for ( STRUCT of OBJ.STRUCT ) {
 
     // set code
     out.print( `
+
 /**
  * Description: ${ STRUCT.MARK }
  
@@ -163,8 +182,7 @@ struct ${ STRUCT.NAME }: Codable {
 
     ${ setVariable( STRUCT.DATA, TYPO.SPC4 ) }
   }
-}
-` )
+}` )
   }
 
   // close
@@ -177,7 +195,9 @@ function setHttp( api, req, res, API ) {
   /* open code */
   api.print( `
   /** Description: ${ API.MARK } */
-  class ${ API.NAME } {` )
+  class ${ API.NAME } {
+    
+    var base: String = "${ API.BASE }"` )
 
   req.print( `
 /** Description: ${ API.MARK } */
@@ -190,14 +210,29 @@ class ${ API.NAME }_RES {` )
   /* print function */
   for ( let FUNC of API.FUNC ) {
 
+    var multipart = false
+
     // get multipart
-    let multipart = FUNC.OPT && FUNC.OPT.image || false
+    if ( FUNC.OPT ) {
+
+      for ( let OPT of FUNC.OPT ) {
+  
+        switch ( OPT.NAME ) {
+
+          case 'image': {
+
+            multipart = OPT.VALUE
+          }
+        }
+      }
+    }
 
     // set api function
     api.print( `
 
     /** 
      * Code: ${ FUNC.CODE }
+     * Method: ${ FUNC.POST ? 'post' : 'get' }
      * Complete: ${ FUNC.COMP.toString() }
      * Description: ${ FUNC.DESC } 
      
@@ -206,9 +241,9 @@ class ${ API.NAME }_RES {` )
      
      - Question:
        ${ getList( FUNC.MARK ) } */
-    static public func ${ FUNC.NAME } ( req: ${ API.NAME }_REQ.${ FUNC.NAME }, completion: @escaping ( Any? ) -> Void ) {
+    static public func ${ FUNC.NAME }( req: ${ API.NAME }_REQ.${ FUNC.NAME }, completion: @escaping ( Any? ) -> Void ) {
 
-      AlamofireModel.shared.request( address: "${ API.BASE }" + "${ FUNC.POST || FUNC.GET }", method: .${ FUNC.POST ? 'post' : 'get' }, parameters: req, multipart: ${ multipart.toString() }, completion: completion )
+      AlamofireModel.shared.request( address: base + "/${ FUNC.POST || FUNC.GET }", method: .${ FUNC.POST ? 'post' : 'get' }, parameters: req, multipart: ${ multipart.toString() }, completion: completion )
     }` )
 
     // set req function
@@ -268,7 +303,7 @@ function getCode( DATA ) {
 }
 
 function getList( DATA ) {
-
+  
   if ( DATA ) {
 
     return Array.from( DATA, row => `- ${ row.NAME }: ${ row.MARK || row.CODE }` ).join( TYPO.LINE + TYPO.SPC7 )
@@ -277,24 +312,24 @@ function getList( DATA ) {
   return '- nothing'
 }
 
-function getClass( DATA ) {
+function getValue( DATA ) {
 
+  if ( DATA ) {
+    
+    return Array.from( DATA, row => `self.${ row.NAME } = ${ row.NAME }` ).join( TYPO.LINE + TYPO.SPC6 )
+  }
+
+  return ''
+}
+
+function getClass( DATA ) {
+  
   if ( DATA.ARRAY ) {
 
     return `[${ DATA.CLASS }]`
   }
 
   return DATA.CLASS
-}
-
-function getValue( DATA ) {
-
-  if ( DATA ) {
-
-    return Array.from( DATA, row => `self.${ row.NAME } = ${ row.NAME }` ).join( TYPO.LINE + TYPO.SPC6 )
-  }
-
-  return ''
 }
 
 function getOption( DATA, SPC ) {
@@ -307,6 +342,16 @@ function getOption( DATA, SPC ) {
   }
 
   return ''
+}
+
+function getVariable( DATA, opt = TYPO.SPC8, join = TYPO.SPC6 ) {
+
+  if ( DATA ) {
+
+    return Array.from( DATA, row => `/**${ TYPO.LINE }${ join }- ${ row.MARK }${ getOption( row.OPTION, opt ) } */${ TYPO.LINE }${ join }var ${ row.NAME }: ${ getClass( row ) }!` ).join( TYPO.LINE + TYPO.LINE + join )
+  }
+
+  return '/** No variable declared */'
 }
 
 function getTranslate( DATA ) {
@@ -331,20 +376,10 @@ function getTranslate( DATA ) {
   return translate
 }
 
-function getVariable( DATA, opt = TYPO.SPC8, join = TYPO.SPC6 ) {
-
-  if ( DATA ) {
-
-    return Array.from( DATA, row => `/**${ TYPO.LINE }${ join }- ${ row.MARK }${ getOption( row.OPTION, opt ) } */${ TYPO.LINE }${ join }var ${ row.NAME }: ${ getClass( row ) }!` ).join( TYPO.LINE + TYPO.LINE + join )
-  }
-
-  return '/** No variable declared */'
-}
-
 function getParameter( DATA ) {
 
   if ( DATA ) {
-
+    
     return Array.from( DATA, row => `${ row.NAME }: ${ getClass( row ) }!` ).join( TYPO.COMMA + TYPO.LINE + TYPO.SPC6 )
   }
 

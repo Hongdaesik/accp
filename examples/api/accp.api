@@ -33,8 +33,9 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 PARAM_DATA struct variable 
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 PARAM_DATA struct variable 
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
@@ -50,16 +51,17 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 RES_DATA struct variable
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 RES_DATA struct variable
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
           2< explain value
           3! explain value
         }
-        param8 [Int] int array variable
-        param9 [PARAM_DATA] struct array variable
+        param9 [Int] int array variable
+        param10 [PARAM_DATA] struct array variable
       }
 
       OPT {
@@ -92,8 +94,9 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 PARAM_DATA struct variable 
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 PARAM_DATA struct variable 
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
@@ -109,16 +112,17 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 RES_DATA struct variable
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 RES_DATA struct variable
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
           2< explain value
           3! explain value
         }
-        param8 [Int] int array variable
-        param9 [PARAM_DATA] struct array variable
+        param9 [Int] int array variable
+        param10 [PARAM_DATA] struct array variable
       }
     }
   }
@@ -126,7 +130,7 @@ API {
   /* mark 2 */
   DEV_TEST_2 class 2 description {
 
-    BASE http://localhost:8080
+    BASE http://localhost:8181
 
     TEST_API_1 1 function description {
 
@@ -151,8 +155,9 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 PARAM_DATA struct variable 
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 PARAM_DATA struct variable 
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
@@ -168,16 +173,17 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 RES_DATA struct variable
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 RES_DATA struct variable
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
           2< explain value
           3! explain value
         }
-        param8 [Int] int array variable
-        param9 [PARAM_DATA] struct array variable
+        param9 [Int] int array variable
+        param10 [PARAM_DATA] struct array variable
       }
     }
 
@@ -199,8 +205,9 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 PARAM_DATA struct variable 
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 PARAM_DATA struct variable 
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
@@ -216,16 +223,17 @@ API {
         param3 Float float variable
         param4 Double double variable 
         param5 String string variable
-        param6 RES_DATA struct variable
-        param7 Int description of the value {
+        param6 Boolean boolean variable
+        param7 RES_DATA struct variable
+        param8 Int description of the value {
 
           0= explain value
           1> explain value
           2< explain value
           3! explain value
         }
-        param8 [Int] int array variable
-        param9 [PARAM_DATA] struct array variable
+        param9 [Int] int array variable
+        param10 [PARAM_DATA] struct array variable
       }
     }
   }
