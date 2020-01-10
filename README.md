@@ -40,10 +40,13 @@ The folder structure is as follows.
 
 <br>
 
-`api` : Default document defining API. ( [.api](#api) )
-`code` : Error Code Definition and Translation. ( [.code](#code) )
-`struct` : Structure used in API. ( [.struct](#struct) )
-`pattern` : Custom pattern files. ( `.js` )
+`api` : Default document defining API( [.api](#api) ).
+
+`code` : Error Code Definition and Translation( [.code](#code) ).
+
+`struct` : Structure used in API( [.struct](#struct) ).
+
+`pattern` : Custom pattern files( `.js` ).
 
 *** All files and folders are required.**
 
@@ -93,7 +96,9 @@ var api = new GEN( "file path" )
 ##### method
 
 `api.open( encoding )` : Create write stream, default encoding `utf8`.
+
 `api.print( string )` : Write the content.
+
 `api.close()` : Close write stream.
 
 <br><br>
@@ -203,7 +208,9 @@ accp language is provided as a [visual code extension program](https://marketpla
 ###### Usage prefix 
 
 `api` : Snippet for api.
+
 `api class` : Snippet for api class.
+
 `api function` : Snippet for api function.
 
 <br>
@@ -215,7 +222,9 @@ accp language is provided as a [visual code extension program](https://marketpla
 ###### Usage prefix
 
 `code` : Snippet for code.
+
 `code class` : Snippet for code class.
+
 `code function` : Snippet for code function.
 
 <br>
@@ -227,6 +236,7 @@ accp language is provided as a [visual code extension program](https://marketpla
 ###### Usage prefix
 
 `struct` : Snippet for struct.
+
 `struct function` : Snippet for struct function.
 
 <br><br>
@@ -234,10 +244,15 @@ accp language is provided as a [visual code extension program](https://marketpla
 ## Raw data provided
 
 `Int`
+
 `Data`
+
 `Float`
+
 `Double`
+
 `String`
+
 `Boolean`
 
 <br><br>
@@ -245,6 +260,7 @@ accp language is provided as a [visual code extension program](https://marketpla
 ## Change Log
 
 `1.0.4-beta` : Replace sample files.
+
 `1.0.5-beta` : Usage prefix explain add.
 
 <br><br>
