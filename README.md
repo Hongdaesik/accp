@@ -20,7 +20,7 @@ npm install accp -g
 
 [Visual Code Extension Program accp language](https://marketplace.visualstudio.com/items?itemName=Bettep.accp)
 
-Open the file with the extension. ( `.api`, `.code`, `.struct` )
+Open the file with the extension( `.api`, `.code`, `.struct` ).
 
 Enter the `ctrl` + `k` `m` (change language mode ) command.
 
@@ -38,15 +38,14 @@ An example file is created within the `<folder>`. Example project used a Swift p
 
 The folder structure is as follows.
 
+<br>
+
 `api` : Default document defining API. ( [.api](#api) )
-
 `code` : Error Code Definition and Translation. ( [.code](#code) )
-
 `struct` : Structure used in API. ( [.struct](#struct) )
-
 `pattern` : Custom pattern files. ( `.js` )
 
-**All files and folders are required.**
+*** All files and folders are required.**
 
 <br><br>
 
@@ -58,13 +57,7 @@ accp --compile
 
 Compile progresses with reference to pattern file. Compilation results are returned to [OBJ](#obj) and [GEN](#gen).
 
-<img src="https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.jpg" style="width: 100%; float: left" />
-
-<br><br>
-
-The following code shall be included in the pattern file.
-
-`pattern/*.js`
+<br>
 
 ```javascript
 module.exports = function( OBJ, GEN ) { 
@@ -73,6 +66,12 @@ module.exports = function( OBJ, GEN ) {
 }
 ```
 
+The following code shall be included in the `pattern/*.js` file.
+
+<br>
+
+![Compile result](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.jpg)
+
 <br><br>
 
 ## Return value
@@ -80,6 +79,8 @@ module.exports = function( OBJ, GEN ) {
 #### GEN
 
 GEN is a function that helps you create files.
+
+<br>
 
 ##### initialization
 
@@ -92,9 +93,7 @@ var api = new GEN( "file path" )
 ##### method
 
 `api.open( encoding )` : Create write stream, default encoding `utf8`.
-
 `api.print( string )` : Write the content.
-
 `api.close()` : Close write stream.
 
 <br><br>
@@ -195,39 +194,58 @@ OBJ = {
 
 accp language is provided as a [visual code extension program](https://marketplace.visualstudio.com/items?itemName=Bettep.accp).
 
+<br>
+
 #### .api
 
 ![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/api.jpg)
+
+###### Usage prefix 
+
+`api` : Snippet for api.
+`api class` : Snippet for api class.
+`api function` : Snippet for api function.
+
+<br>
 
 #### .code
 
 ![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/code.jpg)
 
+###### Usage prefix
+
+`code` : Snippet for code.
+`code class` : Snippet for code class.
+`code function` : Snippet for code function.
+
+<br>
+
 #### .struct
 
 ![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/struct.jpg)
+
+###### Usage prefix
+
+`struct` : Snippet for struct.
+`struct function` : Snippet for struct function.
 
 <br><br>
 
 ## Raw data provided
 
 `Int`
-
 `Data`
-
 `Float`
-
 `Double`
-
 `String`
-
 `Boolean`
 
 <br><br>
 
 ## Change Log
 
-1.0.4-beta: Replace sample files and images.
+`1.0.4-beta` : Replace sample files.
+`1.0.5-beta` : Usage prefix explain add.
 
 <br><br>
 
