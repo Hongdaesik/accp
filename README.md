@@ -263,6 +263,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.0.5-beta` : Usage prefix explain add.
 
+`1.0.6-beta` : Homepage domain change.
+
 <br><br>
 
 ## License
@@ -273,4 +275,4 @@ MIT
 
 ## Other programs
 
-<https://hongdaesik.github.io/blog>
+<https://bettep.org>
