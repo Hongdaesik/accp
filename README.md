@@ -265,6 +265,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.0.6-beta` : Homepage domain change.
 
+`1.0.7-beta` : Change to compile based on each api file.
+
 <br><br>
 
 ## License
