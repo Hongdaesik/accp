@@ -271,7 +271,7 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.0.9-beta` : Fixed an issue where the COMP value was unconditionally true.
 
-`1.2.0-beta` : Addition of the PUT, DELETE request method ( Consequently, it supports GET | PUT | POST | DELETE ).
+`1.2.1-beta` : Addition of the PUT, PATCH, DELETE request method ( Consequently, it supports GET | PUT | POST | PATCH | DELETE ).
 
 <br><br>
 
