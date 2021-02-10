@@ -122,7 +122,7 @@ OBJ = {
           DESC: String
       
           /* Request method: address */
-          ( POST | GET ): String
+          ( GET | PUT | POST | DELETE ): String
       
           /* Completion status */
           COMP: ( true | false )
@@ -270,6 +270,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 `1.0.8-beta` : Solving a problem in which request partial detail information is truncated to spacing.
 
 `1.0.9-beta` : Fixed an issue where the COMP value was unconditionally true.
+
+`1.2.0-beta` : Addition of the PUT, DELETE request method ( Consequently, it supports GET | PUT | POST | DELETE ).
 
 <br><br>
 

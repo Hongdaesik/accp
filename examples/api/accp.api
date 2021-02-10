@@ -6,20 +6,21 @@ import struct/accp.struct
 API {
 
   /* mark 1 */
-  DEV_TEST_1 class 1 description {
+  DEV_TEST_1 class description {
 
-    BASE http://localhost:8080
+    BASE http://localhost:8080/test1
 
-    TEST_API_1 1 function description {
+    GetTest 100 function description {
 
       COMP true
 
       PROC {
 
-        2 DEV_TEST_1.TEST_API_2
+        101 DEV_TEST_1.PostTest
+        201 DEV_TEST_2.DeleteTest
       }
 
-      POST test_1_1.api
+      GET test
 
       MARK {
 
@@ -71,16 +72,11 @@ API {
       }
     }
 
-    TEST_API_2 2 function description {
+    PostTest 101 function description {
 
       COMP true
 
-      PROC {
-
-        2 DEV_TEST_2.TEST_API_2
-      }
-
-      POST test_1_2.api
+      POST test
 
       MARK {
 
@@ -128,25 +124,20 @@ API {
   }
 
   /* mark 2 */
-  DEV_TEST_2 class 2 description {
+  DEV_TEST_2 class description {
 
-    BASE http://localhost:8181
+    BASE http://localhost:8080/test2
 
-    TEST_API_1 1 function description {
+    PutTest 200 function description {
 
       COMP true
-      
-      PROC {
-
-        2 DEV_TEST_1.TEST_API_2
-      }
 
       MARK {
 
         param1 mark variable explain
       }
 
-      GET test_2_1.api
+      PUT test
 
       REQ {
 
@@ -187,16 +178,16 @@ API {
       }
     }
 
-    TEST_API_2 2 function description {
+    DeleteTest 201 function description {
 
       COMP true
-      
+
       MARK {
 
         param1 mark variable explain
       }
 
-      GET test_2_2.api
+      DELETE test
 
       REQ {
 

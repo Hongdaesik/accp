@@ -1,11 +1,8 @@
 
 import Foundation
 
-/** 
- * Notice: An example file. There may be syntax errors. */
-
-/** Description: class 1 description  */
-class DEV_TEST_1_RES {
+/** Description: class description  */
+struct DEV_TEST_1_RES {
 
   /**
    - Parameters:
@@ -17,64 +14,66 @@ class DEV_TEST_1_RES {
      - param6: boolean variable
      - param7: struct variable
      - param8: description of the value
-       - 0=: explain
-       - 1>: explain
-       - 2<: explain
-       - 3!: explain
+       - 0=: explain value
+       - 1>: explain value
+       - 2<: explain value
+       - 3!: explain value
      - param9: int array variable
      - param10: struct array variable */
-  class TEST_API_1: Codable {
+  struct GetTest: Codable {
 
     /**
     - int variable */
-    var param1: Int!
+    var param1: Int?
 
     /**
     - data variable */
-    var param2: Data!
+    var param2: URL?
 
     /**
     - float variable */
-    var param3: Float!
+    var param3: Float?
 
     /**
     - double variable */
-    var param4: Double!
+    var param4: Double?
 
     /**
     - string variable */
-    var param5: String!
+    var param5: String?
 
     /**
     - boolean variable */
-    var param6: Boolean!
+    var param6: Boolean?
 
     /**
     - struct variable */
-    var param7: RES_DATA!
+    var param7: RES_DATA?
 
     /**
     - description of the value
-      - 0=: explain
-      - 1>: explain
-      - 2<: explain
-      - 3!: explain */
-    var param8: Int!
+      - 0=: explain value
+      - 1>: explain value
+      - 2<: explain value
+      - 3!: explain value */
+    var param8: Int?
 
     /**
     - int array variable */
-    var param9: [Int]!
+    var param9: [Int]?
 
     /**
     - struct array variable */
-    var param10: [PARAM_DATA]!
+    var param10: [PARAM_DATA]?
 
-    required init ( from decoder: Decoder ) throws {
+    init() {}
+
+    init( from decoder: Decoder ) throws {
 
       let container = try decoder.container( keyedBy: CodingKeys.self )
 
       self.param1 = ( try? container.decode( Int.self, forKey: .param1 ) ) ?? nil
-      self.param2 = ( try? container.decode( Data.self, forKey: .param2 ) ) ?? nil
+      self.param2 = ( try? container.decode( URL.self, forKey: .param2 ) ) ?? nil
       self.param3 = ( try? container.decode( Float.self, forKey: .param3 ) ) ?? nil
       self.param4 = ( try? container.decode( Double.self, forKey: .param4 ) ) ?? nil
       self.param5 = ( try? container.decode( String.self, forKey: .param5 ) ) ?? nil
@@ -96,64 +95,66 @@ class DEV_TEST_1_RES {
      - param6: boolean variable
      - param7: struct variable
      - param8: description of the value
-       - 0=: explain
-       - 1>: explain
-       - 2<: explain
-       - 3!: explain
+       - 0=: explain value
+       - 1>: explain value
+       - 2<: explain value
+       - 3!: explain value
      - param9: int array variable
      - param10: struct array variable */
-  class TEST_API_2: Codable {
+  struct PostTest: Codable {
 
     /**
     - int variable */
-    var param1: Int!
+    var param1: Int?
 
     /**
     - data variable */
-    var param2: Data!
+    var param2: URL?
 
     /**
     - float variable */
-    var param3: Float!
+    var param3: Float?
 
     /**
     - double variable */
-    var param4: Double!
+    var param4: Double?
 
     /**
     - string variable */
-    var param5: String!
+    var param5: String?
 
     /**
     - boolean variable */
-    var param6: Boolean!
+    var param6: Boolean?
 
     /**
     - struct variable */
-    var param7: RES_DATA!
+    var param7: RES_DATA?
 
     /**
     - description of the value
-      - 0=: explain
-      - 1>: explain
-      - 2<: explain
-      - 3!: explain */
-    var param8: Int!
+      - 0=: explain value
+      - 1>: explain value
+      - 2<: explain value
+      - 3!: explain value */
+    var param8: Int?
 
     /**
     - int array variable */
-    var param9: [Int]!
+    var param9: [Int]?
 
     /**
     - struct array variable */
-    var param10: [PARAM_DATA]!
+    var param10: [PARAM_DATA]?
 
-    required init ( from decoder: Decoder ) throws {
+    init() {}
+
+    init( from decoder: Decoder ) throws {
 
       let container = try decoder.container( keyedBy: CodingKeys.self )
 
       self.param1 = ( try? container.decode( Int.self, forKey: .param1 ) ) ?? nil
-      self.param2 = ( try? container.decode( Data.self, forKey: .param2 ) ) ?? nil
+      self.param2 = ( try? container.decode( URL.self, forKey: .param2 ) ) ?? nil
       self.param3 = ( try? container.decode( Float.self, forKey: .param3 ) ) ?? nil
       self.param4 = ( try? container.decode( Double.self, forKey: .param4 ) ) ?? nil
       self.param5 = ( try? container.decode( String.self, forKey: .param5 ) ) ?? nil
@@ -165,8 +166,8 @@ class DEV_TEST_1_RES {
     }
   }
 }
-/** Description: class 2 description  */
-class DEV_TEST_2_RES {
+/** Description: class description  */
+struct DEV_TEST_2_RES {
 
   /**
    - Parameters:
@@ -178,64 +179,66 @@ class DEV_TEST_2_RES {
      - param6: boolean variable
      - param7: struct variable
      - param8: description of the value
-       - 0=: explain
-       - 1>: explain
-       - 2<: explain
-       - 3!: explain
+       - 0=: explain value
+       - 1>: explain value
+       - 2<: explain value
+       - 3!: explain value
      - param9: int array variable
      - param10: struct array variable */
-  class TEST_API_1: Codable {
+  struct PutTest: Codable {
 
     /**
     - int variable */
-    var param1: Int!
+    var param1: Int?
 
     /**
     - data variable */
-    var param2: Data!
+    var param2: URL?
 
     /**
     - float variable */
-    var param3: Float!
+    var param3: Float?
 
     /**
     - double variable */
-    var param4: Double!
+    var param4: Double?
 
     /**
     - string variable */
-    var param5: String!
+    var param5: String?
 
     /**
     - boolean variable */
-    var param6: Boolean!
+    var param6: Boolean?
 
     /**
     - struct variable */
-    var param7: RES_DATA!
+    var param7: RES_DATA?
 
     /**
     - description of the value
-      - 0=: explain
-      - 1>: explain
-      - 2<: explain
-      - 3!: explain */
-    var param8: Int!
+      - 0=: explain value
+      - 1>: explain value
+      - 2<: explain value
+      - 3!: explain value */
+    var param8: Int?
 
     /**
     - int array variable */
-    var param9: [Int]!
+    var param9: [Int]?
 
     /**
     - struct array variable */
-    var param10: [PARAM_DATA]!
+    var param10: [PARAM_DATA]?
 
-    required init ( from decoder: Decoder ) throws {
+    init() {}
+
+    init( from decoder: Decoder ) throws {
 
       let container = try decoder.container( keyedBy: CodingKeys.self )
 
       self.param1 = ( try? container.decode( Int.self, forKey: .param1 ) ) ?? nil
-      self.param2 = ( try? container.decode( Data.self, forKey: .param2 ) ) ?? nil
+      self.param2 = ( try? container.decode( URL.self, forKey: .param2 ) ) ?? nil
       self.param3 = ( try? container.decode( Float.self, forKey: .param3 ) ) ?? nil
       self.param4 = ( try? container.decode( Double.self, forKey: .param4 ) ) ?? nil
       self.param5 = ( try? container.decode( String.self, forKey: .param5 ) ) ?? nil
@@ -257,64 +260,66 @@ class DEV_TEST_2_RES {
      - param6: boolean variable
      - param7: struct variable
      - param8: description of the value
-       - 0=: explain
-       - 1>: explain
-       - 2<: explain
-       - 3!: explain
+       - 0=: explain value
+       - 1>: explain value
+       - 2<: explain value
+       - 3!: explain value
      - param9: int array variable
      - param10: struct array variable */
-  class TEST_API_2: Codable {
+  struct DeleteTest: Codable {
 
     /**
     - int variable */
-    var param1: Int!
+    var param1: Int?
 
     /**
     - data variable */
-    var param2: Data!
+    var param2: URL?
 
     /**
     - float variable */
-    var param3: Float!
+    var param3: Float?
 
     /**
     - double variable */
-    var param4: Double!
+    var param4: Double?
 
     /**
     - string variable */
-    var param5: String!
+    var param5: String?
 
     /**
     - boolean variable */
-    var param6: Boolean!
+    var param6: Boolean?
 
     /**
     - struct variable */
-    var param7: RES_DATA!
+    var param7: RES_DATA?
 
     /**
     - description of the value
-      - 0=: explain
-      - 1>: explain
-      - 2<: explain
-      - 3!: explain */
-    var param8: Int!
+      - 0=: explain value
+      - 1>: explain value
+      - 2<: explain value
+      - 3!: explain value */
+    var param8: Int?
 
     /**
     - int array variable */
-    var param9: [Int]!
+    var param9: [Int]?
 
     /**
     - struct array variable */
-    var param10: [PARAM_DATA]!
+    var param10: [PARAM_DATA]?
 
-    required init ( from decoder: Decoder ) throws {
+    init() {}
+
+    init( from decoder: Decoder ) throws {
 
       let container = try decoder.container( keyedBy: CodingKeys.self )
 
       self.param1 = ( try? container.decode( Int.self, forKey: .param1 ) ) ?? nil
-      self.param2 = ( try? container.decode( Data.self, forKey: .param2 ) ) ?? nil
+      self.param2 = ( try? container.decode( URL.self, forKey: .param2 ) ) ?? nil
       self.param3 = ( try? container.decode( Float.self, forKey: .param3 ) ) ?? nil
       self.param4 = ( try? container.decode( Double.self, forKey: .param4 ) ) ?? nil
       self.param5 = ( try? container.decode( String.self, forKey: .param5 ) ) ?? nil

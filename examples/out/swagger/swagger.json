@@ -1,0 +1,626 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SERVICE API",
+    "contact": {
+      "email": "hongdaesik88@gmail.com"
+    },
+    "license": {
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html",
+      "name": "Apache 2.0"
+    },
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/dev_test_1/test": {
+      "get": {
+        "tags": [
+          "dev_test_1"
+        ],
+        "summary": "function description",
+        "responses": {
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
+                    "param1": {
+                      "type": "number",
+                      "description": "int variable"
+                    },
+                    "param2": {
+                      "type": "object",
+                      "description": "data variable"
+                    },
+                    "param3": {
+                      "type": "number",
+                      "description": "float variable"
+                    },
+                    "param4": {
+                      "type": "number",
+                      "description": "double variable"
+                    },
+                    "param5": {
+                      "type": "string",
+                      "description": "string variable"
+                    },
+                    "param6": {
+                      "type": "boolean",
+                      "description": "boolean variable"
+                    },
+                    "param7": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/RES_DATA",
+                      "description": "struct variable"
+                    },
+                    "param8": {
+                      "type": "number",
+                      "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                    },
+                    "param9": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "title": "int array variable"
+                    },
+                    "param10": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      },
+                      "title": "struct array variable"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "응답 결과"
+          }
+        },
+        "description": "### Relation.\n* 101: [dev_test_1/undefined](#dev_test_1/get_dev_test_1_undefined).\n* 201: [dev_test_2/undefined](#dev_test_2/get_dev_test_2_undefined).\n### Description.\n* param1 mark variable explain",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "param1",
+            "schema": {
+              "type": "number",
+              "description": "int variable"
+            },
+            "description": "int variable"
+          },
+          {
+            "in": "query",
+            "name": "param2",
+            "schema": {
+              "type": "object",
+              "description": "data variable"
+            },
+            "description": "data variable"
+          },
+          {
+            "in": "query",
+            "name": "param3",
+            "schema": {
+              "type": "number",
+              "description": "float variable"
+            },
+            "description": "float variable"
+          },
+          {
+            "in": "query",
+            "name": "param4",
+            "schema": {
+              "type": "number",
+              "description": "double variable"
+            },
+            "description": "double variable"
+          },
+          {
+            "in": "query",
+            "name": "param5",
+            "schema": {
+              "type": "string",
+              "description": "string variable"
+            },
+            "description": "string variable"
+          },
+          {
+            "in": "query",
+            "name": "param6",
+            "schema": {
+              "type": "boolean",
+              "description": "boolean variable"
+            },
+            "description": "boolean variable"
+          },
+          {
+            "in": "query",
+            "name": "param7",
+            "schema": {
+              "type": "object",
+              "$ref": "#/components/schemas/PARAM_DATA",
+              "description": "struct variable"
+            },
+            "description": "struct variable"
+          },
+          {
+            "in": "query",
+            "name": "param8",
+            "schema": {
+              "type": "number",
+              "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+            },
+            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "dev_test_1"
+        ],
+        "summary": "function description",
+        "responses": {
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
+                    "param1": {
+                      "type": "number",
+                      "description": "int variable"
+                    },
+                    "param2": {
+                      "type": "object",
+                      "description": "data variable"
+                    },
+                    "param3": {
+                      "type": "number",
+                      "description": "float variable"
+                    },
+                    "param4": {
+                      "type": "number",
+                      "description": "double variable"
+                    },
+                    "param5": {
+                      "type": "string",
+                      "description": "string variable"
+                    },
+                    "param6": {
+                      "type": "boolean",
+                      "description": "boolean variable"
+                    },
+                    "param7": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/RES_DATA",
+                      "description": "struct variable"
+                    },
+                    "param8": {
+                      "type": "number",
+                      "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                    },
+                    "param9": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "title": "int array variable"
+                    },
+                    "param10": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      },
+                      "title": "struct array variable"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "응답 결과"
+          }
+        },
+        "description": "### Description.\n* param1 mark variable explain",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "param1": {
+                    "type": "number",
+                    "description": "int variable"
+                  },
+                  "param2": {
+                    "type": "object",
+                    "description": "data variable"
+                  },
+                  "param3": {
+                    "type": "number",
+                    "description": "float variable"
+                  },
+                  "param4": {
+                    "type": "number",
+                    "description": "double variable"
+                  },
+                  "param5": {
+                    "type": "string",
+                    "description": "string variable"
+                  },
+                  "param6": {
+                    "type": "boolean",
+                    "description": "boolean variable"
+                  },
+                  "param7": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/PARAM_DATA",
+                    "description": "struct variable"
+                  },
+                  "param8": {
+                    "type": "number",
+                    "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dev_test_2/test": {
+      "put": {
+        "tags": [
+          "dev_test_2"
+        ],
+        "summary": "function description",
+        "responses": {
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
+                    "param1": {
+                      "type": "number",
+                      "description": "int variable"
+                    },
+                    "param2": {
+                      "type": "object",
+                      "description": "data variable"
+                    },
+                    "param3": {
+                      "type": "number",
+                      "description": "float variable"
+                    },
+                    "param4": {
+                      "type": "number",
+                      "description": "double variable"
+                    },
+                    "param5": {
+                      "type": "string",
+                      "description": "string variable"
+                    },
+                    "param6": {
+                      "type": "boolean",
+                      "description": "boolean variable"
+                    },
+                    "param7": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/RES_DATA",
+                      "description": "struct variable"
+                    },
+                    "param8": {
+                      "type": "number",
+                      "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                    },
+                    "param9": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "title": "int array variable"
+                    },
+                    "param10": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      },
+                      "title": "struct array variable"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "응답 결과"
+          }
+        },
+        "description": "### Description.\n* param1 mark variable explain",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "param1": {
+                    "type": "number",
+                    "description": "int variable"
+                  },
+                  "param2": {
+                    "type": "object",
+                    "description": "data variable"
+                  },
+                  "param3": {
+                    "type": "number",
+                    "description": "float variable"
+                  },
+                  "param4": {
+                    "type": "number",
+                    "description": "double variable"
+                  },
+                  "param5": {
+                    "type": "string",
+                    "description": "string variable"
+                  },
+                  "param6": {
+                    "type": "boolean",
+                    "description": "boolean variable"
+                  },
+                  "param7": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/PARAM_DATA",
+                    "description": "struct variable"
+                  },
+                  "param8": {
+                    "type": "number",
+                    "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "dev_test_2"
+        ],
+        "summary": "function description",
+        "responses": {
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
+                    "param1": {
+                      "type": "number",
+                      "description": "int variable"
+                    },
+                    "param2": {
+                      "type": "object",
+                      "description": "data variable"
+                    },
+                    "param3": {
+                      "type": "number",
+                      "description": "float variable"
+                    },
+                    "param4": {
+                      "type": "number",
+                      "description": "double variable"
+                    },
+                    "param5": {
+                      "type": "string",
+                      "description": "string variable"
+                    },
+                    "param6": {
+                      "type": "boolean",
+                      "description": "boolean variable"
+                    },
+                    "param7": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/RES_DATA",
+                      "description": "struct variable"
+                    },
+                    "param8": {
+                      "type": "number",
+                      "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                    },
+                    "param9": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "title": "int array variable"
+                    },
+                    "param10": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      },
+                      "title": "struct array variable"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "응답 결과"
+          }
+        },
+        "description": "### Description.\n* param1 mark variable explain",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "param1": {
+                    "type": "number",
+                    "description": "int variable"
+                  },
+                  "param2": {
+                    "type": "object",
+                    "description": "data variable"
+                  },
+                  "param3": {
+                    "type": "number",
+                    "description": "float variable"
+                  },
+                  "param4": {
+                    "type": "number",
+                    "description": "double variable"
+                  },
+                  "param5": {
+                    "type": "string",
+                    "description": "string variable"
+                  },
+                  "param6": {
+                    "type": "boolean",
+                    "description": "boolean variable"
+                  },
+                  "param7": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/PARAM_DATA",
+                    "description": "struct variable"
+                  },
+                  "param8": {
+                    "type": "number",
+                    "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Status": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "상태 코드 *"
+          },
+          "message": {
+            "type": "string",
+            "description": "상태 내용 *\n* 1: Korean description\n* 2: Korean description\n* 1: Korean description\n* 2: Korean description"
+          }
+        },
+        "type": "object",
+        "title": "Status ( 상태 정보  )"
+      },
+      "RES_DATA": {
+        "properties": {
+          "param1": {
+            "type": "number",
+            "description": "int variable"
+          },
+          "param2": {
+            "type": "object",
+            "description": "data variable"
+          },
+          "param3": {
+            "type": "number",
+            "description": "float variable"
+          },
+          "param4": {
+            "type": "number",
+            "description": "double variable"
+          },
+          "param5": {
+            "type": "string",
+            "description": "string variable"
+          },
+          "param6": {
+            "type": "boolean",
+            "description": "boolean variable"
+          },
+          "param7": {
+            "type": "object",
+            "$ref": "#/components/schemas/PARAM_DATA",
+            "description": "struct variable"
+          },
+          "param8": {
+            "type": "number",
+            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+          },
+          "param9": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "title": "int array variable"
+          },
+          "param10": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PARAM_DATA"
+            },
+            "title": "struct array variable"
+          }
+        },
+        "type": "object",
+        "title": "RES_DATA ( Response infomation  )"
+      },
+      "PARAM_DATA": {
+        "properties": {
+          "param1": {
+            "type": "number",
+            "description": "int variable"
+          },
+          "param2": {
+            "type": "object",
+            "description": "data variable"
+          },
+          "param3": {
+            "type": "number",
+            "description": "float variable"
+          },
+          "param4": {
+            "type": "number",
+            "description": "double variable"
+          },
+          "param5": {
+            "type": "string",
+            "description": "string variable"
+          },
+          "param6": {
+            "type": "boolean",
+            "description": "boolean variable"
+          },
+          "param7": {
+            "type": "number",
+            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+          }
+        },
+        "type": "object",
+        "title": "PARAM_DATA ( Param infomation  )"
+      }
+    }
+  }
+}
