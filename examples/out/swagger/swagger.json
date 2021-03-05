@@ -56,12 +56,17 @@
                     },
                     "param6": {
                       "type": "boolean",
+                      "default": "false",
                       "description": "boolean variable"
                     },
                     "param7": {
                       "type": "object",
-                      "$ref": "#/components/schemas/RES_DATA",
-                      "description": "struct variable"
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/RES_DATA"
+                        }
+                      ],
+                      "title": "struct variable ( RES_DATA )"
                     },
                     "param8": {
                       "type": "number",
@@ -85,17 +90,18 @@
                 }
               }
             },
-            "description": "응답 결과"
+            "description": "Response result"
           }
         },
-        "description": "### Relation.\n* 101: [dev_test_1/undefined](#dev_test_1/get_dev_test_1_undefined).\n* 201: [dev_test_2/undefined](#dev_test_2/get_dev_test_2_undefined).\n### Description.\n* param1 mark variable explain",
+        "description": "### Relation.\n* 101: [dev_test_1/test](#dev_test_1/post_dev_test_1_test).\n* 201: [dev_test_2/test](#dev_test_2/delete_dev_test_2_test).\n### Description.\n* param1 mark variable explain",
         "parameters": [
           {
             "in": "query",
             "name": "param1",
             "schema": {
               "type": "number",
-              "description": "int variable"
+              "description": "int variable",
+              "nullable": true
             },
             "description": "int variable"
           },
@@ -104,7 +110,8 @@
             "name": "param2",
             "schema": {
               "type": "object",
-              "description": "data variable"
+              "description": "data variable",
+              "nullable": true
             },
             "description": "data variable"
           },
@@ -113,7 +120,8 @@
             "name": "param3",
             "schema": {
               "type": "number",
-              "description": "float variable"
+              "description": "float variable",
+              "nullable": true
             },
             "description": "float variable"
           },
@@ -122,7 +130,8 @@
             "name": "param4",
             "schema": {
               "type": "number",
-              "description": "double variable"
+              "description": "double variable",
+              "nullable": true
             },
             "description": "double variable"
           },
@@ -131,7 +140,8 @@
             "name": "param5",
             "schema": {
               "type": "string",
-              "description": "string variable"
+              "description": "string variable",
+              "nullable": true
             },
             "description": "string variable"
           },
@@ -140,7 +150,9 @@
             "name": "param6",
             "schema": {
               "type": "boolean",
-              "description": "boolean variable"
+              "default": "false",
+              "description": "boolean variable",
+              "nullable": true
             },
             "description": "boolean variable"
           },
@@ -149,8 +161,13 @@
             "name": "param7",
             "schema": {
               "type": "object",
-              "$ref": "#/components/schemas/PARAM_DATA",
-              "description": "struct variable"
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/PARAM_DATA"
+                }
+              ],
+              "title": "struct variable ( PARAM_DATA )",
+              "nullable": true
             },
             "description": "struct variable"
           },
@@ -159,7 +176,8 @@
             "name": "param8",
             "schema": {
               "type": "number",
-              "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+              "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value",
+              "nullable": true
             },
             "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
           }
@@ -202,12 +220,17 @@
                     },
                     "param6": {
                       "type": "boolean",
+                      "default": "false",
                       "description": "boolean variable"
                     },
                     "param7": {
                       "type": "object",
-                      "$ref": "#/components/schemas/RES_DATA",
-                      "description": "struct variable"
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/RES_DATA"
+                        }
+                      ],
+                      "title": "struct variable ( RES_DATA )"
                     },
                     "param8": {
                       "type": "number",
@@ -231,7 +254,7 @@
                 }
               }
             },
-            "description": "응답 결과"
+            "description": "Response result"
           }
         },
         "description": "### Description.\n* param1 mark variable explain",
@@ -263,12 +286,17 @@
                   },
                   "param6": {
                     "type": "boolean",
+                    "default": "false",
                     "description": "boolean variable"
                   },
                   "param7": {
                     "type": "object",
-                    "$ref": "#/components/schemas/PARAM_DATA",
-                    "description": "struct variable"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      }
+                    ],
+                    "title": "struct variable ( PARAM_DATA )"
                   },
                   "param8": {
                     "type": "number",
@@ -319,12 +347,17 @@
                     },
                     "param6": {
                       "type": "boolean",
+                      "default": "false",
                       "description": "boolean variable"
                     },
                     "param7": {
                       "type": "object",
-                      "$ref": "#/components/schemas/RES_DATA",
-                      "description": "struct variable"
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/RES_DATA"
+                        }
+                      ],
+                      "title": "struct variable ( RES_DATA )"
                     },
                     "param8": {
                       "type": "number",
@@ -348,7 +381,7 @@
                 }
               }
             },
-            "description": "응답 결과"
+            "description": "Response result"
           }
         },
         "description": "### Description.\n* param1 mark variable explain",
@@ -380,12 +413,17 @@
                   },
                   "param6": {
                     "type": "boolean",
+                    "default": "false",
                     "description": "boolean variable"
                   },
                   "param7": {
                     "type": "object",
-                    "$ref": "#/components/schemas/PARAM_DATA",
-                    "description": "struct variable"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      }
+                    ],
+                    "title": "struct variable ( PARAM_DATA )"
                   },
                   "param8": {
                     "type": "number",
@@ -434,12 +472,17 @@
                     },
                     "param6": {
                       "type": "boolean",
+                      "default": "false",
                       "description": "boolean variable"
                     },
                     "param7": {
                       "type": "object",
-                      "$ref": "#/components/schemas/RES_DATA",
-                      "description": "struct variable"
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/RES_DATA"
+                        }
+                      ],
+                      "title": "struct variable ( RES_DATA )"
                     },
                     "param8": {
                       "type": "number",
@@ -463,7 +506,7 @@
                 }
               }
             },
-            "description": "응답 결과"
+            "description": "Response result"
           }
         },
         "description": "### Description.\n* param1 mark variable explain",
@@ -495,12 +538,17 @@
                   },
                   "param6": {
                     "type": "boolean",
+                    "default": "false",
                     "description": "boolean variable"
                   },
                   "param7": {
                     "type": "object",
-                    "$ref": "#/components/schemas/PARAM_DATA",
-                    "description": "struct variable"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PARAM_DATA"
+                      }
+                    ],
+                    "title": "struct variable ( PARAM_DATA )"
                   },
                   "param8": {
                     "type": "number",
@@ -558,12 +606,17 @@
           },
           "param6": {
             "type": "boolean",
+            "default": "false",
             "description": "boolean variable"
           },
           "param7": {
             "type": "object",
-            "$ref": "#/components/schemas/PARAM_DATA",
-            "description": "struct variable"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PARAM_DATA"
+              }
+            ],
+            "title": "struct variable ( PARAM_DATA )"
           },
           "param8": {
             "type": "number",
@@ -611,6 +664,7 @@
           },
           "param6": {
             "type": "boolean",
+            "default": "false",
             "description": "boolean variable"
           },
           "param7": {

@@ -72,7 +72,7 @@ function gen( json, OBJ ) {
 
   for ( API of OBJ.API ) {
 
-    setPath( json, API )
+    setPath( json, API, OBJ )
   }
 }
 
@@ -103,7 +103,7 @@ function struct( json, OBJ ) {
   }
 }
 
-function setPath( json, API ) {
+function setPath( json, API, OBJ ) {
 
   for ( FUNC of API.FUNC ) {
 
@@ -137,7 +137,7 @@ function setPath( json, API ) {
       tags: [ API.NAME.toLowerCase() ],
       summary: FUNC.DESC,
       responses: getResponse( FUNC.RES ),
-      description: getDescription( FUNC ),
+      description: getDescription( API, OBJ, FUNC )
     }
 
     if ( FUNC.GET ) {
@@ -183,7 +183,11 @@ function setDelete( object ) {
 /* function */
 function getPath( API, FUNC ) {
 
-  return `/${ API.NAME.toLowerCase() }/${ getLocation( FUNC ) }`
+  let loc = getLocation( FUNC )
+
+  if ( loc.length > 0 ) return `/${ API.NAME.toLowerCase() }/${ loc }`
+
+  return `/${ API.NAME.toLowerCase() }`
 }
 
 function getBody( DATA ) {
@@ -232,6 +236,8 @@ function getMethod( FUNC ) {
   if ( FUNC.PUT ) return 'put'
 
   if ( FUNC.POST ) return 'post'
+
+  if ( FUNC.PATCH ) return 'patch'
 
   if ( FUNC.DELETE ) return 'delete'
 
@@ -293,7 +299,7 @@ function getResponse( DATA ) {
           }
         }
       },
-      description: '응답 결과'
+      description: 'Response result'
     }
   }
 
@@ -310,7 +316,7 @@ function getResponse( DATA ) {
 
 function getLocation( FUNC ) {
 
-  return FUNC.GET || FUNC.PUT || FUNC.POST || FUNC.DELETE
+  return ( FUNC.GET || FUNC.PUT || FUNC.POST || FUNC.PATCH || FUNC.DELETE ).replace( '/', '' )
 }
 
 function getParameter( DATA ) {
@@ -321,14 +327,20 @@ function getParameter( DATA ) {
 
     for ( ROW of DATA ) {
 
-      parameters.push( setDelete( {
+      let required = getRequired( ROW.MARK )
+
+      var query = {
 
         in: 'query',
         name: ROW.NAME,
         schema: getProperty( ROW ),
-        required: getRequired( ROW.MARK ),
+        required: required,
         description: ROW.MARK + getOption( ROW.OPTION )
-      } ) )
+      }
+
+      if ( !required ) query.schema.nullable = true
+
+      parameters.push( setDelete( query ) )
     }
 
     return parameters
@@ -381,7 +393,24 @@ function getProperty( DATA ) {
         description: DATA.MARK + getOption( DATA.OPTION )
       }
     }
-    case 'String':
+    case 'String': {
+
+      if ( DATA.ARRAY ) return {
+
+        type: 'array',
+        items: {
+
+          type: DATA.CLASS.toLowerCase()
+        },
+        title: DATA.MARK + getOption( DATA.OPTION )
+      }
+
+      return {
+
+        type: DATA.CLASS.toLowerCase(),
+        description: DATA.MARK + getOption( DATA.OPTION )
+      }
+    }
     case 'Boolean': {
 
       if ( DATA.ARRAY ) return {
@@ -397,6 +426,7 @@ function getProperty( DATA ) {
       return {
 
         type: DATA.CLASS.toLowerCase(),
+        default: 'false',
         description: DATA.MARK + getOption( DATA.OPTION )
       }
     }
@@ -415,8 +445,11 @@ function getProperty( DATA ) {
       return {
 
         type: 'object',
-        $ref: `#/components/schemas/${ DATA.CLASS }`,
-        description: DATA.MARK + getOption( DATA.OPTION )
+        allOf: [ {
+
+          $ref: `#/components/schemas/${ DATA.CLASS }`
+        } ],
+        title: DATA.MARK + getOption( DATA.OPTION ) + ` ( ${ DATA.CLASS } )`
       }
     }
   }
@@ -427,7 +460,7 @@ function getRequired( MARK ) {
   return MARK.indexOf( '*' ) < 0 ? false : true
 }
 
-function getDescription( FUNC ) {
+function getDescription( API, OBJ, FUNC ) {
 
   var desc = []
 
@@ -437,13 +470,30 @@ function getDescription( FUNC ) {
 
     for ( ROW of FUNC.PROC ) {
 
-      var split = ROW.NAME.split( '.' )
+      var target = null
 
-      let path = split[ 0 ].toLowerCase()
+      for ( let A of OBJ.API ) {
 
-      let location = getLocation( split[ 1 ] )
+        target = A.FUNC.find( F => {
 
-      desc.push( `* ${ ROW.CODE }: [${ path }/${ location }](#${ path }/${ getMethod( FUNC ) }_${ path }_${ location }).` )
+          return F.CODE == ROW.CODE
+        } )
+
+        if ( target ) break
+      }
+
+      let base = ROW.NAME.split( '.' )[ 0 ].toLowerCase()
+
+      let path = getPath( API, target ).substring( 1 ).split( '/' )[ 1 ]
+
+      if ( path ) {
+
+        desc.push( `* ${ target.CODE }: [${ base }/${ path }](#${ base }/${ getMethod( target ) }_${ base }_${ path }).` )
+
+      } else {
+
+        desc.push( `* ${ target.CODE }: [${ base }](#${ base }/${ getMethod( target ) }_${ base }).` )
+      }
     }
   }
 

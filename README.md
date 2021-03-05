@@ -273,6 +273,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.2.1-beta` : Addition of the PUT, PATCH, DELETE request method ( Consequently, it supports GET | PUT | POST | PATCH | DELETE ).
 
+`1.2.2-beta` : Fixed a bug that would not output if 'import' was used in the variable name.
+
 <br><br>
 
 ## License
