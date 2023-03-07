@@ -1,7 +1,7 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.3",
   "info": {
-    "title": "SERVICE API",
+    "title": "SWAGGER API",
     "contact": {
       "email": "hongdaesik88@gmail.com"
     },
@@ -13,8 +13,8 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080",
-      "description": "Development server"
+      "url": "http://localhost",
+      "description": "Dev"
     }
   ],
   "paths": {
@@ -23,7 +23,7 @@
         "tags": [
           "dev_test_1"
         ],
-        "summary": "function description",
+        "summary": "[100] function description",
         "responses": {
           "default": {
             "content": {
@@ -31,23 +31,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/Status"
-                    },
                     "param1": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "int variable"
                     },
                     "param2": {
                       "type": "object",
-                      "description": "data variable"
+                      "title": "data variable"
                     },
                     "param3": {
                       "type": "number",
+                      "format": "Float",
                       "description": "float variable"
                     },
                     "param4": {
                       "type": "number",
+                      "format": "Double",
                       "description": "double variable"
                     },
                     "param5": {
@@ -63,19 +63,21 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#/components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/RES_DATA"
                         }
                       ],
-                      "title": "struct variable ( RES_DATA )"
+                      "title": "struct variable"
                     },
                     "param8": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
                     },
                     "param9": {
                       "type": "array",
                       "items": {
-                        "type": "number"
+                        "type": "integer",
+                        "format": "Int32"
                       },
                       "title": "int array variable"
                     },
@@ -90,16 +92,17 @@
                 }
               }
             },
-            "description": "Response result"
+            "description": "응답 결과"
           }
         },
-        "description": "### Relation.\n* 101: [dev_test_1/test](#dev_test_1/post_dev_test_1_test).\n* 201: [dev_test_2/test](#dev_test_2/delete_dev_test_2_test).\n### Description.\n* param1 mark variable explain",
+        "description": "### Relation.\n* [[101] function description](#dev_test_1/post_dev_test_1_test).\n* [[201] function description](#dev_test_2/delete_dev_test_2_test).\n### Description.\nparam1 mark variable explain",
         "parameters": [
           {
             "in": "query",
             "name": "param1",
             "schema": {
-              "type": "number",
+              "type": "integer",
+              "format": "Int32",
               "description": "int variable",
               "nullable": true
             },
@@ -110,7 +113,7 @@
             "name": "param2",
             "schema": {
               "type": "object",
-              "description": "data variable",
+              "title": "data variable",
               "nullable": true
             },
             "description": "data variable"
@@ -120,6 +123,7 @@
             "name": "param3",
             "schema": {
               "type": "number",
+              "format": "Float",
               "description": "float variable",
               "nullable": true
             },
@@ -130,6 +134,7 @@
             "name": "param4",
             "schema": {
               "type": "number",
+              "format": "Double",
               "description": "double variable",
               "nullable": true
             },
@@ -163,10 +168,10 @@
               "type": "object",
               "allOf": [
                 {
-                  "$ref": "#/components/schemas/PARAM_DATA"
+                  "$ref": "#components/schemas/PARAM_DATA"
                 }
               ],
-              "title": "struct variable ( PARAM_DATA )",
+              "title": "struct variable",
               "nullable": true
             },
             "description": "struct variable"
@@ -175,7 +180,8 @@
             "in": "query",
             "name": "param8",
             "schema": {
-              "type": "number",
+              "type": "integer",
+              "format": "Int32",
               "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value",
               "nullable": true
             },
@@ -187,7 +193,7 @@
         "tags": [
           "dev_test_1"
         ],
-        "summary": "function description",
+        "summary": "[101] function description",
         "responses": {
           "default": {
             "content": {
@@ -195,23 +201,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/Status"
-                    },
                     "param1": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "int variable"
                     },
                     "param2": {
                       "type": "object",
-                      "description": "data variable"
+                      "title": "data variable"
                     },
                     "param3": {
                       "type": "number",
+                      "format": "Float",
                       "description": "float variable"
                     },
                     "param4": {
                       "type": "number",
+                      "format": "Double",
                       "description": "double variable"
                     },
                     "param5": {
@@ -227,19 +233,21 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#/components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/RES_DATA"
                         }
                       ],
-                      "title": "struct variable ( RES_DATA )"
+                      "title": "struct variable"
                     },
                     "param8": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
                     },
                     "param9": {
                       "type": "array",
                       "items": {
-                        "type": "number"
+                        "type": "integer",
+                        "format": "Int32"
                       },
                       "title": "int array variable"
                     },
@@ -254,10 +262,10 @@
                 }
               }
             },
-            "description": "Response result"
+            "description": "응답 결과"
           }
         },
-        "description": "### Description.\n* param1 mark variable explain",
+        "description": "### Description.\nparam1 mark variable explain",
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
@@ -265,7 +273,8 @@
                 "type": "object",
                 "properties": {
                   "param1": {
-                    "type": "number",
+                    "type": "integer",
+                    "format": "Int32",
                     "description": "int variable"
                   },
                   "param2": {
@@ -274,10 +283,12 @@
                   },
                   "param3": {
                     "type": "number",
+                    "format": "Float",
                     "description": "float variable"
                   },
                   "param4": {
                     "type": "number",
+                    "format": "Double",
                     "description": "double variable"
                   },
                   "param5": {
@@ -293,15 +304,33 @@
                     "type": "object",
                     "allOf": [
                       {
-                        "$ref": "#/components/schemas/PARAM_DATA"
+                        "$ref": "#components/schemas/PARAM_DATA"
                       }
                     ],
-                    "title": "struct variable ( PARAM_DATA )"
+                    "description": "<details><summary>struct variable</summary><table><tbody><tr><td>param1</td><td><span>integer</span><span>($Int32)</span><div><p>int variable</p></div></td></tr><tr><td>param2</td><td><span>object</span><span></span><div><p>undefined</p></div></td></tr><tr><td>param3</td><td><span>number</span><span>($Float)</span><div><p>float variable</p></div></td></tr><tr><td>param4</td><td><span>number</span><span>($Double)</span><div><p>double variable</p></div></td></tr><tr><td>param5</td><td><span>string</span><span></span><div><p>string variable</p></div></td></tr><tr><td>param6</td><td><span>boolean</span><span></span><div><p>boolean variable</p></div></td></tr><tr><td>param7</td><td><span>integer</span><span>($Int32)</span><div><p>description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value</p></div></td></tr></tbody></table></details>",
+                    "example": {
+                      "param1": null,
+                      "param2": null,
+                      "param3": null,
+                      "param4": null,
+                      "param5": null,
+                      "param6": null,
+                      "param7": null
+                    }
                   },
                   "param8": {
-                    "type": "number",
+                    "type": "integer",
+                    "format": "Int32",
                     "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
                   }
+                }
+              },
+              "encoding": {
+                "param2": {
+                  "contentType": "application/json"
+                },
+                "param7": {
+                  "contentType": "application/json"
                 }
               }
             }
@@ -314,7 +343,7 @@
         "tags": [
           "dev_test_2"
         ],
-        "summary": "function description",
+        "summary": "[200] function description",
         "responses": {
           "default": {
             "content": {
@@ -322,23 +351,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/Status"
-                    },
                     "param1": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "int variable"
                     },
                     "param2": {
                       "type": "object",
-                      "description": "data variable"
+                      "title": "data variable"
                     },
                     "param3": {
                       "type": "number",
+                      "format": "Float",
                       "description": "float variable"
                     },
                     "param4": {
                       "type": "number",
+                      "format": "Double",
                       "description": "double variable"
                     },
                     "param5": {
@@ -354,19 +383,21 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#/components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/RES_DATA"
                         }
                       ],
-                      "title": "struct variable ( RES_DATA )"
+                      "title": "struct variable"
                     },
                     "param8": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
                     },
                     "param9": {
                       "type": "array",
                       "items": {
-                        "type": "number"
+                        "type": "integer",
+                        "format": "Int32"
                       },
                       "title": "int array variable"
                     },
@@ -381,10 +412,10 @@
                 }
               }
             },
-            "description": "Response result"
+            "description": "응답 결과"
           }
         },
-        "description": "### Description.\n* param1 mark variable explain",
+        "description": "### Description.\nparam1 mark variable explain",
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
@@ -392,7 +423,8 @@
                 "type": "object",
                 "properties": {
                   "param1": {
-                    "type": "number",
+                    "type": "integer",
+                    "format": "Int32",
                     "description": "int variable"
                   },
                   "param2": {
@@ -401,10 +433,12 @@
                   },
                   "param3": {
                     "type": "number",
+                    "format": "Float",
                     "description": "float variable"
                   },
                   "param4": {
                     "type": "number",
+                    "format": "Double",
                     "description": "double variable"
                   },
                   "param5": {
@@ -420,15 +454,33 @@
                     "type": "object",
                     "allOf": [
                       {
-                        "$ref": "#/components/schemas/PARAM_DATA"
+                        "$ref": "#components/schemas/PARAM_DATA"
                       }
                     ],
-                    "title": "struct variable ( PARAM_DATA )"
+                    "description": "<details><summary>struct variable</summary><table><tbody><tr><td>param1</td><td><span>integer</span><span>($Int32)</span><div><p>int variable</p></div></td></tr><tr><td>param2</td><td><span>object</span><span></span><div><p>undefined</p></div></td></tr><tr><td>param3</td><td><span>number</span><span>($Float)</span><div><p>float variable</p></div></td></tr><tr><td>param4</td><td><span>number</span><span>($Double)</span><div><p>double variable</p></div></td></tr><tr><td>param5</td><td><span>string</span><span></span><div><p>string variable</p></div></td></tr><tr><td>param6</td><td><span>boolean</span><span></span><div><p>boolean variable</p></div></td></tr><tr><td>param7</td><td><span>integer</span><span>($Int32)</span><div><p>description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value</p></div></td></tr></tbody></table></details>",
+                    "example": {
+                      "param1": null,
+                      "param2": null,
+                      "param3": null,
+                      "param4": null,
+                      "param5": null,
+                      "param6": null,
+                      "param7": null
+                    }
                   },
                   "param8": {
-                    "type": "number",
+                    "type": "integer",
+                    "format": "Int32",
                     "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
                   }
+                }
+              },
+              "encoding": {
+                "param2": {
+                  "contentType": "application/json"
+                },
+                "param7": {
+                  "contentType": "application/json"
                 }
               }
             }
@@ -439,7 +491,7 @@
         "tags": [
           "dev_test_2"
         ],
-        "summary": "function description",
+        "summary": "[201] function description",
         "responses": {
           "default": {
             "content": {
@@ -447,23 +499,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "$ref": "#/components/schemas/Status"
-                    },
                     "param1": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "int variable"
                     },
                     "param2": {
                       "type": "object",
-                      "description": "data variable"
+                      "title": "data variable"
                     },
                     "param3": {
                       "type": "number",
+                      "format": "Float",
                       "description": "float variable"
                     },
                     "param4": {
                       "type": "number",
+                      "format": "Double",
                       "description": "double variable"
                     },
                     "param5": {
@@ -479,19 +531,21 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#/components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/RES_DATA"
                         }
                       ],
-                      "title": "struct variable ( RES_DATA )"
+                      "title": "struct variable"
                     },
                     "param8": {
-                      "type": "number",
+                      "type": "integer",
+                      "format": "Int32",
                       "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
                     },
                     "param9": {
                       "type": "array",
                       "items": {
-                        "type": "number"
+                        "type": "integer",
+                        "format": "Int32"
                       },
                       "title": "int array variable"
                     },
@@ -506,135 +560,187 @@
                 }
               }
             },
-            "description": "Response result"
+            "description": "응답 결과"
           }
         },
-        "description": "### Description.\n* param1 mark variable explain",
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "param1": {
-                    "type": "number",
-                    "description": "int variable"
-                  },
-                  "param2": {
-                    "type": "object",
-                    "description": "data variable"
-                  },
-                  "param3": {
-                    "type": "number",
-                    "description": "float variable"
-                  },
-                  "param4": {
-                    "type": "number",
-                    "description": "double variable"
-                  },
-                  "param5": {
-                    "type": "string",
-                    "description": "string variable"
-                  },
-                  "param6": {
-                    "type": "boolean",
-                    "default": "false",
-                    "description": "boolean variable"
-                  },
-                  "param7": {
-                    "type": "object",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/PARAM_DATA"
-                      }
-                    ],
-                    "title": "struct variable ( PARAM_DATA )"
-                  },
-                  "param8": {
-                    "type": "number",
-                    "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
-                  }
+        "description": "### Description.\nparam1 mark variable explain",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "param1",
+            "schema": {
+              "type": "integer",
+              "format": "Int32",
+              "description": "int variable",
+              "nullable": true
+            },
+            "description": "int variable"
+          },
+          {
+            "in": "query",
+            "name": "param2",
+            "schema": {
+              "type": "object",
+              "title": "data variable",
+              "nullable": true
+            },
+            "description": "data variable"
+          },
+          {
+            "in": "query",
+            "name": "param3",
+            "schema": {
+              "type": "number",
+              "format": "Float",
+              "description": "float variable",
+              "nullable": true
+            },
+            "description": "float variable"
+          },
+          {
+            "in": "query",
+            "name": "param4",
+            "schema": {
+              "type": "number",
+              "format": "Double",
+              "description": "double variable",
+              "nullable": true
+            },
+            "description": "double variable"
+          },
+          {
+            "in": "query",
+            "name": "param5",
+            "schema": {
+              "type": "string",
+              "description": "string variable",
+              "nullable": true
+            },
+            "description": "string variable"
+          },
+          {
+            "in": "query",
+            "name": "param6",
+            "schema": {
+              "type": "boolean",
+              "default": "false",
+              "description": "boolean variable",
+              "nullable": true
+            },
+            "description": "boolean variable"
+          },
+          {
+            "in": "query",
+            "name": "param7",
+            "schema": {
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "#components/schemas/PARAM_DATA"
                 }
-              }
-            }
+              ],
+              "title": "struct variable",
+              "nullable": true
+            },
+            "description": "struct variable"
+          },
+          {
+            "in": "query",
+            "name": "param8",
+            "schema": {
+              "type": "integer",
+              "format": "Int32",
+              "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value",
+              "nullable": true
+            },
+            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
           }
-        }
+        ]
       }
     }
   },
+  "security": [
+    {
+      "token": []
+    }
+  ],
   "components": {
+    "securitySchemes": {
+      "token": {
+        "in": "header",
+        "type": "apiKey",
+        "name": "X-API-TOKEN",
+        "description": "\nDescription: 사용자 토큰값\n\n\n<details>\n<summary>Development token</summary>\n<p>token</p>\n</details>"
+      }
+    },
     "schemas": {
-      "Status": {
-        "required": [
-          "code",
-          "message"
-        ],
-        "properties": {
-          "code": {
-            "type": "number",
-            "description": "상태 코드 *"
-          },
-          "message": {
-            "type": "string",
-            "description": "상태 내용 *\n* 1: Korean description\n* 2: Korean description\n* 1: Korean description\n* 2: Korean description"
-          }
-        },
-        "type": "object",
-        "title": "Status ( 상태 정보  )"
-      },
       "RES_DATA": {
         "properties": {
           "param1": {
-            "type": "number",
-            "description": "int variable"
+            "type": "integer",
+            "format": "Int32",
+            "description": "int variable",
+            "default": "null"
           },
           "param2": {
             "type": "object",
-            "description": "data variable"
+            "title": "data variable",
+            "default": "null"
           },
           "param3": {
             "type": "number",
-            "description": "float variable"
+            "format": "Float",
+            "description": "float variable",
+            "default": "null"
           },
           "param4": {
             "type": "number",
-            "description": "double variable"
+            "format": "Double",
+            "description": "double variable",
+            "default": "null"
           },
           "param5": {
             "type": "string",
-            "description": "string variable"
+            "description": "string variable",
+            "default": "null"
           },
           "param6": {
             "type": "boolean",
-            "default": "false",
+            "default": "null",
             "description": "boolean variable"
           },
           "param7": {
             "type": "object",
             "allOf": [
               {
-                "$ref": "#/components/schemas/PARAM_DATA"
+                "$ref": "#components/schemas/PARAM_DATA"
               }
             ],
-            "title": "struct variable ( PARAM_DATA )"
+            "title": "struct variable",
+            "default": "null"
           },
           "param8": {
-            "type": "number",
-            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+            "type": "integer",
+            "format": "Int32",
+            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value",
+            "default": "null"
           },
           "param9": {
             "type": "array",
             "items": {
-              "type": "number"
+              "type": "integer",
+              "format": "Int32"
             },
-            "title": "int array variable"
+            "title": "int array variable",
+            "default": "null"
           },
           "param10": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PARAM_DATA"
             },
-            "title": "struct array variable"
+            "title": "struct array variable",
+            "default": "null"
           }
         },
         "type": "object",
@@ -643,33 +749,43 @@
       "PARAM_DATA": {
         "properties": {
           "param1": {
-            "type": "number",
-            "description": "int variable"
+            "type": "integer",
+            "format": "Int32",
+            "description": "int variable",
+            "default": "null"
           },
           "param2": {
             "type": "object",
-            "description": "data variable"
+            "title": "data variable",
+            "default": "null"
           },
           "param3": {
             "type": "number",
-            "description": "float variable"
+            "format": "Float",
+            "description": "float variable",
+            "default": "null"
           },
           "param4": {
             "type": "number",
-            "description": "double variable"
+            "format": "Double",
+            "description": "double variable",
+            "default": "null"
           },
           "param5": {
             "type": "string",
-            "description": "string variable"
+            "description": "string variable",
+            "default": "null"
           },
           "param6": {
             "type": "boolean",
-            "default": "false",
+            "default": "null",
             "description": "boolean variable"
           },
           "param7": {
-            "type": "number",
-            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value"
+            "type": "integer",
+            "format": "Int32",
+            "description": "description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value",
+            "default": "null"
           }
         },
         "type": "object",

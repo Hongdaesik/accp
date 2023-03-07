@@ -132,12 +132,12 @@ API {
 
       COMP true
 
+      PUT test
+
       MARK {
 
         param1 mark variable explain
       }
-
-      PUT test
 
       REQ {
 
@@ -182,12 +182,12 @@ API {
 
       COMP true
 
+      DELETE test
+
       MARK {
 
         param1 mark variable explain
       }
-
-      DELETE test
 
       REQ {
 

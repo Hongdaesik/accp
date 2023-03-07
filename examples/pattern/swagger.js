@@ -6,6 +6,7 @@ const TYPO = {
 
   LINE: '\n',
   EMPTY: '',
+  SPACE: ' '
 }
 
 module.exports = function( OBJ, GEN ) {
@@ -14,9 +15,9 @@ module.exports = function( OBJ, GEN ) {
 
   var json = {
 
-    openapi: '3.0.1',
+    openapi: '3.0.3',
     info: {
-      title: 'SERVICE API',
+      title: 'SWAGGER API',
       contact: {
         email: 'hongdaesik88@gmail.com'
       },
@@ -27,53 +28,43 @@ module.exports = function( OBJ, GEN ) {
       version: '0.0.1',
     },
     servers: [ {
-      url: 'http://localhost:8080',
-      description: 'Development server'
+      url: 'http://localhost',
+      description: 'Dev'
     } ],
     paths: {},
+    security: [ {
+      token: []
+    } ],
     components: {
-      schemas: {
-        Status: {
-          required: [
-            'code',
-            'message'
-          ],
-          properties: {
-            code: {
-              type: 'number',
-              description: '상태 코드 *'
-            },
-            message: {
-              type: 'string',
-              description: '상태 내용 *'
-            }
-          },
-          type: 'object',
-          title: 'Status ( 상태 정보  )'
+      securitySchemes: {
+        token: {
+          in: 'header',
+          type: 'apiKey',
+          name: 'X-API-TOKEN',
+          description: `
+Description: 사용자 토큰값\n\n
+<details>
+<summary>Development token</summary>
+<p>token</p>
+</details>`
         }
-      }
+      },
+      schemas: {}
     }
   }
 
-  gen( json, OBJ )
-
   struct( json, OBJ )
 
-  code( json, OBJ )
+  path( json, OBJ )
+
+  /*
+  code( json, OBJ ) */
 
   def.open()
 
   def.print( JSON.stringify( json, null, 2 ) )
 
   def.close()
-}
-
-function gen( json, OBJ ) {
-
-  for ( API of OBJ.API ) {
-
-    setPath( json, API, OBJ )
-  }
 }
 
 function code( json, OBJ ) {
@@ -87,8 +78,77 @@ function code( json, OBJ ) {
       code.push( `* ${ _CODE.CODE }: ${ _CODE.MARK.ko || _CODE.MARK.en }` )
     }
   }
+}
 
-  json.components.schemas.Status.properties.message.description += TYPO.LINE + code.join( TYPO.LINE )
+function path( json, OBJ ) {
+
+  for ( API of OBJ.API ) {
+
+    for ( FUNC of API.FUNC ) {
+
+      if ( FUNC.COMP == false ) continue
+
+      var token = false
+
+      var procedure = false
+
+      if ( FUNC.OPT ) {
+
+        for ( let OPT of FUNC.OPT ) {
+
+          switch ( OPT.NAME ) {
+
+            case 'token': {
+
+              token = OPT.VALUE
+
+              break
+            }
+            case 'procedure': {
+
+              procedure = OPT.VALUE
+
+              break
+            }
+          }
+        }
+      }
+
+      // chk procedure
+      if ( procedure ) continue
+
+      var path = json.paths[ getPath( API, FUNC ) ] || new Object()
+
+      var object = {
+
+        tags: [ API.NAME.toLowerCase() ],
+        summary: `[${ FUNC.CODE }] ${ FUNC.DESC }${ token ? ' 🔒' : '' }`,
+        responses: getResponse( FUNC.RES ),
+        description: getDescription( API, OBJ, FUNC ),
+      }
+
+      if ( token ) {
+
+        object.security = [ {
+
+          token: []
+        } ]
+      }
+
+      if ( FUNC.GET || FUNC.DELETE ) {
+
+        object.parameters = getParameter( FUNC.REQ )
+
+      } else {
+
+        object.requestBody = getBody( FUNC.REQ, json )
+      }
+
+      path[ getMethod( FUNC ) ] = setDelete( object )
+
+      json.paths[ getPath( API, FUNC ) ] = path
+    }
+  }
 }
 
 function struct( json, OBJ ) {
@@ -103,61 +163,19 @@ function struct( json, OBJ ) {
   }
 }
 
-function setPath( json, API, OBJ ) {
+/* set */
+function setIf( condition, data ) {
 
-  for ( FUNC of API.FUNC ) {
+  if ( condition ) return data
 
-    if ( FUNC.COMP == false ) continue
-
-    var procedure = false
-
-    if ( FUNC.OPT ) {
-
-      for ( let OPT of FUNC.OPT ) {
-
-        switch ( OPT.NAME ) {
-
-          case 'procedure': {
-
-            procedure = OPT.VALUE
-
-            break
-          }
-        }
-      }
-    }
-
-    // chk procedure
-    if ( procedure ) continue
-
-    var path = json.paths[ getPath( API, FUNC ) ] || new Object()
-
-    var object = {
-
-      tags: [ API.NAME.toLowerCase() ],
-      summary: FUNC.DESC,
-      responses: getResponse( FUNC.RES ),
-      description: getDescription( API, OBJ, FUNC )
-    }
-
-    if ( FUNC.GET ) {
-
-      object.parameters = getParameter( FUNC.REQ )
-
-    } else {
-
-      object.requestBody = getBody( FUNC.REQ )
-    }
-
-    path[ getMethod( FUNC ) ] = setDelete( object )
-
-    json.paths[ getPath( API, FUNC ) ] = path
-  }
+  return TYPO.EMPTY
 }
 
 function setDelete( object ) {
 
   for ( key of Object.keys( object ) ) {
+
+    if ( key == 'example' ) continue
 
     if ( object[ key ] ) {
 
@@ -180,7 +198,7 @@ function setDelete( object ) {
   return object
 }
 
-/* function */
+/* get */
 function getPath( API, FUNC ) {
 
   let loc = getLocation( FUNC )
@@ -190,9 +208,11 @@ function getPath( API, FUNC ) {
   return `/${ API.NAME.toLowerCase() }`
 }
 
-function getBody( DATA ) {
+function getBody( DATA, json ) {
 
   var properties = {}
+
+  var encoding = {}
 
   var requires = []
 
@@ -207,7 +227,8 @@ function getBody( DATA ) {
           type: 'object',
           required: requires,
           properties: properties
-        }
+        },
+        encoding: encoding
       }
     }
   }
@@ -218,7 +239,15 @@ function getBody( DATA ) {
 
       if ( getRequired( ROW.MARK ) ) requires.push( ROW.NAME )
 
-      properties[ ROW.NAME ] = getProperty( ROW )
+      properties[ ROW.NAME ] = getProperty( ROW, json )
+
+      if ( properties[ ROW.NAME ].type == 'object' || properties[ ROW.NAME ].type == 'array' ) {
+
+        encoding[ ROW.NAME ] = {
+
+          contentType: 'application/json'
+        }
+      }
     }
 
     return request
@@ -226,6 +255,48 @@ function getBody( DATA ) {
   } else {
 
     return null
+  }
+}
+
+function getModel( DATA, schemas ) {
+
+  let struct = schemas[ DATA.CLASS ]
+
+  var example = {}
+
+  var description = new Array()
+
+  for ( let key of Object.keys( struct.properties ) ) {
+
+    let required = ( struct.required || [] ).indexOf( key ) > -1
+
+    let property = struct.properties[ key ]
+
+    example[ key ] = required ? property.type : null
+
+    description.push( `
+    <tr>
+      <td>${ required ? `<b>${ key }<span> \\*</span></b>` : key }</td>
+      <td>
+        <span>${ property.type }</span>
+        <span>${ setIf( property.format, `($${ property.format })` ) }</span>
+        <div>
+          <p>${ property.description }</p>
+        </div>
+      </td>
+    </tr>`.trim() )
+  }
+
+  return {
+
+    example: example,
+    description: `
+    <details>
+      <summary>${ DATA.MARK }</summary>
+      <table>
+        <tbody>${ description.join( TYPO.EMPTY )  }</tbody>
+      </table>
+    </details>${ getOption( DATA.OPTION ) }`.trim().replace( />\n\s*</g, '><' )
   }
 }
 
@@ -248,7 +319,7 @@ function getOption( DATA ) {
 
   return Array.from( Object.keys( DATA ), key => {
 
-    return `\n* ${ key } ${ DATA[ key ] }`
+    return `\n* ${ key } ${ DATA[ key ] }`.replace( /\\n/g, '\n' )
 
   } ).join( TYPO.EMPTY )
 }
@@ -265,9 +336,16 @@ function getStruct( DATA ) {
 
     for ( ROW of DATA ) {
 
-      if ( getRequired( ROW.MARK ) ) struct.required.push( ROW.NAME )
-
       struct.properties[ ROW.NAME ] = getProperty( ROW )
+
+      if ( getRequired( ROW.MARK ) ) {
+
+        struct.required.push( ROW.NAME )
+
+      } else {
+
+        struct.properties[ ROW.NAME ].default = 'null'
+      }
     }
   }
 
@@ -276,13 +354,7 @@ function getStruct( DATA ) {
 
 function getResponse( DATA ) {
 
-  var properties = {
-
-    status: {
-
-      $ref: '#/components/schemas/Status'
-    }
-  }
+  var properties = {}
 
   var response = {
 
@@ -299,7 +371,7 @@ function getResponse( DATA ) {
           }
         }
       },
-      description: 'Response result'
+      description: '응답 결과'
     }
   }
 
@@ -316,13 +388,15 @@ function getResponse( DATA ) {
 
 function getLocation( FUNC ) {
 
-  return ( FUNC.GET || FUNC.PUT || FUNC.POST || FUNC.PATCH || FUNC.DELETE ).replace( '/', '' )
+  let loc = ( FUNC.GET || FUNC.PUT || FUNC.POST || FUNC.PATCH || FUNC.DELETE )
+
+  return loc.length > 1 ? loc : loc.replace( '/', '' )
 }
 
 function getParameter( DATA ) {
 
   var parameters = []
-  
+
   if ( DATA ) {
 
     for ( ROW of DATA ) {
@@ -351,108 +425,180 @@ function getParameter( DATA ) {
   }
 }
 
-function getProperty( DATA ) {
+function getProperty( DATA, json = null ) {
 
-  switch ( DATA.CLASS ) {
+  var getType = _ => {
 
-    case 'Int':
-    case 'Float':
-    case 'Double': {
+    switch ( DATA.CLASS ) {
 
-      if ( DATA.ARRAY ) return {
+      case 'Int': {
 
-        type: 'array',
-        items: {
+        if ( DATA.ARRAY ) return {
 
-          type: 'number'
-        },
-        title: DATA.MARK + getOption( DATA.OPTION )
+          type: 'array',
+          items: {
+
+            type: 'integer',
+            format: DATA.CLASS + 32
+          }
+        }
+
+        return {
+
+          type: 'integer',
+          format: DATA.CLASS + 32
+        }
       }
+      case 'Float': {
 
-      return {
+        if ( DATA.ARRAY ) return {
 
-        type: 'number',
-        description: DATA.MARK + getOption( DATA.OPTION )
+          type: 'array',
+          items: {
+
+            type: 'number',
+            format: DATA.CLASS
+          }
+        }
+
+        return {
+
+          type: 'number',
+          format: DATA.CLASS
+        }
       }
-    }
-    case 'Data': {
+      case 'Double': {
 
-      if ( DATA.ARRAY ) return {
+        if ( DATA.ARRAY ) return {
 
-        type: 'object',
-        items: {
+          type: 'array',
+          items: {
+
+            type: 'number',
+            format: DATA.CLASS
+          }
+        }
+
+        return {
+
+          type: 'number',
+          format: DATA.CLASS
+        }
+      }
+      case 'String': {
+
+        if ( DATA.ARRAY ) return {
+
+          type: 'array',
+          items: {
+
+            type: 'string'
+          }
+        }
+
+        return {
+
+          type: 'string'
+        }
+      }
+      case 'Boolean': {
+
+        if ( DATA.ARRAY ) return {
+
+          type: 'array',
+          items: {
+
+            type: 'boolean'
+          }
+        }
+
+        return {
+
+          type: 'boolean',
+          default: 'false'
+        }
+      }
+      case 'Data': {
+
+        if ( DATA.ARRAY ) return {
+
+          type: 'array',
+          items: {
+
+            type: 'object'
+          }
+        }
+
+        return {
 
           type: 'object'
-        },
-        description: DATA.MARK + getOption( DATA.OPTION )
+        }
       }
+      default: {
 
-      return {
+        if ( DATA.ARRAY ) return {
 
-        type: 'object',
-        description: DATA.MARK + getOption( DATA.OPTION )
-      }
-    }
-    case 'String': {
+          type: 'array',
+          items: {
 
-      if ( DATA.ARRAY ) return {
+            $ref: '#/components/schemas/' + DATA.CLASS
+          }
+        }
 
-        type: 'array',
-        items: {
+        return {
 
-          type: DATA.CLASS.toLowerCase()
-        },
-        title: DATA.MARK + getOption( DATA.OPTION )
-      }
+          type: 'object',
+          allOf: [ {
 
-      return {
-
-        type: DATA.CLASS.toLowerCase(),
-        description: DATA.MARK + getOption( DATA.OPTION )
-      }
-    }
-    case 'Boolean': {
-
-      if ( DATA.ARRAY ) return {
-
-        type: 'array',
-        items: {
-
-          type: DATA.CLASS.toLowerCase()
-        },
-        title: DATA.MARK + getOption( DATA.OPTION )
-      }
-
-      return {
-
-        type: DATA.CLASS.toLowerCase(),
-        default: 'false',
-        description: DATA.MARK + getOption( DATA.OPTION )
-      }
-    }
-    default: {
-
-      if ( DATA.ARRAY ) return {
-
-        type: 'array',
-        items: {
-
-          $ref: `#/components/schemas/${ DATA.CLASS }`
-        },
-        title: DATA.MARK + getOption( DATA.OPTION )
-      }
-
-      return {
-
-        type: 'object',
-        allOf: [ {
-
-          $ref: `#/components/schemas/${ DATA.CLASS }`
-        } ],
-        title: DATA.MARK + getOption( DATA.OPTION ) + ` ( ${ DATA.CLASS } )`
+            $ref: '#components/schemas/' + DATA.CLASS
+          } ]
+        }
       }
     }
   }
+
+  var object = getType()
+
+  if ( json ) {
+
+    if ( ( object.items && object.items.$ref ) || object.allOf ) {
+
+      let model = getModel( DATA, json.components.schemas )
+
+      object.description = model.description
+
+      if ( object.allOf ) {
+
+        object.example = model.example
+
+      } else if ( object.items.$ref ) {
+
+        object.type = 'object'
+
+        object.example = [ model.example ]
+
+        delete object.items
+      }
+
+    } else {
+
+      object.description = DATA.MARK + getOption( DATA.OPTION )
+    }
+  } else {
+
+    if ( object.type == 'object' || object.type == 'array' ) {
+
+      object.title = DATA.MARK
+
+      object.description = getOption( DATA.OPTION )
+
+    } else {
+
+      object.description = DATA.MARK + getOption( DATA.OPTION )
+    }
+  }
+
+  return object
 }
 
 function getRequired( MARK ) {
@@ -486,13 +632,15 @@ function getDescription( API, OBJ, FUNC ) {
 
       let path = getPath( API, target ).substring( 1 ).split( '/' )[ 1 ]
 
+      let method = getMethod( target )
+
       if ( path ) {
 
-        desc.push( `* ${ target.CODE }: [${ base }/${ path }](#${ base }/${ getMethod( target ) }_${ base }_${ path }).` )
+        desc.push( `* [[${ target.CODE }] ${ target.DESC }](#${ base }/${ method }_${ base }_${ path }).` )
 
       } else {
 
-        desc.push( `* ${ target.CODE }: [${ base }](#${ base }/${ getMethod( target ) }_${ base }).` )
+        desc.push( `* [[${ target.CODE }] ${ target.DESC }](#${ base }/${ method }_${ base }).` )
       }
     }
   }
@@ -501,7 +649,7 @@ function getDescription( API, OBJ, FUNC ) {
 
     desc.push( '### Description.' )
 
-    for ( ROW of FUNC.MARK ) desc.push( `* ${ ROW.NAME } ${ ROW.MARK || ROW.CODE }` )
+    for ( ROW of FUNC.MARK ) desc.push( `${ ROW.NAME } ${ ROW.MARK || ROW.CODE }`.replace( /\\n/g, '\n' ) )
   }
 
   return desc.length > 0 ? desc.join( TYPO.LINE ) : null
