@@ -275,6 +275,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.2.2-beta` : Fixed a bug that would not output if 'import' was used in the variable name.
 
+`1.2.3-beta` : Add sample pattern file (Flutter, Node JS).
+
 <br><br>
 
 ## License

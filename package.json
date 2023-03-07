@@ -12,7 +12,7 @@
     "email": "hongdaesik88@gmail.com"
   },
   "license": "MIT",
-  "version": "1.2.2-beta",
+  "version": "1.2.3-beta",
   "keywords": [
     "api",
     "code",
@@ -24,6 +24,7 @@
     "nodejs",
     "create",
     "angular",
+    "flutter",
     "pattern",
     "generate"
   ],
