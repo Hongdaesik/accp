@@ -1,17 +1,18 @@
-
 /* require */
+
+/* Virtual file for writing example code. */
+const DB = require( '..' )
+const FUNC = require( '..' )
+
 const CODE = require( '../code/code' )
 
 const QUERY = require( '../query/dev_test_1' )
 
-/* config */
-const CONFIG = require( '../config/' + process.argv[ 2 ] )
-
-function Dev_test_1() {}
+function Dev_test_1 () {}
 
 /** 
- * Parameter: 
- * @param query.param1 int variable
+* Parameter: 
+* @param query.param1 int variable
  * @param query.param2 data variable
  * @param query.param3 float variable
  * @param query.param4 double variable
@@ -19,73 +20,80 @@ function Dev_test_1() {}
  * @param query.param6 boolean variable
  * @param query.param7 struct variable
  * @param query.param8 description of the value
- */
+*/
 Dev_test_1.prototype.getTest = async function( req ) {
 
-  try {
+/* Code for example, please edit it yourself. */
+try {
 
-    /* database connection sample
-    var connection = await DB.connection.write()
+  var connection = await DB.connection.write()
 
-    connection.commit()
+  let data = DB.query( connection, QUERY.get.any(), req.query || req.body )
 
-    connection.release() */
+  await connection.beginTransaction()
 
-    var response = CODE.SYSTEM_SUCCESS
+  await connection.commit()
 
-    /* int variable 
-    response.param1 = DB.get( data, 0, 0 ) */
+  await connection.release()
 
-    /* data variable 
-    response.param2 = DB.get( data, 1, 0 ) */
+  var response = FUNC.getStatus( req, CODE.SYSTEM_SUCCESS ) 
 
-    /* float variable 
-    response.param3 = DB.get( data, 2, 0 ) */
+  /* int variable */
+    response.param1 = DB.get( data, 0, 0 )
 
-    /* double variable 
-    response.param4 = DB.get( data, 3, 0 ) */
+    /* data variable */
+    response.param2 = DB.get( data, 1, 0 )
 
-    /* string variable 
-    response.param5 = DB.get( data, 4, 0 ) */
+    /* float variable */
+    response.param3 = DB.get( data, 2, 0 )
 
-    /* boolean variable 
-    response.param6 = DB.get( data, 5, 0 ) */
+    /* double variable */
+    response.param4 = DB.get( data, 3, 0 )
 
-    /* struct variable 
-    response.param7 = DB.get( data, 6, 0 ) */
+    /* string variable */
+    response.param5 = DB.get( data, 4, 0 )
 
-    /* description of the value 
-    response.param8 = DB.get( data, 7, 0 ) */
+    /* boolean variable */
+    response.param6 = DB.get( data, 5, 0 )
 
-    /* int array variable 
-    response.param9 = DB.get( data, 8 ) */
+    /* struct variable */
+    response.param7 = DB.get( data, 6, 0 )
 
-    /* struct array variable 
-    response.param10 = DB.get( data, 9 ) */
+    /* description of the value */
+    response.param8 = DB.get( data, 7, 0 )
 
-    return response
+    /* int array variable */
+    response.param9 = DB.get( data, 8 )
 
-  } catch ( error ) {
+    /* struct array variable */
+    response.param10 = DB.get( data, 9 )
 
-    /* database error sample
-    connection.rollback()
+  return response
 
-    connection.release() */
+} catch ( error ) {
 
-    if ( error && error.message ) {
+  if ( connection ) {
 
-      console.error( new Date(), error.message )
+    await connection.rollback()
 
-      return CODE.SYSTEM_DATABASE
-    }
-
-    return error
+    await connection.release()
   }
+
+  if ( error && error.message ) {
+
+    console.error( new Date().locale(), error.message )
+
+    return FUNC.getStatus( req, CODE.SYSTEM_DATABASE )
+  }
+
+  return FUNC.getStatus( req, error )
+}
 }
 
+
 /** 
- * Parameter: 
- * @param body.param1 int variable
+* Parameter: 
+* @param body.param1 int variable
  * @param body.param2 data variable
  * @param body.param3 float variable
  * @param body.param4 double variable
@@ -93,68 +101,74 @@ Dev_test_1.prototype.getTest = async function( req ) {
  * @param body.param6 boolean variable
  * @param body.param7 struct variable
  * @param body.param8 description of the value
- */
+*/
 Dev_test_1.prototype.postTest = async function( req ) {
 
-  try {
+/* Code for example, please edit it yourself. */
+try {
 
-    /* database connection sample
-    var connection = await DB.connection.write()
+  var connection = await DB.connection.write()
 
-    connection.commit()
+  let data = DB.query( connection, QUERY.set.any(), req.query || req.body )
 
-    connection.release() */
+  await connection.beginTransaction()
 
-    var response = CODE.SYSTEM_SUCCESS
+  await connection.commit()
 
-    /* int variable 
-    response.param1 = DB.get( data, 0, 0 ) */
+  await connection.release()
 
-    /* data variable 
-    response.param2 = DB.get( data, 1, 0 ) */
+  var response = FUNC.getStatus( req, CODE.SYSTEM_SUCCESS ) 
 
-    /* float variable 
-    response.param3 = DB.get( data, 2, 0 ) */
+  /* int variable */
+    response.param1 = DB.get( data, 0, 0 )
 
-    /* double variable 
-    response.param4 = DB.get( data, 3, 0 ) */
+    /* data variable */
+    response.param2 = DB.get( data, 1, 0 )
 
-    /* string variable 
-    response.param5 = DB.get( data, 4, 0 ) */
+    /* float variable */
+    response.param3 = DB.get( data, 2, 0 )
 
-    /* boolean variable 
-    response.param6 = DB.get( data, 5, 0 ) */
+    /* double variable */
+    response.param4 = DB.get( data, 3, 0 )
 
-    /* struct variable 
-    response.param7 = DB.get( data, 6, 0 ) */
+    /* string variable */
+    response.param5 = DB.get( data, 4, 0 )
 
-    /* description of the value 
-    response.param8 = DB.get( data, 7, 0 ) */
+    /* boolean variable */
+    response.param6 = DB.get( data, 5, 0 )
 
-    /* int array variable 
-    response.param9 = DB.get( data, 8 ) */
+    /* struct variable */
+    response.param7 = DB.get( data, 6, 0 )
 
-    /* struct array variable 
-    response.param10 = DB.get( data, 9 ) */
+    /* description of the value */
+    response.param8 = DB.get( data, 7, 0 )
 
-    return response
+    /* int array variable */
+    response.param9 = DB.get( data, 8 )
 
-  } catch ( error ) {
+    /* struct array variable */
+    response.param10 = DB.get( data, 9 )
 
-    /* database error sample
-    connection.rollback()
+  return response
 
-    connection.release() */
+} catch ( error ) {
 
-    if ( error && error.message ) {
+  if ( connection ) {
 
-      console.error( new Date(), error.message )
+    await connection.rollback()
 
-      return CODE.SYSTEM_DATABASE
-    }
-
-    return error
+    await connection.release()
   }
+
+  if ( error && error.message ) {
+
+    console.error( new Date().locale(), error.message )
+
+    return FUNC.getStatus( req, CODE.SYSTEM_DATABASE )
+  }
+
+  return FUNC.getStatus( req, error )
+}
 }
 
 

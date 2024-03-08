@@ -1,7 +1,13 @@
 
 STRUCT {
 
-  RES_DATA Response infomation {
+  Status Status information {
+
+    code Int Error code
+    message String Error message
+  }
+
+  RES_DATA Response information {
 
     param1 Int int variable
     param2 Data data variable
@@ -21,7 +27,7 @@ STRUCT {
     param10 [PARAM_DATA] struct array variable
   }
 
-  PARAM_DATA Param infomation {
+  PARAM_DATA Param information {
 
     param1 Int int variable
     param2 Data data variable

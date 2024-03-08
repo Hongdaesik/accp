@@ -1,24 +1,24 @@
 
+
 function CODE() {
 
   /* TEST_CODE_1 */
   this.TEST_CODE_1_error_1 = 1
   this.TEST_CODE_1_error_2 = 2
-  
   /* TEST_CODE_2 */
   this.TEST_CODE_2_error_1 = 1
   this.TEST_CODE_2_error_2 = 2
 
   /**
-   * 사용자 언어 설정에 따른 에러 메시지 반환
-   * @param { string } typeLang - req.user.typeLang, 사용자 언어
-   * @param { number } code - 에러 코드
-   * @returns { string } - 에러 메시지
+   * Error message returned according to user language settings.
+   * @param { string } typeLang
+   * @param { number } code
+   * @returns { string }
    */
   this.getMessage = function( typeLang, code ) {
 
-    switch ( typeLang.toLowerCase() ) {
-      
+    switch ( typeLang.toLowerCase() ) { 
+
       case 'ko': {
 
         switch ( code ) {
@@ -58,7 +58,10 @@ function CODE() {
           case 1: return 'English description'
           case 2: return 'English description'
         }
+
+        break
       }
+      
     }
   }
 }

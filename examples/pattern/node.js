@@ -2,447 +2,243 @@ const PATH = require( 'path' )
 
 const BASE = 'out/node'
 
-const TYPO = {
+const LIB = {
 
-  LINE: '\n',
-  SPC1: ' ',
-  SPC2: '  ',
-  SPC3: '   ',
-  SPC4: '    ',
-  SPC5: '     ',
-  SPC6: '      ',
-  SPC7: '       ',
-  SPC8: '        ',
-  SPC9: '         ',
-  SPC10: '          ',
-  COMMA: ',',
-  EMPTY: '',
-  BRACKET: {
+  code: {
 
-    END: ')',
-    START: '('
-  }
-}
+    /**
+     * Code constant and number matching & code number and message output.
+     * @param { object } OBJ - https://www.npmjs.com/package/accp#obj
+     * @returns 
+     */
+    language: function ( OBJ ) {
 
-module.exports = function( OBJ, GEN ) {
+      /* Separation of codes & messages by language. */
+      var code = []
+      var value = {}
 
-  /* get api */
-  gen( OBJ, GEN )
+      for ( let CODE of OBJ.CODE ) {
 
-  /* get code */
-  code( OBJ, GEN )
-}
+        /* Language-specific code messages. */
+        code = code.concat( [ `/* ${ CODE.NAME } */` ].concat( Array.from( CODE.CODE, ( ROW ) => `this.${ CODE.NAME }_${ ROW.NAME } = ${ ROW.CODE }` ) ) )
 
-function gen( OBJ, GEN ) {
+        /* Separate code objects by language. */
+        var mark = {}
 
-  /* router */
-  for ( API of OBJ.API ) {
+        for ( let ROW of CODE.CODE ) {
 
-    // init
-    var model = new GEN( PATH.join( BASE, `model/${ API.NAME.toLowerCase() }.js` ) )
-    
-    var query = new GEN( PATH.join( BASE, `query/${ API.NAME.toLowerCase() }.js` ) )
-    
-    var router = new GEN( PATH.join( BASE, `router/${ API.NAME.toLowerCase() }.js` ) )
+          for ( let key of Object.keys( ROW.MARK ) ) {
 
-    // set open
-    model.open()
-    query.open()
-    router.open()
+            if ( !value[ key ] ) value[ key ] = []
 
-    setModel( model, API )
+            if ( !mark[ key ] ) {
 
-    setQuery( query, API )
-    
-    setRouter( router, API )
+              value[ key ].push( {
 
-    // set close
-    model.close()
-    query.close()
-    router.close()
-  }
-}
+                mark: CODE.NAME
+              } )
 
-function code( OBJ, GEN ) {
+              mark[ key ] = true
+            }
 
-  var out = new GEN( PATH.join( BASE, 'code/code.js' ) )
+            value[ key ].push( {
 
-  var v = []
-  var l = {}
+              code: ROW.CODE,
+              mark: ROW.MARK[ key ]
+            } )
+          }
+        }
+      }
 
-  out.open()
+      return [ code, value ]
+    }
+  },
+  model: {
 
-  out.print( `
-function CODE() {
-` )
+    /**
+     * Parameter description.
+     * @param { object } REQ - https://www.npmjs.com/package/accp#obj
+     * @param { object } method
+     * @param { object } parameter 
+     * @param { string } template
+     * @returns { string }
+     */
+    mark: function ( REQ, method, parameter, template = '* @param {key} {mark}' ) {
 
-  for ( let CODE of OBJ.CODE ) {
+      return ( Array.from( parameter.filter( ROW => ROW.PARAM ), ROW =>
 
-    v = v.concat( getValue( CODE ) )
+        /* Set custom parameters. */
+        template.replace( '{key}', ROW.PARAM ).replace( '{mark}', ROW.MARK ) ).concat(
 
-    l = getLanguage( l, CODE )
-  }
+        /* Set HTTP parameters. */
+        !REQ ? [] : Array.from( REQ, ROW =>
 
-  /* print value */
-  out.print( v.join( TYPO.LINE + TYPO.SPC2 ) )
+          template.replace( '{key}', `${ method.PARAM }.${ ROW.NAME }` ).replace( '{mark}', ROW.MARK ) ) ) || [] ).join( '\n ' )
+    },
 
-  /* print function */
-  out.print( getCode( l ) )
+    /**
+     * Response data output.
+     * @param { object } FUNC 
+     * @param { string } template 
+     * @returns { string }
+     */
+    response: function ( FUNC, template = `/* {mark} */\n${ getTab( 2 ) }response.{name} = DB.get( data, {args} )` ) {
 
-  out.print( `
-}
+      return ( !FUNC?.RES ? [] : Array.from(
 
-module.exports = new CODE()` )
+        /* Processing of excluding certain response values. */
+        FUNC.RES.filter( RES => ![ 'status' ].includes( RES.NAME ) ), ( RES, index ) =>
 
-  out.close()
-}
+        template.replace( '{mark}', RES.MARK ).replace( '{name}', RES.NAME ).replace( '{args}', RES.ARRAY ? index : `${ index }, 0` ) ) ).join( '\n\n' + getTab( 2 ) )
+    },
 
-function setModel( out, API ) {
+    /**
+     * As a parameter written in the OPT item.
+     * Database connection method settings.
+     * @param { object } FUNC 
+     * @returns { string }
+     */
+    connection: function ( FUNC ) {
 
-  /* set header */
-  out.print( `
-/* require */
-const CODE = require( '../code/code' )
+      for ( let OPT of FUNC?.OPT || [] ) {
 
-const QUERY = require( '../query/${ API.NAME.toLowerCase() }' )
-
-/* config */
-const CONFIG = require( '../config/' + process.argv[ 2 ] )
-
-function ${ getClass( API.NAME ) }() {}
-` )
-
-  /* print func */
-  for ( let FUNC of API.FUNC ) {
-
-    var method = 'write'
-
-    var procedure = false
-
-    if ( FUNC.OPT ) {
-
-      for ( let OPT of FUNC.OPT ) {
-
+        /* You can use it further by setting the desired option value. */
         switch ( OPT.NAME ) {
 
           case 'read':
           case 'cache': {
 
-            method = OPT.NAME
-
-            break
-          }
-
-          case 'procedure': {
-
-            procedure = OPT.VALUE
-
-            break
+            return OPT.NAME
           }
         }
       }
+
+      return 'write'
     }
+  },
+  router: {
 
-    // chk procedure
-    if ( procedure ) continue
+    /**
+     * List of associated APIs.
+     * @param { object } PROC - https://www.npmjs.com/package/accp#obj
+     */
+    proc: function ( PROC ) {
 
-    let METHOD = getMethod( FUNC )
+      if ( PROC ) return Array.from( PROC, ROW => `* * [${ ROW.NAME }] ${ ROW.MARK || ROW.CODE }` ).join( '\n' )
 
-    let OPTION = getOption( FUNC )
+      return '* * notihng'
+    },
 
-    // set api function
-    out.print( `
-/** 
- * Parameter: ${ getMarks( FUNC.REQ, TYPO.SPC1, METHOD, OPTION ) }*/
-${ getClass( API.NAME ) }.prototype.${ getFunction( FUNC.NAME ) } = async function( req ) {
+    /**
+     * Additional explanation regarding API.
+     * @param { object } MARK - https://www.npmjs.com/package/accp#obj
+     */
+    mark: function ( MARK ) {
 
-  try {
+      if ( MARK ) return Array.from( MARK, ROW => `* * ${ ROW.NAME } ${ ROW.MARK.replace( /\\n\s\s/g, '\n * * * ' ) }` ).join( '\n' )
 
-    /* database connection sample
-    var connection = await DB.connection.${ method }()
+      return '* * notihng'
+    },
 
-    connection.commit()
+    /**
+     * Output of the router method (user-declared function) set in the option value.
+     * @param { object } OPTION - https://www.npmjs.com/package/accp#obj
+     */
+    option: function ( OPTION ) {
 
-    connection.release() */
+      let o = Array.from( OPTION.filter( ROW => ROW.METHOD ), ROW => ROW.METHOD )
 
-    var response = {
-      
-      code: CODE.SYSTEM_SUCCESS
-    }
+      return o.length ? o.join( ', ' ) + ', ' : ''
+    },
 
-    ${ getResponse( FUNC, TYPO.SPC4 ) }
+    /**
+     * Check required parameters.
+     * @param { object } REQ - https://www.npmjs.com/package/accp#obj
+     * @param { object } method - function getMethod struct.
+     * @returns
+     */
+    required: function ( REQ, method, template = {
 
-    return response
+      setReq: `/* {mark} */\n${ getTab( 2 ) }{name}: req.{param}.{name}`,
+      setVal: `/* {mark} */\n${ getTab( 2 ) }{name}: FUNC.getVal( req.{param}.{name}, {square} )
+      `,
+      chkFunc: `\n\n/* Declare a function for parameter value existence and data restriction. */\nfunction ( req, res, next ) {\n\n${ getTab( 1 ) }let response = FUNC.{function}( req, {\n\n${ getTab( 2 ) }{value}\n${ getTab( 1 ) }} )\n\n${ getTab( 1 ) }if ( response.status?.code ) return res.json( response )\n\n${ getTab( 1 ) }return next()\n\n}, `,
+    } ) {
 
-  } catch ( error ) {
+      if ( REQ && REQ.length > 0 ) {
 
-    /* database error sample
-    connection.rollback()
+        var range = []
 
-    connection.release() */
+        var require = []
 
-    if ( error && error.message ) {
+        for ( ROW of REQ ) {
 
-      console.error( new Date(), error.message )
+          if ( ROW.OPTION ) {
 
-      return CODE.SYSTEM_DATABASE
-    }
+            var square = Object.keys( ROW.OPTION ).reduce( ( prev, cur ) => {
 
-    return error
-  }
-}
-` )
-  }
+              var num = cur.replace( /[^0-9]/g, '' )
 
-  out.print( `
+              if ( num ) return prev + Math.pow( 2, parseInt( num ) + 1 )
 
-var ${ API.NAME.toLowerCase() } = new ${ getClass( API.NAME ) }()
+              return prev
 
-module.exports = ${ API.NAME.toLowerCase() }` )
-}
+            }, 0 )
 
-function setRouter( out, API ) {
-
-  /* set header */
-  out.print( `
-/* dependency */
-const ROUTER = require( 'express' ).Router()
-
-/* require */
-const FUNC = require( '../library/func' )
-
-const MODEL = require( '../model/${ API.NAME.toLowerCase() }' )
-
-/* config */
-const CONFIG = require( '../config/' + process.argv[ 2 ] )
-` )
-
-  /* print func */
-  for ( let FUNC of API.FUNC ) {
-
-    var method = 'write'
-
-    var procedure = false
-
-    if ( FUNC.OPT ) {
-
-      for ( let OPT of FUNC.OPT ) {
-
-        switch ( OPT.NAME ) {
-
-          case 'read':
-          case 'cache': {
-
-            method = OPT.NAME
-
-            break
+            if ( square > 0 ) range.push( template.setVal.replace( '{mark}', ROW.MARK ).replaceAll( '{name}', ROW.NAME ).replace( '{param}', method.PARAM ).replace( '{square}', square ) )
           }
 
-          case 'procedure': {
+          /* Check required parameters. */
+          if ( ROW.MARK.indexOf( '*' ) < 0 ) continue
 
-            procedure = OPT.VALUE
-
-            break
-          }
+          require.push( template.setReq.replace( '{mark}', ROW.MARK ).replaceAll( '{name}', ROW.NAME ).replace( '{param}', method.PARAM ) )
         }
+
+        return [
+
+          require.length ? template.chkFunc.replace( '{function}', 'chkReq' ).replace( '{value}', require.join( ',\n' + getTab( 2 ) ) ) : null,
+
+          range.length ? template.chkFunc.replace( '{function}', 'chkVal' ).replace( '{value}', range.join( ',\n' + getTab( 2 ) ) ) : null
+
+        ].filter( code => code ).join( '' )
       }
+
+      return ''
     }
-
-    // chk procedure
-    if ( procedure ) continue
-
-    let METHOD = getMethod( FUNC )
-
-    let OPTION = getOption( FUNC )
-
-    // set api function
-    out.print( `
-/** 
- * Code: ${ FUNC.CODE }
- * Complete: ${ FUNC.COMP.toString() }
- * Description: ${ FUNC.DESC } 
- * 
- * Process: 
- ${ getProc( FUNC.PROC ) }
- *
- * Question:
- ${ getList( FUNC.MARK ) } */
-ROUTER.${ METHOD.NAME }( '/${ METHOD.PATH }', /* FUNC.setParams,${ setOption( OPTION ) } */${ getRequired( FUNC.REQ, METHOD ) } async function( req, res ) {
-
-  console.log( new Date(), \`Route.${ getClass( METHOD.NAME ) } \${ req.baseUrl + req.path } \${ req.user.ip } \${ req.user?.token?.keyUser ? req.user.token.keyUser : '' }\` )
-
-  return res.json( await MODEL.${ getFunction( FUNC.NAME ) }( req ) )
-} )
-` )
   }
-
-  out.print( `
-module.exports = ROUTER` )
 }
 
-function setQuery( out, API ) {
+/**
+ * Returns tab space.
+ * @param { number } depth - indentation depth.
+ * @param { string } indentation - Indentation space size.
+ * @returns 
+ */
+function getTab ( depth, indentation = 2 ) {
 
-  out.print( `function ${ getClass( API.NAME ) }() {}
-
-${ getClass( API.NAME ) }.prototype.get = {
+  return ''.padEnd( depth * indentation, ' ' )
 }
 
-${ getClass( API.NAME ) }.prototype.set = {
-}
+/**
+ * HTTP method information
+ * @param { object } FUNC 
+ * @returns { object }
+ */
+function getMethod ( FUNC ) {
 
-${ getClass( API.NAME ) }.prototype.put = {
-}
+  var path = function ( path ) {
 
-${ getClass( API.NAME ) }.prototype.del = {
-}
-
-var ${ API.NAME.toLowerCase() } = new ${ getClass( API.NAME ) }()
-
-module.exports = ${ API.NAME.toLowerCase() }` )
-}
-
-function setOption( OPTION ) {
-
-  OPTION = OPTION.filter( ( ROW ) => {
-
-    return ROW.METHOD
-  } )
-
-  OPTION = Array.from( OPTION, ( ROW ) => {
-
-    if ( ROW.METHOD ) return ROW.METHOD
-
-    return
-  } )
-
-  // chk option
-  if ( OPTION.length < 1 ) return TYPO.EMPTY
-
-  return TYPO.SPC1 + OPTION.join( TYPO.COMMA + TYPO.SPC1 ) + TYPO.COMMA
-}
-
-/* function, get */
-function getCode( LANG, DEF = 'en' ) {
-
-  var def = function( d ) {
-
-    return `
-      default: {
-
-        switch ( code ) {
-
-          ${ Array.from( d, ( r ) => {
-
-            if ( r.code == undefined ) return `/* ${ r.mark } */`
-
-            return `case ${ r.code }: return '${ r.mark }'`
-
-          } ).join( TYPO.LINE + TYPO.SPC10 ) }
-        }
-      }`
+    return path.indexOf( '/' ) > 1 ? path : path.replace( '/', '' )
   }
-
-  var lang = function( k, d ) {
-
-    return `
-      case '${ k }': {
-
-        switch ( code ) {
-
-          ${ Array.from( d, ( r ) => {
-
-            if ( r.code == undefined ) return `/* ${ r.mark } */`
-
-            return `case ${ r.code }: return '${ r.mark }'`
-
-          } ).join( TYPO.LINE + TYPO.SPC10 ) }
-        }
-
-        break
-      }`
-  }
-
-  return `
-
-  /**
-   * 사용자 언어 설정에 따른 에러 메시지 반환
-   * @param { string } typeLang - req.user.typeLang, 사용자 언어
-   * @param { number } code - 에러 코드
-   * @returns { string } - 에러 메시지
-   */
-  this.getMessage = function( typeLang, code ) {
-
-    switch ( typeLang.toLowerCase() ) {
-      ${ Array.from( Object.keys( LANG ), ( k ) => {
-
-        switch ( k ) {
-
-          case DEF: return def( LANG[ k ] )
-
-          default: return lang( k, LANG[ k ] )
-        }
-      } ).join( TYPO.EMPTY ) }
-    }
-  }`
-}
-
-function getPath( path ) {
-
-  return path.indexOf( '/' ) > 1 ? path : path.replace( '/', '' )
-}
-
-function getProc( PROC ) {
-
-  if ( PROC ) {
-
-    return Array.from( PROC, ROW => {
-
-      return `* * [${ ROW.NAME }] ${ ROW.MARK || ROW.CODE }`
-
-    } ).join( TYPO.LINE + TYPO.SPC1 )
-  }
-
-  return '* * nothing'
-}
-
-function getList( MARK ) {
-
-  if ( MARK ) {
-
-    return Array.from( MARK, ROW => {
-
-      return `* * ${ ROW.NAME } ${ ROW.MARK.replace( /\\n\s\s/g, '\n * * * ' ) }`
-
-    } ).join( TYPO.LINE + TYPO.SPC1 )
-  }
-
-  return '* * nothing'
-}
-
-function getClass( NAME ) {
-
-  return NAME.substr( 0, 1 ).toUpperCase() + NAME.substr( 1 ).toLowerCase()
-}
-
-function getValue( CODE ) {
-
-  var values = [ `${ TYPO.LINE + TYPO.SPC2 }/* ${ CODE.NAME } */` ]
-
-  return values.concat( Array.from( CODE.CODE, ( ROW ) => {
-
-    return `this.${ CODE.NAME }_${ ROW.NAME } = ${ ROW.CODE }`
-  } ) )
-}
-
-function getMethod( FUNC ) {
 
   if ( FUNC.GET ) {
 
     return {
 
-      PATH: getPath( FUNC.GET ),
+      PATH: path( FUNC.GET ),
       NAME: 'get',
-      PARAM: 'query'
+      PARAM: 'query',
+      QUERY: 'get'
     }
   }
 
@@ -450,9 +246,10 @@ function getMethod( FUNC ) {
 
     return {
 
-      PATH: getPath( FUNC.PUT ),
+      PATH: path( FUNC.PUT ),
       NAME: 'put',
-      PARAM: 'body'
+      PARAM: 'body',
+      QUERY: 'put'
     }
   }
 
@@ -460,9 +257,10 @@ function getMethod( FUNC ) {
 
     return {
 
-      PATH: getPath( FUNC.POST ),
+      PATH: path( FUNC.POST ),
       NAME: 'post',
-      PARAM: 'body'
+      PARAM: 'body',
+      QUERY: 'set'
     }
   }
 
@@ -470,23 +268,43 @@ function getMethod( FUNC ) {
 
     return {
 
-      PATH: getPath( FUNC.PATCH ),
+      PATH: path( FUNC.PATCH ),
       NAME: 'patch',
-      PARAM: 'body'
+      PARAM: 'body',
+      QUERY: 'put'
     }
   }
 
   return {
 
-    PATH: getPath( FUNC.DELETE ),
+    PATH: path( FUNC.DELETE ),
     NAME: 'delete',
-    PARAM: 'query'
+    PARAM: 'query',
+    QUERY: 'del'
   }
 }
 
-function getOption( FUNC ) {
+/**
+ * Convert first letter to uppercase.
+ * @param { string } str - Character to convert.
+ * @param { boolean } upper - Capitalized or not. 
+ * @param { boolean } lower - Whether to convert to lowercase except for the first character.
+ * @returns { string }
+ */
+function getCapitalize ( str, upper = true, lower = true ) {
 
-  let option = []
+  return ( upper ? str.substring( 0, 1 ).toUpperCase() : str.substring( 0, 1 ).toLowerCase() ) + ( lower ? str.substring( 1 ).toLowerCase() : str.substring( 1 ) )
+}
+
+/**
+ * As a parameter written in the OPT item.
+ * Automatic addition of additional parameters.
+ * @param { object } FUNC 
+ * @returns { array }
+ */
+function getOPTParameter ( FUNC ) {
+
+  let parameter = []
 
   try {
 
@@ -494,203 +312,251 @@ function getOption( FUNC ) {
 
       switch ( opt.NAME ) {
 
-        /* token example
+        /* You can use it further by setting the desired option value. */
         case 'token': {
 
-          option.push( {
+          parameter.push( {
 
-            MARK: '토큰 정보',
-            PARAM: 'req.user.token',
             METHOD: 'FUNC.setToken'
           } )
 
           break
-        } */
+        }
       }
     }
 
-    return option
+    return parameter
 
   } catch ( error ) {
 
-    return option
+    return parameter
   }
 }
 
-function getMarks( REQ, SPC, METHOD, OPTION ) {
+/**
+ * Generate router file
+ */
+function setRouter ( GEN, API ) {
 
-  OPTION = OPTION.filter( ( ROW ) => {
+  var out = new GEN( PATH.join( BASE, `router/${ API.NAME.toLowerCase() }.js` ) )
 
-    return ROW.PARAM
-  } )
+  out.open()
 
-  OPTION = Array.from( OPTION, ( ROW ) => {
+  out.print( `
+/* dependency */
+const ROUTER = require( 'express' ).Router()
 
-    return `* @param ${ ROW.PARAM.replace( 'req.', '' ) } ${ ROW.MARK }${ TYPO.LINE + SPC }`
-  } )
+/* Virtual file for writing example code. */
+const FUNC = require( '..' )
 
-  // chk req
-  if ( REQ && REQ.length > 0 ) {
+const MODEL = require( '../model/${ API.NAME.toLowerCase() }' )
 
-    REQ = Array.from( REQ, ( ROW ) => {
+${ ( _ => Array.from( API.FUNC, FUNC => {
 
-      return `* @param ${ METHOD.PARAM }.${ ROW.NAME } ${ ROW.MARK }${ TYPO.LINE + SPC }`
-    } )
+let method = getMethod( FUNC )
 
-    return TYPO.LINE + SPC + ( OPTION.concat( REQ ) ).join( TYPO.EMPTY )
-  }
+let parameter = getOPTParameter( FUNC )
 
-  // chk option
-  if ( OPTION.length > 0 ) return TYPO.LINE + SPC + OPTION.join( TYPO.EMPTY )
+return `
 
-  return TYPO.EMPTY
+/** 
+* Code: ${ FUNC.CODE }
+* Complete: ${ FUNC.COMP.toString() }
+* Description: ${ FUNC.DESC } 
+* 
+* Process: 
+${ LIB.router.proc( FUNC.PROC ) }
+*
+* Question:
+${ LIB.router.mark( FUNC.MARK ) } */
+ROUTER.${ method.NAME }( '/${ method.PATH }', ${ LIB.router.option( parameter ) }${ LIB.router.required( FUNC.REQ, method ) }async function( req, res ) {
+
+console.log( new Date(), \`Route.${ getCapitalize( method.NAME ) } \${ req.baseUrl + req.path }\` )
+
+return res.json( await MODEL.${ getCapitalize( FUNC.NAME, false, false ) }( req ) )
+} )
+`
+} ) )().join( '' ).replace( /^\n+/, '' ) }
+
+module.exports = ROUTER
+` )
+
+  out.close()
 }
 
-function getLanguage( language, CODE ) {
+/**
+ * Generate model file
+ */
+function setModel ( GEN, API ) {
 
-  var mark = {}
+  var out = new GEN( PATH.join( BASE, `model/${ API.NAME.toLowerCase() }.js` ) )
 
-  for ( let ROW of CODE.CODE ) {
+  out.open()
 
-    for ( let code of Object.keys( ROW.MARK ) ) {
+  out.print( `
 
-      // chk value
-      if ( language[ code ] == undefined ) language[ code ] = []
+/* require */
 
-      // chk mark
-      if ( mark[ code ] == undefined ) {
+/* Virtual file for writing example code. */
+const DB = require( '..' )
+const FUNC = require( '..' )
 
-        language[ code ].push( {
+const CODE = require( '../code/code' )
 
-          mark: CODE.NAME
-        } )
+const QUERY = require( '../query/${ API.NAME.toLowerCase() }' )
 
-        mark[ code ] = true
-      }
+function ${ getCapitalize( API.NAME ) } () {}
 
-      language[ code ].push( {
+${ ( _ => Array.from( API.FUNC, FUNC => {
 
-        code: ROW.CODE,
-        mark: ROW.MARK[ code ]
-      } )
-    }
+let method = getMethod( FUNC )
+
+let parameter = getOPTParameter( FUNC )
+
+return `
+
+/** 
+* Parameter: 
+${ LIB.model.mark( FUNC.REQ, method, parameter ) }
+*/
+${ getCapitalize( API.NAME ) }.prototype.${ getCapitalize( FUNC.NAME, false, false ) } = async function( req ) {
+
+/* Code for example, please edit it yourself. */
+try {
+
+  var connection = await DB.connection.${ LIB.model.connection( FUNC ) }()
+
+  let data = DB.query( connection, QUERY.${ method.QUERY }.any(), req.query || req.body )
+
+  await connection.beginTransaction()
+
+  await connection.commit()
+
+  await connection.release()
+
+  var response = FUNC.getStatus( req, CODE.SYSTEM_SUCCESS ) 
+
+  ${ LIB.model.response( FUNC ) }
+
+  return response
+
+} catch ( error ) {
+
+  if ( connection ) {
+
+    await connection.rollback()
+
+    await connection.release()
   }
 
-  return language
+  if ( error && error.message ) {
+
+    console.error( new Date().locale(), error.message )
+
+    return FUNC.getStatus( req, CODE.SYSTEM_DATABASE )
+  }
+
+  return FUNC.getStatus( req, error )
+}
+}
+`
+} ) )().join( '' ).replace( /^\n+/, '' ) }
+
+var ${ API.NAME.toLowerCase() } = new ${ getCapitalize( API.NAME ) }()
+
+module.exports = ${ API.NAME.toLowerCase() }`.replace( /^\n+/, '' ) )
+
+  out.close()
 }
 
-function getResponse( FUNC, SPC ) {
+/**
+ * Generate query file.
+ */
+function setQuery ( GEN, API ) {
 
-  var index = 0
+  var out = new GEN( PATH.join( BASE, `query/${ API.NAME.toLowerCase() }.js` ) )
 
-  var response = []
+  out.open()
 
-  let getIndex = function( index, ARRAY ) {
+  out.print( `
 
-    if ( ARRAY ) return `${ index }`
+function ${ getCapitalize( API.NAME ) }() {}
 
-    return `${ index }, 0`
-  }
+${ getCapitalize( API.NAME ) }.prototype.get = {}
 
-  if ( FUNC.RES ) {
+${ getCapitalize( API.NAME ) }.prototype.set = {}
 
-    for ( let RES of FUNC.RES ) {
+${ getCapitalize( API.NAME ) }.prototype.put = {}
 
-      /* check name */
-      switch ( RES.NAME ) {
+${ getCapitalize( API.NAME ) }.prototype.del = {}
 
-        case 'code':
-        case 'message': {
+var ${ API.NAME.toLowerCase() } = new ${ getCapitalize( API.NAME ) }()
 
-          continue
+module.exports = ${ API.NAME.toLowerCase() }` )
+
+  out.close()
+}
+
+/** 
+ * Generate code file.
+ */
+function setCode ( GEN, OBJ ) {
+
+  let [ code, value ] = LIB.code.language( OBJ )
+
+  var out = new GEN( PATH.join( BASE, 'code/code.js' ) )
+
+  out.open()
+
+  out.print( `
+
+function CODE() {
+
+  ${ code.join( '\n  ' ) }
+
+  /**
+   * Error message returned according to user language settings.
+   * @param { string } typeLang
+   * @param { number } code
+   * @returns { string }
+   */
+  this.getMessage = function( typeLang, code ) {
+
+    switch ( typeLang.toLowerCase() ) { 
+
+      ${ Array.from( Object.keys( value ), ( k ) => `${ k.indexOf( 'en' ) > -1 ? 'default' : `case '${ k }'` }: {
+
+        switch ( code ) {
+
+          ${ Array.from( value[ k ], ( r ) => r.hasOwnProperty( 'code' ) ? `case ${ r.code }: return '${ r.mark }'` : `/* ${ r.mark } */` ).join( '\n' + getTab( 5 ) ) }
         }
 
-        default: {
-
-          response.push( `/* ${ RES.MARK } ${ TYPO.LINE + SPC }response.${ RES.NAME } = DB.get( data, ${ getIndex( index, RES.ARRAY ) } ) */` )
-        }
+        break
       }
-
-      index++
+      ` ).join( '' ) }
     }
   }
-
-  if ( response.length > 0 ) return response.join( TYPO.LINE + TYPO.LINE + SPC )
-
-  return TYPO.EMPTY
 }
 
-function getFunction( NAME ) {
+module.exports = new CODE()` )
 
-  return NAME.substr( 0, 1 ).toLowerCase() + NAME.substr( 1 )
+  out.close()
 }
 
-function getRequired( REQ, METHOD ) {
+/**
+ * @param { object } OBJ - https://www.npmjs.com/package/accp#obj
+ * @param { object } GEN - https://www.npmjs.com/package/accp#gen
+ */
+module.exports = function ( OBJ, GEN ) {
 
-  // chk req
-  if ( REQ && REQ.length > 0 ) {
+  for ( API of OBJ.API ) {
 
-    var range = []
+    setRouter( GEN, API )
 
-    var require = []
+    setModel( GEN, API )
 
-    for ( ROW of REQ ) {
-
-      // chk option
-      if ( ROW.OPTION ) {
-
-        var square = Object.keys( ROW.OPTION ).reduce( ( prev, cur ) => {
-
-          var num = cur.replace( /[^0-9]/g, TYPO.EMPTY )
-
-          if ( num ) return prev + Math.pow( 2, parseInt( num ) + 1 )
-
-          return prev
-
-        }, 0 )
-
-        // chk square
-        if ( square > 0 ) range.push( `/* ${ ROW.MARK } ${ TYPO.LINE + TYPO.SPC4 }${ ROW.NAME }: FUNC.getValue( req.${ METHOD.PARAM }.${ ROW.NAME }, ${ square } ) */` )
-      }
-
-      // chk require
-      if ( ROW.MARK.indexOf( '*' ) < 0 ) continue
-
-      require.push( `/* ${ ROW.MARK } */${ TYPO.LINE + TYPO.SPC4 }${ ROW.NAME }: req.${ METHOD.PARAM }.${ ROW.NAME }` )
-    }
-
-    // chk length
-    if ( require.length > 0 ) {
-
-      return ` /* chk value example
-      
-  function( req, res, next ) {
-
-  let response = FUNC.chkParams( req, {
-
-    ${ require.join( TYPO.COMMA + TYPO.LINE + TYPO.SPC4 ) }
-  } )
-
-  if ( response.status.code ) return res.json( response ) */
-
-  return next()
-
-},${ range.length > 0 ? ` /* chk value example
-
-  function( req, res, next ) {
-
-  let response = FUNC.chkValues( req, {
-
-    ${ range.join( TYPO.COMMA + TYPO.LINE + TYPO.SPC4 ) }
-  } )
-
-  if ( response.status.code ) return res.json( response ) */
-
-  return next()
-
-},` : TYPO.EMPTY }`
-    }
+    setQuery( GEN, API )
   }
 
-  return TYPO.EMPTY
+  setCode( GEN, OBJ )
 }

@@ -2,46 +2,77 @@
 /* dependency */
 const ROUTER = require( 'express' ).Router()
 
-/* require */
-const FUNC = require( '../library/func' )
+/* Virtual file for writing example code. */
+const FUNC = require( '..' )
 
 const MODEL = require( '../model/dev_test_2' )
 
-/* config */
-const CONFIG = require( '../config/' + process.argv[ 2 ] )
-
 /** 
- * Code: 200
- * Complete: true
- * Description: function description 
- * 
- * Process: 
- * * nothing
- *
- * Question:
- * * param1 mark variable explain */
-ROUTER.put( '/test', /* FUNC.setParams, */ async function( req, res ) {
+* Code: 200
+* Complete: true
+* Description: function description 
+* 
+* Process: 
+* * notihng
+*
+* Question:
+* * param1 mark variable explain */
+ROUTER.put( '/test', 
 
-  console.log( new Date(), `Route.Put ${ req.baseUrl + req.path } ${ req.user.ip } ${ req.user?.token?.keyUser ? req.user.token.keyUser : '' }` )
+/* Declare a function for parameter value existence and data restriction. */
+function ( req, res, next ) {
 
-  return res.json( await MODEL.putTest( req ) )
+  let response = FUNC.chkVal( req, {
+
+    /* description of the value */
+    param8: FUNC.getVal( req.body.param8, 30 )
+      
+  } )
+
+  if ( response.status?.code ) return res.json( response )
+
+  return next()
+
+}, async function( req, res ) {
+
+console.log( new Date(), `Route.Put ${ req.baseUrl + req.path }` )
+
+return res.json( await MODEL.putTest( req ) )
 } )
 
+
 /** 
- * Code: 201
- * Complete: true
- * Description: function description 
- * 
- * Process: 
- * * nothing
- *
- * Question:
- * * param1 mark variable explain */
-ROUTER.delete( '/test', /* FUNC.setParams, */ async function( req, res ) {
+* Code: 201
+* Complete: true
+* Description: function description 
+* 
+* Process: 
+* * notihng
+*
+* Question:
+* * param1 mark variable explain */
+ROUTER.delete( '/test', 
 
-  console.log( new Date(), `Route.Delete ${ req.baseUrl + req.path } ${ req.user.ip } ${ req.user?.token?.keyUser ? req.user.token.keyUser : '' }` )
+/* Declare a function for parameter value existence and data restriction. */
+function ( req, res, next ) {
 
-  return res.json( await MODEL.deleteTest( req ) )
+  let response = FUNC.chkVal( req, {
+
+    /* description of the value */
+    param8: FUNC.getVal( req.query.param8, 30 )
+      
+  } )
+
+  if ( response.status?.code ) return res.json( response )
+
+  return next()
+
+}, async function( req, res ) {
+
+console.log( new Date(), `Route.Delete ${ req.baseUrl + req.path }` )
+
+return res.json( await MODEL.deleteTest( req ) )
 } )
+
 
 module.exports = ROUTER

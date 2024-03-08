@@ -31,6 +31,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
                     "param1": {
                       "type": "integer",
                       "format": "Int32",
@@ -201,6 +204,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
                     "param1": {
                       "type": "integer",
                       "format": "Int32",
@@ -271,6 +277,7 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "type": "object",
+                "required": [],
                 "properties": {
                   "param1": {
                     "type": "integer",
@@ -351,6 +358,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
                     "param1": {
                       "type": "integer",
                       "format": "Int32",
@@ -421,6 +431,7 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "type": "object",
+                "required": [],
                 "properties": {
                   "param1": {
                     "type": "integer",
@@ -499,6 +510,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Status"
+                    },
                     "param1": {
                       "type": "integer",
                       "format": "Int32",
@@ -670,11 +684,30 @@
         "in": "header",
         "type": "apiKey",
         "name": "X-API-TOKEN",
-        "description": "\nDescription: 사용자 토큰값\n\n\n<details>\n<summary>Development token</summary>\n<p>token</p>\n</details>"
+        "description": "\nDescription: 사용자 토큰값\n\n\n<details>\n<summary>Development token</summary>\n<p>Please enter the development token value.</p>\n</details>"
       }
     },
     "schemas": {
+      "Status": {
+        "required": [],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "Int32",
+            "description": "Error code",
+            "default": "null"
+          },
+          "message": {
+            "type": "string",
+            "description": "* 1: Korean description\n* 2: Korean description\n* 1: Korean description\n* 2: Korean description",
+            "default": "null"
+          }
+        },
+        "type": "object",
+        "title": "Status ( Status information  )"
+      },
       "RES_DATA": {
+        "required": [],
         "properties": {
           "param1": {
             "type": "integer",
@@ -744,9 +777,10 @@
           }
         },
         "type": "object",
-        "title": "RES_DATA ( Response infomation  )"
+        "title": "RES_DATA ( Response information  )"
       },
       "PARAM_DATA": {
+        "required": [],
         "properties": {
           "param1": {
             "type": "integer",
@@ -789,7 +823,7 @@
           }
         },
         "type": "object",
-        "title": "PARAM_DATA ( Param infomation  )"
+        "title": "PARAM_DATA ( Param information  )"
       }
     }
   }

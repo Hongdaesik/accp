@@ -2,47 +2,78 @@
 /* dependency */
 const ROUTER = require( 'express' ).Router()
 
-/* require */
-const FUNC = require( '../library/func' )
+/* Virtual file for writing example code. */
+const FUNC = require( '..' )
 
 const MODEL = require( '../model/dev_test_1' )
 
-/* config */
-const CONFIG = require( '../config/' + process.argv[ 2 ] )
-
 /** 
- * Code: 100
- * Complete: true
- * Description: function description 
- * 
- * Process: 
- * * [DEV_TEST_1.PostTest] 101
- * * [DEV_TEST_2.DeleteTest] 201
- *
- * Question:
- * * param1 mark variable explain */
-ROUTER.get( '/test', /* FUNC.setParams, */ async function( req, res ) {
+* Code: 100
+* Complete: true
+* Description: function description 
+* 
+* Process: 
+* * [DEV_TEST_1.PostTest] 101
+* * [DEV_TEST_2.DeleteTest] 201
+*
+* Question:
+* * param1 mark variable explain */
+ROUTER.get( '/test', 
 
-  console.log( new Date(), `Route.Get ${ req.baseUrl + req.path } ${ req.user.ip } ${ req.user?.token?.keyUser ? req.user.token.keyUser : '' }` )
+/* Declare a function for parameter value existence and data restriction. */
+function ( req, res, next ) {
 
-  return res.json( await MODEL.getTest( req ) )
+  let response = FUNC.chkVal( req, {
+
+    /* description of the value */
+    param8: FUNC.getVal( req.query.param8, 30 )
+      
+  } )
+
+  if ( response.status?.code ) return res.json( response )
+
+  return next()
+
+}, async function( req, res ) {
+
+console.log( new Date(), `Route.Get ${ req.baseUrl + req.path }` )
+
+return res.json( await MODEL.getTest( req ) )
 } )
 
+
 /** 
- * Code: 101
- * Complete: true
- * Description: function description 
- * 
- * Process: 
- * * nothing
- *
- * Question:
- * * param1 mark variable explain */
-ROUTER.post( '/test', /* FUNC.setParams, */ async function( req, res ) {
+* Code: 101
+* Complete: true
+* Description: function description 
+* 
+* Process: 
+* * notihng
+*
+* Question:
+* * param1 mark variable explain */
+ROUTER.post( '/test', 
 
-  console.log( new Date(), `Route.Post ${ req.baseUrl + req.path } ${ req.user.ip } ${ req.user?.token?.keyUser ? req.user.token.keyUser : '' }` )
+/* Declare a function for parameter value existence and data restriction. */
+function ( req, res, next ) {
 
-  return res.json( await MODEL.postTest( req ) )
+  let response = FUNC.chkVal( req, {
+
+    /* description of the value */
+    param8: FUNC.getVal( req.body.param8, 30 )
+      
+  } )
+
+  if ( response.status?.code ) return res.json( response )
+
+  return next()
+
+}, async function( req, res ) {
+
+console.log( new Date(), `Route.Post ${ req.baseUrl + req.path }` )
+
+return res.json( await MODEL.postTest( req ) )
 } )
+
 
 module.exports = ROUTER
