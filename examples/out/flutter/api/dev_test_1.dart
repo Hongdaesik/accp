@@ -15,7 +15,7 @@ class Dev_test_1Service {
 
   Dev_test_1Service._(); 
 
-    /// Desc: function description
+  /// Desc: function description
   /// Code: 100
   /// Comp: true
   ///
@@ -38,19 +38,18 @@ class Dev_test_1Service {
 
       /// Debug response
       if ( useLog ) log( 'Response name: "get:GetTest", path: "/http://localhost:8080/test1/test", res: "$http"' );
-  
+
       if ( http.statusCode != Code.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
-  
+
       struct.Response raw = struct.Response();
-  
+
       raw.response = res.GetTest.fromJson( http.data );
-  
+
       raw.status = raw.response?.status;
-  
+
       return raw;
     } );
   }
-  
   /// Desc: function description
   /// Code: 101
   /// Comp: true
@@ -73,17 +72,16 @@ class Dev_test_1Service {
 
       /// Debug response
       if ( useLog ) log( 'Response name: "post:PostTest", path: "/http://localhost:8080/test1/test", res: "$http"' );
-  
+
       if ( http.statusCode != Code.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
-  
+
       struct.Response raw = struct.Response();
-  
+
       raw.response = res.PostTest.fromJson( http.data );
-  
+
       raw.status = raw.response?.status;
-  
+
       return raw;
     } );
   }
-  
 }

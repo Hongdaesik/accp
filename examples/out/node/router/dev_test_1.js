@@ -1,4 +1,3 @@
-
 /* dependency */
 const ROUTER = require( 'express' ).Router()
 
@@ -8,20 +7,17 @@ const FUNC = require( '..' )
 const MODEL = require( '../model/dev_test_1' )
 
 /** 
-* Code: 100
-* Complete: true
-* Description: function description 
-* 
-* Process: 
-* * [DEV_TEST_1.PostTest] 101
-* * [DEV_TEST_2.DeleteTest] 201
-*
-* Question:
-* * param1 mark variable explain */
-ROUTER.get( '/test', 
-
-/* Declare a function for parameter value existence and data restriction. */
-function ( req, res, next ) {
+ * Code: 100
+ * Complete: true
+ * Description: function description 
+ * 
+ * Process: 
+ * * [DEV_TEST_1.PostTest] 101
+ * * [DEV_TEST_2.DeleteTest] 201
+ *
+ * Question:
+ * * param1 mark variable explain */
+ROUTER.get( '/test', /* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {
 
   let response = FUNC.chkVal( req, {
 
@@ -36,26 +32,22 @@ function ( req, res, next ) {
 
 }, async function( req, res ) {
 
-console.log( new Date(), `Route.Get ${ req.baseUrl + req.path }` )
+  console.log( new Date(), `Route.Get ${ req.baseUrl + req.path }` )
 
-return res.json( await MODEL.getTest( req ) )
+  return res.json( await MODEL.getTest( req ) )
 } )
 
-
 /** 
-* Code: 101
-* Complete: true
-* Description: function description 
-* 
-* Process: 
-* * notihng
-*
-* Question:
-* * param1 mark variable explain */
-ROUTER.post( '/test', 
-
-/* Declare a function for parameter value existence and data restriction. */
-function ( req, res, next ) {
+ * Code: 101
+ * Complete: true
+ * Description: function description 
+ * 
+ * Process: 
+ * * notihng
+ *
+ * Question:
+ * * param1 mark variable explain */
+ROUTER.post( '/test', /* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {
 
   let response = FUNC.chkVal( req, {
 
@@ -70,9 +62,9 @@ function ( req, res, next ) {
 
 }, async function( req, res ) {
 
-console.log( new Date(), `Route.Post ${ req.baseUrl + req.path }` )
+  console.log( new Date(), `Route.Post ${ req.baseUrl + req.path }` )
 
-return res.json( await MODEL.postTest( req ) )
+  return res.json( await MODEL.postTest( req ) )
 } )
 
 

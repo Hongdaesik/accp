@@ -11,8 +11,8 @@ const QUERY = require( '../query/dev_test_1' )
 function Dev_test_1 () {}
 
 /** 
-* Parameter: 
-* @param query.param1 int variable
+ * Parameter: 
+ * @param query.param1 int variable
  * @param query.param2 data variable
  * @param query.param3 float variable
  * @param query.param4 double variable
@@ -20,7 +20,7 @@ function Dev_test_1 () {}
  * @param query.param6 boolean variable
  * @param query.param7 struct variable
  * @param query.param8 description of the value
-*/
+ */
 Dev_test_1.prototype.getTest = async function( req ) {
 
 /* Code for example, please edit it yourself. */
@@ -92,8 +92,8 @@ try {
 
 
 /** 
-* Parameter: 
-* @param body.param1 int variable
+ * Parameter: 
+ * @param body.param1 int variable
  * @param body.param2 data variable
  * @param body.param3 float variable
  * @param body.param4 double variable
@@ -101,7 +101,7 @@ try {
  * @param body.param6 boolean variable
  * @param body.param7 struct variable
  * @param body.param8 description of the value
-*/
+ */
 Dev_test_1.prototype.postTest = async function( req ) {
 
 /* Code for example, please edit it yourself. */

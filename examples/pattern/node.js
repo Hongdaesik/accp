@@ -124,7 +124,7 @@ const LIB = {
      */
     proc: function ( PROC ) {
 
-      if ( PROC ) return Array.from( PROC, ROW => `* * [${ ROW.NAME }] ${ ROW.MARK || ROW.CODE }` ).join( '\n' )
+      if ( PROC ) return Array.from( PROC, ROW => `* * [${ ROW.NAME }] ${ ROW.MARK || ROW.CODE }` ).join( '\n ' )
 
       return '* * notihng'
     },
@@ -135,7 +135,7 @@ const LIB = {
      */
     mark: function ( MARK ) {
 
-      if ( MARK ) return Array.from( MARK, ROW => `* * ${ ROW.NAME } ${ ROW.MARK.replace( /\\n\s\s/g, '\n * * * ' ) }` ).join( '\n' )
+      if ( MARK ) return Array.from( MARK, ROW => `* * ${ ROW.NAME } ${ ROW.MARK.replace( /\\n\s\s/g, '\n * * * ' ) }` ).join( '\n ' )
 
       return '* * notihng'
     },
@@ -162,7 +162,7 @@ const LIB = {
       setReq: `/* {mark} */\n${ getTab( 2 ) }{name}: req.{param}.{name}`,
       setVal: `/* {mark} */\n${ getTab( 2 ) }{name}: FUNC.getVal( req.{param}.{name}, {square} )
       `,
-      chkFunc: `\n\n/* Declare a function for parameter value existence and data restriction. */\nfunction ( req, res, next ) {\n\n${ getTab( 1 ) }let response = FUNC.{function}( req, {\n\n${ getTab( 2 ) }{value}\n${ getTab( 1 ) }} )\n\n${ getTab( 1 ) }if ( response.status?.code ) return res.json( response )\n\n${ getTab( 1 ) }return next()\n\n}, `,
+      chkFunc: `/* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {\n\n${ getTab( 1 ) }let response = FUNC.{function}( req, {\n\n${ getTab( 2 ) }{value}\n${ getTab( 1 ) }} )\n\n${ getTab( 1 ) }if ( response.status?.code ) return res.json( response )\n\n${ getTab( 1 ) }return next()\n\n}, `,
     } ) {
 
       if ( REQ && REQ.length > 0 ) {
@@ -343,6 +343,7 @@ function setRouter ( GEN, API ) {
   out.open()
 
   out.print( `
+
 /* dependency */
 const ROUTER = require( 'express' ).Router()
 
@@ -351,7 +352,7 @@ const FUNC = require( '..' )
 
 const MODEL = require( '../model/${ API.NAME.toLowerCase() }' )
 
-${ ( _ => Array.from( API.FUNC, FUNC => {
+${ Array.from( API.FUNC, FUNC => {
 
 let method = getMethod( FUNC )
 
@@ -360,26 +361,24 @@ let parameter = getOPTParameter( FUNC )
 return `
 
 /** 
-* Code: ${ FUNC.CODE }
-* Complete: ${ FUNC.COMP.toString() }
-* Description: ${ FUNC.DESC } 
-* 
-* Process: 
-${ LIB.router.proc( FUNC.PROC ) }
-*
-* Question:
-${ LIB.router.mark( FUNC.MARK ) } */
+ * Code: ${ FUNC.CODE }
+ * Complete: ${ FUNC.COMP.toString() }
+ * Description: ${ FUNC.DESC } 
+ * 
+ * Process: 
+ ${ LIB.router.proc( FUNC.PROC ) }
+ *
+ * Question:
+ ${ LIB.router.mark( FUNC.MARK ) } */
 ROUTER.${ method.NAME }( '/${ method.PATH }', ${ LIB.router.option( parameter ) }${ LIB.router.required( FUNC.REQ, method ) }async function( req, res ) {
 
-console.log( new Date(), \`Route.${ getCapitalize( method.NAME ) } \${ req.baseUrl + req.path }\` )
+  console.log( new Date(), \`Route.${ getCapitalize( method.NAME ) } \${ req.baseUrl + req.path }\` )
 
-return res.json( await MODEL.${ getCapitalize( FUNC.NAME, false, false ) }( req ) )
+  return res.json( await MODEL.${ getCapitalize( FUNC.NAME, false, false ) }( req ) )
 } )
-`
-} ) )().join( '' ).replace( /^\n+/, '' ) }
+`.replace( /^\n+/, '' ) } ).join( '\n' ) }
 
-module.exports = ROUTER
-` )
+module.exports = ROUTER`.replace( /^\n+/, '' ) )
 
   out.close()
 }
@@ -416,9 +415,9 @@ let parameter = getOPTParameter( FUNC )
 return `
 
 /** 
-* Parameter: 
-${ LIB.model.mark( FUNC.REQ, method, parameter ) }
-*/
+ * Parameter: 
+ ${ LIB.model.mark( FUNC.REQ, method, parameter ) }
+ */
 ${ getCapitalize( API.NAME ) }.prototype.${ getCapitalize( FUNC.NAME, false, false ) } = async function( req ) {
 
 /* Code for example, please edit it yourself. */

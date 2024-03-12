@@ -313,7 +313,7 @@ ${ Array.from( API.FUNC.filter( FUNC => FUNC.COMP ), ( FUNC ) => {
       return raw;
     } );
   }`.replace( /^\n+/, '' ) } ).join( '\n' ) }
-}` ).replace( /^\n+/, '' )
+}`.replace( /^\n+/, '' ) )
 
     api.close()
 
@@ -355,6 +355,7 @@ class ${ FUNC.NAME } {
     res.open()
 
     res.print( `
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/pub/struct.dart';
@@ -380,18 +381,15 @@ ${ Array.from( API.FUNC.filter( FUNC => FUNC.COMP ), FUNC => {
 @JsonSerializable()
 class ${ FUNC.NAME } {
 
-${ LIB.initialize( FUNC.RES, true ) }
+  ${ LIB.initialize( FUNC.RES, true ) }
 
-${ FUNC.NAME }(${ LIB.constructor( FUNC.RES ) });
+  ${ FUNC.NAME }(${ LIB.constructor( FUNC.RES ) });
 
-factory ${ FUNC.NAME }.fromJson( Map< String, dynamic > json ) => _$${ FUNC.NAME }FromJson( json );
+  factory ${ FUNC.NAME }.fromJson( Map< String, dynamic > json ) => _$${ FUNC.NAME }FromJson( json );
 
-Map< String, dynamic > toJson() => _$${ FUNC.NAME }ToJson( this );
+  Map< String, dynamic > toJson() => _$${ FUNC.NAME }ToJson( this );
 }
-`.replace( /^\n+/, '' ) 
-
-} ).join( '\n' ) }
-
+`.replace( /^\n+/, '' ) } ).join( '\n' ) }
 `.replace( /^\n+/, '' ) )
 
     res.close()

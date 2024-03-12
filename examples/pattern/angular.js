@@ -366,14 +366,14 @@ export class ${ getCapitalize( API.NAME ) }Service {
     return `
   /** 
    * Description: ${ FUNC.DESC } 
-   - Code: ${ FUNC.CODE }
-   - Complete: ${ FUNC.COMP.toString() }
+     - Code: ${ FUNC.CODE }
+     - Complete: ${ FUNC.COMP.toString() }
    *
    * Process: 
-   ${ LIB.model.proc( FUNC.PROC ) }
+     ${ LIB.model.proc( FUNC.PROC ) }
    *
    * Question:
-   ${ LIB.model.mark( FUNC.MARK ) } */
+     ${ LIB.model.mark( FUNC.MARK ) } */
   ${ getCapitalize( FUNC.NAME, false, false ) }( req?: Req.${ FUNC.NAME } ): Observable< Res.${ FUNC.NAME } > {
 
     this.preloaderService.start()

@@ -15,7 +15,7 @@ class Dev_test_2Service {
 
   Dev_test_2Service._(); 
 
-    /// Desc: function description
+  /// Desc: function description
   /// Code: 200
   /// Comp: true
   ///
@@ -37,19 +37,18 @@ class Dev_test_2Service {
 
       /// Debug response
       if ( useLog ) log( 'Response name: "put:PutTest", path: "/http://localhost:8080/test2/test", res: "$http"' );
-  
+
       if ( http.statusCode != Code.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
-  
+
       struct.Response raw = struct.Response();
-  
+
       raw.response = res.PutTest.fromJson( http.data );
-  
+
       raw.status = raw.response?.status;
-  
+
       return raw;
     } );
   }
-  
   /// Desc: function description
   /// Code: 201
   /// Comp: true
@@ -72,17 +71,16 @@ class Dev_test_2Service {
 
       /// Debug response
       if ( useLog ) log( 'Response name: "delete:DeleteTest", path: "/http://localhost:8080/test2/test", res: "$http"' );
-  
+
       if ( http.statusCode != Code.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
-  
+
       struct.Response raw = struct.Response();
-  
+
       raw.response = res.DeleteTest.fromJson( http.data );
-  
+
       raw.status = raw.response?.status;
-  
+
       return raw;
     } );
   }
-  
 }

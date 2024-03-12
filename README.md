@@ -277,7 +277,7 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.2.3-beta` : Add sample pattern file (Flutter, Node JS).
 
-`1.2.4-beta` : Modified main library & example pattern code. / Added Angular example pattern file. / When creating a file with `new Gen(path)`, if there is no path corresponding to path, a folder is created.
+`1.3.0-beta` : Modified main library & example pattern code. / Added Angular example pattern file. / When creating a file with `new Gen(path)`, if there is no path corresponding to path, a folder is created.
 
 <br><br>
 

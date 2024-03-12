@@ -1,4 +1,3 @@
-
 /* dependency */
 const ROUTER = require( 'express' ).Router()
 
@@ -8,19 +7,16 @@ const FUNC = require( '..' )
 const MODEL = require( '../model/dev_test_2' )
 
 /** 
-* Code: 200
-* Complete: true
-* Description: function description 
-* 
-* Process: 
-* * notihng
-*
-* Question:
-* * param1 mark variable explain */
-ROUTER.put( '/test', 
-
-/* Declare a function for parameter value existence and data restriction. */
-function ( req, res, next ) {
+ * Code: 200
+ * Complete: true
+ * Description: function description 
+ * 
+ * Process: 
+ * * notihng
+ *
+ * Question:
+ * * param1 mark variable explain */
+ROUTER.put( '/test', /* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {
 
   let response = FUNC.chkVal( req, {
 
@@ -35,26 +31,22 @@ function ( req, res, next ) {
 
 }, async function( req, res ) {
 
-console.log( new Date(), `Route.Put ${ req.baseUrl + req.path }` )
+  console.log( new Date(), `Route.Put ${ req.baseUrl + req.path }` )
 
-return res.json( await MODEL.putTest( req ) )
+  return res.json( await MODEL.putTest( req ) )
 } )
 
-
 /** 
-* Code: 201
-* Complete: true
-* Description: function description 
-* 
-* Process: 
-* * notihng
-*
-* Question:
-* * param1 mark variable explain */
-ROUTER.delete( '/test', 
-
-/* Declare a function for parameter value existence and data restriction. */
-function ( req, res, next ) {
+ * Code: 201
+ * Complete: true
+ * Description: function description 
+ * 
+ * Process: 
+ * * notihng
+ *
+ * Question:
+ * * param1 mark variable explain */
+ROUTER.delete( '/test', /* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {
 
   let response = FUNC.chkVal( req, {
 
@@ -69,9 +61,9 @@ function ( req, res, next ) {
 
 }, async function( req, res ) {
 
-console.log( new Date(), `Route.Delete ${ req.baseUrl + req.path }` )
+  console.log( new Date(), `Route.Delete ${ req.baseUrl + req.path }` )
 
-return res.json( await MODEL.deleteTest( req ) )
+  return res.json( await MODEL.deleteTest( req ) )
 } )
 
 

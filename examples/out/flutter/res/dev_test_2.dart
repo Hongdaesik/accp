@@ -8,7 +8,7 @@ part 'dev_test_2.g.dart';
 @JsonSerializable()
 class PutTest {
 
-/// Status information *
+  /// Status information *
   @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
@@ -31,7 +31,7 @@ class PutTest {
   /// struct array variable
   @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
-PutTest( { 
+  PutTest( { 
 
     this.status,
     this.param1,
@@ -46,16 +46,16 @@ PutTest( {
     this.param10
    } );
 
-factory PutTest.fromJson( Map< String, dynamic > json ) => _$PutTestFromJson( json );
+  factory PutTest.fromJson( Map< String, dynamic > json ) => _$PutTestFromJson( json );
 
-Map< String, dynamic > toJson() => _$PutTestToJson( this );
+  Map< String, dynamic > toJson() => _$PutTestToJson( this );
 }
 
 /// Description: function description
 @JsonSerializable()
 class DeleteTest {
 
-/// Status information *
+  /// Status information *
   @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
@@ -78,7 +78,7 @@ class DeleteTest {
   /// struct array variable
   @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
-DeleteTest( { 
+  DeleteTest( { 
 
     this.status,
     this.param1,
@@ -93,9 +93,8 @@ DeleteTest( {
     this.param10
    } );
 
-factory DeleteTest.fromJson( Map< String, dynamic > json ) => _$DeleteTestFromJson( json );
+  factory DeleteTest.fromJson( Map< String, dynamic > json ) => _$DeleteTestFromJson( json );
 
-Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
+  Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
 }
-
 

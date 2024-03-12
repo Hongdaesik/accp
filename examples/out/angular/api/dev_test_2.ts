@@ -55,14 +55,14 @@ export class Dev_test_2Service {
   
   /** 
    * Description: function description 
-   - Code: 200
-   - Complete: true
+     - Code: 200
+     - Complete: true
    *
    * Process: 
-   - nothing
+     - nothing
    *
    * Question:
-   - param1 mark variable explain */
+     - param1 mark variable explain */
   putTest( req?: Req.PutTest ): Observable< Res.PutTest > {
 
     this.preloaderService.start()
@@ -94,14 +94,14 @@ export class Dev_test_2Service {
 
   /** 
    * Description: function description 
-   - Code: 201
-   - Complete: true
+     - Code: 201
+     - Complete: true
    *
    * Process: 
-   - nothing
+     - nothing
    *
    * Question:
-   - param1 mark variable explain */
+     - param1 mark variable explain */
   deleteTest( req?: Req.DeleteTest ): Observable< Res.DeleteTest > {
 
     this.preloaderService.start()
