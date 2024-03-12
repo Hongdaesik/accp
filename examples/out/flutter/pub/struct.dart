@@ -1,9 +1,28 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'struct.g.dart';
 
-/// Description: Response infomation 
+/// Description: Status information 
+@JsonSerializable()
+class Status {
+
+  /// Error code
+  @JsonKey( name: 'code' ) int? code;
+  /// Error message
+  @JsonKey( name: 'message' ) String? message;
+
+  Status( { 
+
+    this.code,
+    this.message
+   } );
+
+  factory Status.fromJson( Map< String, dynamic > json ) => _$StatusFromJson( json );
+
+  Map< String, dynamic > toJson() => _$StatusToJson( this );
+}
+
+/// Description: Response information 
 @JsonSerializable()
 class RES_DATA {
 
@@ -47,7 +66,7 @@ class RES_DATA {
   Map< String, dynamic > toJson() => _$RES_DATAToJson( this );
 }
 
-/// Description: Param infomation 
+/// Description: Param information 
 @JsonSerializable()
 class PARAM_DATA {
 
@@ -81,3 +100,4 @@ class PARAM_DATA {
 
   Map< String, dynamic > toJson() => _$PARAM_DATAToJson( this );
 }
+

@@ -1,7 +1,6 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:fancast_flutter/network/pub/struct.dart';
+import 'package:flutter/pub/struct.dart';
 
 part 'dev_test_2.g.dart';
 
@@ -9,6 +8,8 @@ part 'dev_test_2.g.dart';
 @JsonSerializable()
 class PutTest {
 
+/// Status information *
+  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -30,8 +31,9 @@ class PutTest {
   /// struct array variable
   @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
-  PutTest( { 
+PutTest( { 
 
+    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -44,15 +46,17 @@ class PutTest {
     this.param10
    } );
 
-  factory PutTest.fromJson( Map< String, dynamic > json ) => _$PutTestFromJson( json );
+factory PutTest.fromJson( Map< String, dynamic > json ) => _$PutTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$PutTestToJson( this );
+Map< String, dynamic > toJson() => _$PutTestToJson( this );
 }
 
 /// Description: function description
 @JsonSerializable()
 class DeleteTest {
 
+/// Status information *
+  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -74,8 +78,9 @@ class DeleteTest {
   /// struct array variable
   @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
-  DeleteTest( { 
+DeleteTest( { 
 
+    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -88,7 +93,9 @@ class DeleteTest {
     this.param10
    } );
 
-  factory DeleteTest.fromJson( Map< String, dynamic > json ) => _$DeleteTestFromJson( json );
+factory DeleteTest.fromJson( Map< String, dynamic > json ) => _$DeleteTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
+Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
 }
+
+

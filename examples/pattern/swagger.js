@@ -76,7 +76,7 @@ const LIB = {
           /* You can use it further by setting the desired option value. */
           case 'token': {
 
-            token = ROW.VALUE
+            option.token = ROW.VALUE
 
             break
           }
@@ -299,7 +299,7 @@ function getPath ( API, FUNC ) {
 
   let method = ( FUNC.GET || FUNC.PUT || FUNC.POST || FUNC.PATCH || FUNC.DELETE )
 
-  return PATH.join( '/', API.NAME.toLowerCase(), method ? method : '' )
+  return PATH.join( '/', API.NAME.toLowerCase(), method.length > 1 ? method : method.replace( '/', '' ) )
 }
 
 /**
@@ -592,7 +592,7 @@ function setPath ( OBJ, json ) {
 
       if ( !FUNC.COMP ) continue
 
-      let opt = LIB.path.option()
+      let opt = LIB.path.option( FUNC.OPT )
 
       var path = json.paths[ getPath( API, FUNC ) ] || new Object()
 

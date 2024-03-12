@@ -1,7 +1,6 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:fancast_flutter/network/pub/struct.dart';
+import 'package:flutter/pub/struct.dart';
 
 part 'dev_test_2.g.dart';
 
@@ -80,3 +79,4 @@ class DeleteTest {
 
   Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
 }
+

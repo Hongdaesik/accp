@@ -512,7 +512,7 @@ function setCode ( GEN, OBJ ) {
 
 function CODE() {
 
-  ${ code.join( '\n  ' ) }
+  ${ code.join( '\n' + getTab( 1 ) ) }
 
   /**
    * Error message returned according to user language settings.

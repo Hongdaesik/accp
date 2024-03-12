@@ -1,7 +1,6 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:fancast_flutter/network/pub/struct.dart';
+import 'package:flutter/pub/struct.dart';
 
 part 'dev_test_1.g.dart';
 
@@ -9,6 +8,8 @@ part 'dev_test_1.g.dart';
 @JsonSerializable()
 class GetTest {
 
+/// Status information *
+  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -30,8 +31,9 @@ class GetTest {
   /// struct array variable
   @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
-  GetTest( { 
+GetTest( { 
 
+    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -44,15 +46,17 @@ class GetTest {
     this.param10
    } );
 
-  factory GetTest.fromJson( Map< String, dynamic > json ) => _$GetTestFromJson( json );
+factory GetTest.fromJson( Map< String, dynamic > json ) => _$GetTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$GetTestToJson( this );
+Map< String, dynamic > toJson() => _$GetTestToJson( this );
 }
 
 /// Description: function description
 @JsonSerializable()
 class PostTest {
 
+/// Status information *
+  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -74,8 +78,9 @@ class PostTest {
   /// struct array variable
   @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
-  PostTest( { 
+PostTest( { 
 
+    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -88,7 +93,9 @@ class PostTest {
     this.param10
    } );
 
-  factory PostTest.fromJson( Map< String, dynamic > json ) => _$PostTestFromJson( json );
+factory PostTest.fromJson( Map< String, dynamic > json ) => _$PostTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$PostTestToJson( this );
+Map< String, dynamic > toJson() => _$PostTestToJson( this );
 }
+
+

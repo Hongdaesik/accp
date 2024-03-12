@@ -32,7 +32,13 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/Status"
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#components/schemas/Status"
+                        }
+                      ],
+                      "title": "Status information *"
                     },
                     "param1": {
                       "type": "integer",
@@ -205,7 +211,13 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/Status"
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#components/schemas/Status"
+                        }
+                      ],
+                      "title": "Status information *"
                     },
                     "param1": {
                       "type": "integer",
@@ -359,7 +371,13 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/Status"
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#components/schemas/Status"
+                        }
+                      ],
+                      "title": "Status information *"
                     },
                     "param1": {
                       "type": "integer",
@@ -511,7 +529,13 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "$ref": "#/components/schemas/Status"
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#components/schemas/Status"
+                        }
+                      ],
+                      "title": "Status information *"
                     },
                     "param1": {
                       "type": "integer",

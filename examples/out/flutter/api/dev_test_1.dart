@@ -1,23 +1,21 @@
-
 import 'dart:async';
-import 'dart:collection';
+import 'dart:developer';
 
 import 'package:dio/dio.dart' as dio;
-import 'package:flutter/material.dart';
 
-import 'package:fancast_flutter/network/req/dev_test_1.dart' as req;
-import 'package:fancast_flutter/network/res/dev_test_1.dart' as res;
+import 'package:flutter/res/dev_test_1.dart' as res;
 
-import 'package:fancast_flutter/network/pub/config.dart';
-import 'package:fancast_flutter/network/pub/struct.dart' as struct;
+import 'package:flutter/pub/code.dart';
+import 'package:flutter/pub/config.dart';
+import 'package:flutter/pub/struct.dart' as struct;
 
 class Dev_test_1Service {
 
   static final dio.Dio _dio = dio.Dio(); 
 
   Dev_test_1Service._(); 
-  
-  /// Desc: function description, If [pub] is false, connect to the development server.
+
+    /// Desc: function description
   /// Code: 100
   /// Comp: true
   ///
@@ -27,21 +25,21 @@ class Dev_test_1Service {
   ///
   /// Question:
   /// * param1 mark variable explain
-  static Future< struct.Response > getTest( HashMap< String, String > headers, { req.GetTest? req, bool pub = true, dio.CancelToken? cancelToken } ) async {
+  static Future< struct.Response > gettest( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
 
     /// Debug request
-    if ( !pub ) debugPrint( 'Request name: "get:GetTest", path: "/http://localhost:8080/test1/test", req: "${ req?.toJson() }"' );
+    if ( useLog ) log( 'Request name: "get:GetTest", path: "/http://localhost:8080/test1/test", req: "${ req?.toJson() }"' );
 
-    return _dio.get( '${ pub ? Config.pub : Config.dev }/http://localhost:8080/test1/test', queryParameters: req?.toJson(), options: dio.Options( headers: headers ), cancelToken: cancelToken ).timeout( const Duration( seconds: Config.timeout ), onTimeout: () {
+    return _dio.get( 'http://localhost:8080/test1/test', queryParameters: req?.toJson(), options: dio.Options( headers: headers ), cancelToken: cancelToken ).timeout( const Duration( seconds: Config.timeoutPublic ), onTimeout: () {
 
       throw TimeoutException( null );
 
     } ).then( ( http ) {
 
       /// Debug response
-      if ( !pub ) debugPrint( 'Response name: "get:GetTest", path: "/http://localhost:8080/test1/test", res: "$http"' );
+      if ( useLog ) log( 'Response name: "get:GetTest", path: "/http://localhost:8080/test1/test", res: "$http"' );
   
-      if ( http.statusCode != Config.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
+      if ( http.statusCode != Code.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
   
       struct.Response raw = struct.Response();
   
@@ -52,8 +50,8 @@ class Dev_test_1Service {
       return raw;
     } );
   }
-
-  /// Desc: function description, If [pub] is false, connect to the development server.
+  
+  /// Desc: function description
   /// Code: 101
   /// Comp: true
   ///
@@ -62,21 +60,21 @@ class Dev_test_1Service {
   ///
   /// Question:
   /// * param1 mark variable explain
-  static Future< struct.Response > postTest( HashMap< String, String > headers, { req.PostTest? req, bool pub = true, dio.CancelToken? cancelToken } ) async {
+  static Future< struct.Response > posttest( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
 
     /// Debug request
-    if ( !pub ) debugPrint( 'Request name: "post:PostTest", path: "/http://localhost:8080/test1/test", req: "${ req?.toJson() }"' );
+    if ( useLog ) log( 'Request name: "post:PostTest", path: "/http://localhost:8080/test1/test", req: "${ req?.toJson() }"' );
 
-    return _dio.post( '${ pub ? Config.pub : Config.dev }/http://localhost:8080/test1/test', data: req?.toJson(), options: dio.Options( headers: headers ), cancelToken: cancelToken ).timeout( const Duration( seconds: Config.timeout ), onTimeout: () {
+    return _dio.post( 'http://localhost:8080/test1/test', data: req?.toJson(), options: dio.Options( headers: headers ), cancelToken: cancelToken ).timeout( const Duration( seconds: Config.timeoutPublic ), onTimeout: () {
 
       throw TimeoutException( null );
 
     } ).then( ( http ) {
 
       /// Debug response
-      if ( !pub ) debugPrint( 'Response name: "post:PostTest", path: "/http://localhost:8080/test1/test", res: "$http"' );
+      if ( useLog ) log( 'Response name: "post:PostTest", path: "/http://localhost:8080/test1/test", res: "$http"' );
   
-      if ( http.statusCode != Config.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
+      if ( http.statusCode != Code.statusSuccess ) throw InvalidStatusCodeException( http.statusCode );
   
       struct.Response raw = struct.Response();
   
@@ -87,4 +85,5 @@ class Dev_test_1Service {
       return raw;
     } );
   }
+  
 }
