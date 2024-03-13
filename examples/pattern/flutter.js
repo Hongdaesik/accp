@@ -288,7 +288,7 @@ ${ Array.from( API.FUNC.filter( FUNC => FUNC.COMP ), ( FUNC ) => {
   ///
   /// Question:
   ${ LIB.model.mark( FUNC.MARK ) }
-  static Future< struct.Response > ${ getCapitalize( FUNC.NAME, false ) }( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
+  static Future< struct.Response > ${ getCapitalize( FUNC.NAME, false, false ) }( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
 
     /// Debug request
     if ( useLog ) log( 'Request name: "${ method.NAME }:${ FUNC.NAME }", path: "/${ API.BASE }/${ method.PATH }", req: "\${ req?.toJson() }"' );
