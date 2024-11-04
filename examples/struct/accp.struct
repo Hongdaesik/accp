@@ -7,7 +7,7 @@ STRUCT {
     message String Error message
   }
 
-  RES_DATA Response information {
+  Response Response information {
 
     param1 Int int variable
     param2 Data data variable
@@ -15,7 +15,7 @@ STRUCT {
     param4 Double double variable 
     param5 String string variable
     param6 Boolean boolean variable
-    param7 PARAM_DATA struct variable 
+    param7 Parameter struct variable 
     param8 Int description of the value {
 
       0= explain value
@@ -24,10 +24,10 @@ STRUCT {
       3! explain value
     }
     param9 [Int] int array variable
-    param10 [PARAM_DATA] struct array variable
+    param10 [Parameter] struct array variable
   }
 
-  PARAM_DATA Param information {
+  Parameter Param information {
 
     param1 Int int variable
     param2 Data data variable

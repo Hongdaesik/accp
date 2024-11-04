@@ -6,9 +6,9 @@ const FUNC = require( '..' )
 
 const CODE = require( '../code/code' )
 
-const QUERY = require( '../query/dev_test_1' )
+const QUERY = require( '../query/test1' )
 
-function Dev_test_1 () {}
+function Test1 () {}
 
 /** 
  * Parameter: 
@@ -21,7 +21,7 @@ function Dev_test_1 () {}
  * @param query.param7 struct variable
  * @param query.param8 description of the value
  */
-Dev_test_1.prototype.getTest = async function( req ) {
+Test1.prototype.getTest = async function( req ) {
 
 /* Code for example, please edit it yourself. */
 try {
@@ -102,7 +102,7 @@ try {
  * @param body.param7 struct variable
  * @param body.param8 description of the value
  */
-Dev_test_1.prototype.postTest = async function( req ) {
+Test1.prototype.postTest = async function( req ) {
 
 /* Code for example, please edit it yourself. */
 try {
@@ -172,6 +172,6 @@ try {
 }
 
 
-var dev_test_1 = new Dev_test_1()
+var test1 = new Test1()
 
-module.exports = dev_test_1
+module.exports = test1

@@ -18,10 +18,10 @@
     }
   ],
   "paths": {
-    "/dev_test_1/test": {
+    "/test1/test": {
       "get": {
         "tags": [
-          "dev_test_1"
+          "test1"
         ],
         "summary": "[100] function description",
         "responses": {
@@ -72,7 +72,7 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/Response"
                         }
                       ],
                       "title": "struct variable"
@@ -93,7 +93,7 @@
                     "param10": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/PARAM_DATA"
+                        "$ref": "#/components/schemas/Parameter"
                       },
                       "title": "struct array variable"
                     }
@@ -104,7 +104,7 @@
             "description": "응답 결과"
           }
         },
-        "description": "### Relation.\n* [[101] function description](#dev_test_1/post_dev_test_1_test).\n* [[201] function description](#dev_test_2/delete_dev_test_2_test).\n### Description.\nparam1 mark variable explain",
+        "description": "### Relation.\n* [[101] function description](#test1/post_test1_test).\n* [[201] function description](#test2/delete_test2_test).\n### Description.\nparam1 mark variable explain",
         "parameters": [
           {
             "in": "query",
@@ -177,7 +177,7 @@
               "type": "object",
               "allOf": [
                 {
-                  "$ref": "#components/schemas/PARAM_DATA"
+                  "$ref": "#components/schemas/Parameter"
                 }
               ],
               "title": "struct variable",
@@ -200,7 +200,7 @@
       },
       "post": {
         "tags": [
-          "dev_test_1"
+          "test1"
         ],
         "summary": "[101] function description",
         "responses": {
@@ -251,7 +251,7 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/Response"
                         }
                       ],
                       "title": "struct variable"
@@ -272,7 +272,7 @@
                     "param10": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/PARAM_DATA"
+                        "$ref": "#/components/schemas/Parameter"
                       },
                       "title": "struct array variable"
                     }
@@ -323,7 +323,7 @@
                     "type": "object",
                     "allOf": [
                       {
-                        "$ref": "#components/schemas/PARAM_DATA"
+                        "$ref": "#components/schemas/Parameter"
                       }
                     ],
                     "description": "<details><summary>struct variable</summary><table><tbody><tr><td>param1</td><td><span>integer</span><span>($Int32)</span><div><p>int variable</p></div></td></tr><tr><td>param2</td><td><span>object</span><span></span><div><p>undefined</p></div></td></tr><tr><td>param3</td><td><span>number</span><span>($Float)</span><div><p>float variable</p></div></td></tr><tr><td>param4</td><td><span>number</span><span>($Double)</span><div><p>double variable</p></div></td></tr><tr><td>param5</td><td><span>string</span><span></span><div><p>string variable</p></div></td></tr><tr><td>param6</td><td><span>boolean</span><span></span><div><p>boolean variable</p></div></td></tr><tr><td>param7</td><td><span>integer</span><span>($Int32)</span><div><p>description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value</p></div></td></tr></tbody></table></details>",
@@ -357,10 +357,10 @@
         }
       }
     },
-    "/dev_test_2/test": {
+    "/test2/test": {
       "put": {
         "tags": [
-          "dev_test_2"
+          "test2"
         ],
         "summary": "[200] function description",
         "responses": {
@@ -411,7 +411,7 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/Response"
                         }
                       ],
                       "title": "struct variable"
@@ -432,7 +432,7 @@
                     "param10": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/PARAM_DATA"
+                        "$ref": "#/components/schemas/Parameter"
                       },
                       "title": "struct array variable"
                     }
@@ -483,7 +483,7 @@
                     "type": "object",
                     "allOf": [
                       {
-                        "$ref": "#components/schemas/PARAM_DATA"
+                        "$ref": "#components/schemas/Parameter"
                       }
                     ],
                     "description": "<details><summary>struct variable</summary><table><tbody><tr><td>param1</td><td><span>integer</span><span>($Int32)</span><div><p>int variable</p></div></td></tr><tr><td>param2</td><td><span>object</span><span></span><div><p>undefined</p></div></td></tr><tr><td>param3</td><td><span>number</span><span>($Float)</span><div><p>float variable</p></div></td></tr><tr><td>param4</td><td><span>number</span><span>($Double)</span><div><p>double variable</p></div></td></tr><tr><td>param5</td><td><span>string</span><span></span><div><p>string variable</p></div></td></tr><tr><td>param6</td><td><span>boolean</span><span></span><div><p>boolean variable</p></div></td></tr><tr><td>param7</td><td><span>integer</span><span>($Int32)</span><div><p>description of the value\n* 0= explain value\n* 1> explain value\n* 2< explain value\n* 3! explain value</p></div></td></tr></tbody></table></details>",
@@ -518,7 +518,7 @@
       },
       "delete": {
         "tags": [
-          "dev_test_2"
+          "test2"
         ],
         "summary": "[201] function description",
         "responses": {
@@ -569,7 +569,7 @@
                       "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#components/schemas/RES_DATA"
+                          "$ref": "#components/schemas/Response"
                         }
                       ],
                       "title": "struct variable"
@@ -590,7 +590,7 @@
                     "param10": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/PARAM_DATA"
+                        "$ref": "#/components/schemas/Parameter"
                       },
                       "title": "struct array variable"
                     }
@@ -674,7 +674,7 @@
               "type": "object",
               "allOf": [
                 {
-                  "$ref": "#components/schemas/PARAM_DATA"
+                  "$ref": "#components/schemas/Parameter"
                 }
               ],
               "title": "struct variable",
@@ -730,7 +730,7 @@
         "type": "object",
         "title": "Status ( Status information  )"
       },
-      "RES_DATA": {
+      "Response": {
         "required": [],
         "properties": {
           "param1": {
@@ -770,7 +770,7 @@
             "type": "object",
             "allOf": [
               {
-                "$ref": "#components/schemas/PARAM_DATA"
+                "$ref": "#components/schemas/Parameter"
               }
             ],
             "title": "struct variable",
@@ -794,16 +794,16 @@
           "param10": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PARAM_DATA"
+              "$ref": "#/components/schemas/Parameter"
             },
             "title": "struct array variable",
             "default": "null"
           }
         },
         "type": "object",
-        "title": "RES_DATA ( Response information  )"
+        "title": "Response ( Response information  )"
       },
-      "PARAM_DATA": {
+      "Parameter": {
         "required": [],
         "properties": {
           "param1": {
@@ -847,7 +847,7 @@
           }
         },
         "type": "object",
-        "title": "PARAM_DATA ( Param information  )"
+        "title": "Parameter ( Param information  )"
       }
     }
   }

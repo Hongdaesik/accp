@@ -24,7 +24,7 @@ class Status {
 
 /// Description: Response information 
 @JsonSerializable()
-class RES_DATA {
+class Response {
 
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
@@ -39,15 +39,15 @@ class RES_DATA {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) PARAM_DATA? param7;
+  @JsonKey( name: 'param7' ) Parameter? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
   /// int array variable
   @JsonKey( name: 'param9' ) List< int >? param9;
   /// struct array variable
-  @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
+  @JsonKey( name: 'param10' ) List< Parameter >? param10;
 
-  RES_DATA( { 
+  Response( { 
 
     this.param1,
     this.param2,
@@ -61,14 +61,14 @@ class RES_DATA {
     this.param10
    } );
 
-  factory RES_DATA.fromJson( Map< String, dynamic > json ) => _$RES_DATAFromJson( json );
+  factory Response.fromJson( Map< String, dynamic > json ) => _$ResponseFromJson( json );
 
-  Map< String, dynamic > toJson() => _$RES_DATAToJson( this );
+  Map< String, dynamic > toJson() => _$ResponseToJson( this );
 }
 
 /// Description: Param information 
 @JsonSerializable()
-class PARAM_DATA {
+class Parameter {
 
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
@@ -85,7 +85,7 @@ class PARAM_DATA {
   /// description of the value
   @JsonKey( name: 'param7' ) int? param7;
 
-  PARAM_DATA( { 
+  Parameter( { 
 
     this.param1,
     this.param2,
@@ -96,8 +96,8 @@ class PARAM_DATA {
     this.param7
    } );
 
-  factory PARAM_DATA.fromJson( Map< String, dynamic > json ) => _$PARAM_DATAFromJson( json );
+  factory Parameter.fromJson( Map< String, dynamic > json ) => _$ParameterFromJson( json );
 
-  Map< String, dynamic > toJson() => _$PARAM_DATAToJson( this );
+  Map< String, dynamic > toJson() => _$ParameterToJson( this );
 }
 

@@ -313,11 +313,20 @@ function getOPTParameter ( FUNC ) {
       switch ( opt.NAME ) {
 
         /* You can use it further by setting the desired option value. */
-        case 'token': {
+        case 'option1': {
 
-          parameter.push( {
+          if ( opt.VALUE ) parameter.push( {
 
-            METHOD: 'FUNC.setToken'
+            METHOD: 'FUNC.setOption1'
+          } )
+
+          break
+        }
+        case 'option2': {
+
+          if ( opt.VALUE ) parameter.push( {
+
+            METHOD: 'FUNC.setOption2'
           } )
 
           break
@@ -352,7 +361,7 @@ const FUNC = require( '..' )
 
 const MODEL = require( '../model/${ API.NAME.toLowerCase() }' )
 
-${ Array.from( API.FUNC, FUNC => {
+${ Array.from( API.FUNC.filter( FUNC => FUNC.COMP ), FUNC => {
 
 let method = getMethod( FUNC )
 

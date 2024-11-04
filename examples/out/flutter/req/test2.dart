@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/pub/struct.dart';
 
-part 'dev_test_2.g.dart';
+part 'test2.g.dart';
 
 /// Description: function description
 @JsonSerializable()
@@ -21,7 +21,7 @@ class PutTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) PARAM_DATA? param7;
+  @JsonKey( name: 'param7' ) Parameter? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
 
@@ -59,7 +59,7 @@ class DeleteTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) PARAM_DATA? param7;
+  @JsonKey( name: 'param7' ) Parameter? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
 

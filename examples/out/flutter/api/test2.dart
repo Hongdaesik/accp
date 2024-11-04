@@ -3,17 +3,17 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart' as dio;
 
-import 'package:flutter/res/dev_test_2.dart' as res;
+import 'package:flutter/res/test2.dart' as res;
 
 import 'package:flutter/pub/code.dart';
 import 'package:flutter/pub/config.dart';
 import 'package:flutter/pub/struct.dart' as struct;
 
-class Dev_test_2Service {
+class Test2Service {
 
   static final dio.Dio _dio = dio.Dio(); 
 
-  Dev_test_2Service._(); 
+  Test2Service._(); 
 
   /// Desc: function description
   /// Code: 200
@@ -24,7 +24,7 @@ class Dev_test_2Service {
   ///
   /// Question:
   /// * param1 mark variable explain
-  static Future< struct.Response > puttest( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
+  static Future< struct.Response > putTest( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
 
     /// Debug request
     if ( useLog ) log( 'Request name: "put:PutTest", path: "/http://localhost:8080/test2/test", req: "${ req?.toJson() }"' );
@@ -58,7 +58,7 @@ class Dev_test_2Service {
   ///
   /// Question:
   /// * param1 mark variable explain
-  static Future< struct.Response > deletetest( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
+  static Future< struct.Response > deleteTest( Map< String, String > headers, { dynamic req, bool useLog = false, dio.CancelToken? cancelToken } ) async {
 
     /// Debug request
     if ( useLog ) log( 'Request name: "delete:DeleteTest", path: "/http://localhost:8080/test2/test", req: "${ req?.toJson() }"' );

@@ -41,14 +41,30 @@ export function setAttribute( p: any, d: any ): any {
       continue
     }
 
-    p[ k ] = d[ k ]
+    p[ k ] = d[ k ] instanceof Array ? [ ...d[ k ] ] : d[ k ] instanceof Object ? { ...d[ k ] } : d[ k ]
   }
 
   return p
 }
 
+/** Description: 프리로더 설정 */
+export class Preloader {
+
+  public preloader: PreloaderInterface = {
+
+    animate: true
+  }
+}
+
+export interface PreloaderInterface {
+
+  animate: boolean
+}
+
 /** Description: Status information  */
 export class Status {
+
+  [ key: string ]: any
 
   /** @type { number } Error code */
   public code?: number
@@ -57,8 +73,8 @@ export class Status {
 
   /**
    * @constructor
-   * @param { number } code Error code
-   * @param { string } message Error message
+   * @param { number } data.code Error code
+   * @param { string } data.message Error message
    */
   constructor( data? : { code?: number, message?: string } ) {
 
@@ -79,7 +95,9 @@ export class Status {
 }
 
 /** Description: Response information  */
-export class RES_DATA {
+export class Response {
+
+  [ key: string ]: any
 
   /** @type { number } int variable */
   public param1?: number
@@ -93,29 +111,29 @@ export class RES_DATA {
   public param5?: string
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
-  /** @type { PARAM_DATA } struct variable */
-  public param7: PARAM_DATA = new PARAM_DATA()
+  /** @type { Parameter } struct variable */
+  public param7: Parameter = new Parameter()
   /** @type { number } description of the value */
   public param8?: number
   /** @type { number[] } int array variable */
   public param9?: number[]
-  /** @type { PARAM_DATA[] } struct array variable */
-  public param10: PARAM_DATA[] = []
+  /** @type { Parameter[] } struct array variable */
+  public param10: Parameter[] = []
 
   /**
    * @constructor
-   * @param { number } param1 int variable
-   * @param { any } param2 data variable
-   * @param { number } param3 float variable
-   * @param { number } param4 double variable
-   * @param { string } param5 string variable
-   * @param { boolean | number } param6 boolean variable
-   * @param { Struct.PARAM_DATA } param7 struct variable
-   * @param { number } param8 description of the value
-   * @param { number[] } param9 int array variable
-   * @param { Struct.PARAM_DATA[] } param10 struct array variable
+   * @param { number } data.param1 int variable
+   * @param { any } data.param2 data variable
+   * @param { number } data.param3 float variable
+   * @param { number } data.param4 double variable
+   * @param { string } data.param5 string variable
+   * @param { boolean | number } data.param6 boolean variable
+   * @param { Struct.Parameter } data.param7 struct variable
+   * @param { number } data.param8 description of the value
+   * @param { number[] } data.param9 int array variable
+   * @param { Struct.Parameter[] } data.param10 struct array variable
    */
-  constructor( data? : { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: PARAM_DATA, param8?: number, param9?: number[], param10?: PARAM_DATA[] } ) {
+  constructor( data? : { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: Parameter, param8?: number, param9?: number[], param10?: Parameter[] } ) {
 
     setAttribute( this, data )
   }
@@ -128,12 +146,12 @@ export class RES_DATA {
    * @param { number } data.param4 double variable
    * @param { string } data.param5 string variable
    * @param { boolean | number } data.param6 boolean variable
-   * @param { Struct.PARAM_DATA } data.param7 struct variable
+   * @param { Struct.Parameter } data.param7 struct variable
    * @param { number } data.param8 description of the value
    * @param { number[] } data.param9 int array variable
-   * @param { Struct.PARAM_DATA[] } data.param10 struct array variable
+   * @param { Struct.Parameter[] } data.param10 struct array variable
    */
-  onInit( data?: { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: PARAM_DATA, param8?: number, param9?: number[], param10?: PARAM_DATA[] } ) {
+  onInit( data?: { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: Parameter, param8?: number, param9?: number[], param10?: Parameter[] } ) {
 
     setAttribute( this, data )
 
@@ -142,7 +160,9 @@ export class RES_DATA {
 }
 
 /** Description: Param information  */
-export class PARAM_DATA {
+export class Parameter {
+
+  [ key: string ]: any
 
   /** @type { number } int variable */
   public param1?: number
@@ -161,13 +181,13 @@ export class PARAM_DATA {
 
   /**
    * @constructor
-   * @param { number } param1 int variable
-   * @param { any } param2 data variable
-   * @param { number } param3 float variable
-   * @param { number } param4 double variable
-   * @param { string } param5 string variable
-   * @param { boolean | number } param6 boolean variable
-   * @param { number } param7 description of the value
+   * @param { number } data.param1 int variable
+   * @param { any } data.param2 data variable
+   * @param { number } data.param3 float variable
+   * @param { number } data.param4 double variable
+   * @param { string } data.param5 string variable
+   * @param { boolean | number } data.param6 boolean variable
+   * @param { number } data.param7 description of the value
    */
   constructor( data? : { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: number } ) {
 

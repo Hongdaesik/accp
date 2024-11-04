@@ -138,18 +138,19 @@ const LIB = {
 
     if ( !DATA ) return '*'
 
-    if ( req ) return param.concat( Array.from( DATA, ( ROW ) => `* @param { ${ getClass( ROW.CLASS, true ) }${ getArray( ROW.ARRAY ) } } ${ ROW.NAME } ${ ROW.MARK }` ) ).join( '\n' + getTab( 3, 1 ) )
+    if ( req ) return param.concat( Array.from( DATA, ( ROW ) => `* @param { ${ getClass( ROW.CLASS, true ) }${ getArray( ROW.ARRAY ) } } data.${ ROW.NAME } ${ ROW.MARK }` ) ).join( '\n' + getTab( 3, 1 ) )
 
     return ( clear ? [
 
-      '* @param { { clear?: boolean, param?: any } } data',
+      '* @param { { data?: any, clear?: boolean, preloader?: boolean } } data',
+      '* @param { any? } data.data 할당할 파라미터 객체',
       '* @param { boolean? } data.clear 초기화 여부',
-      '* @param { any? } data.param 할당할 파라미터 객체'
+      '* @param { boolean? } data.preloader 프리로더 여부',
     ] : [
 
       '* @param { any } data'
 
-    ] ).concat( Array.from( DATA, ( ROW ) => `* @param { ${ getClass( ROW.CLASS, true ) }${ getArray( ROW.ARRAY ) } } data${ clear ? '.param' : '' }.${ ROW.NAME } ${ ROW.MARK }` ) ).join( '\n' + getTab( 3, 1 ) )
+    ] ).concat( Array.from( DATA, ( ROW ) => `* @param { ${ getClass( ROW.CLASS, true ) }${ getArray( ROW.ARRAY ) } } data${ clear ? '.data' : '' }.${ ROW.NAME } ${ ROW.MARK }` ) ).join( '\n' + getTab( 3, 1 ) )
   },
 
   /**
@@ -292,7 +293,6 @@ function getCapitalize ( str, upper = true, lower = true ) {
 
 /**
  * Create model file.
- * 
  */
 function setModel ( OBJ, GEN ) {
 
@@ -305,25 +305,40 @@ function setModel ( OBJ, GEN ) {
 
     api.print( `
 
-import { Observable, map } from 'rxjs'
+import {
+  map, 
+  catchError,
+  Observable, 
+  ObservableInput
+} from 'rxjs'
 
+import { 
+  Injectable 
+} from '@angular/core'
 import { 
   HttpClient, 
   HttpParams,
   HttpHeaders
 } from '@angular/common/http'
 
-import { 
-  Injectable 
-} from '@angular/core'
-
-/* Virtual file for writing example code. */
 import {
   ConfigService
 } from 'src/app/service/config.service'
 import {
+  Modal,
+  ModalService
+} from 'src/app/service/modal.service'
+import {
   PreloaderService
 } from 'src/app/service/preloader.service'
+
+import { 
+  Config 
+} from 'src/app/app.config'
+
+import {
+  environment
+} from 'src/environments/environment'
 
 /* import request */
 import * as Req from '../req/${ API.NAME.toLowerCase() }'
@@ -340,26 +355,54 @@ export class ${ getCapitalize( API.NAME ) }Service {
   constructor(
 
     private http: HttpClient,
-    
-    /* Virtual file for writing example code. */
-    private configService: ConfigService,
-    private preloaderService: PreloaderService
-  ) {}
 
-  setReq( param: any, encode: boolean = false ) {
+    private modalService: ModalService,
+    private configService: ConfigService,
+    private preloaderService: PreloaderService ) {}
+
+  /**
+   * Description: API 요청 결과 공용 콜백 설정
+   */
+  private error = ( error: any ): ObservableInput< any > => {
+  
+    this.preloaderService.stop()
+
+    this.modalService.modal( new Modal( error ) )
+
+    return error
+  }
+
+  private response = ( response: any ): void => {
+
+    this.preloaderService.stop()
+
+    return response
+  }
+  
+  /**
+   * Description: 요청 파라미터 확인
+   * @param { any } param - 파라미터 
+   * @param { boolean } [encode=false] - 인코드 여부
+   */
+  setReq( param: any, encode: boolean = false ): any {
 
     try {
 
-      if ( param == null || param == 'null' || param == undefined || param == 'undefined' ) return ''
+      if ( 
+      
+        param == null || 
+        param == 'null' || 
+        param == undefined || 
+        param == 'undefined' ) return ''
 
       return encode ? encodeURIComponent( param ) : param
 
-    } catch ( _ ) {
+    } catch {
 
       return ''
     }
   }
-  ${ Array.from( API.FUNC, ( FUNC ) => {
+  ${ Array.from( API.FUNC.filter( FUNC => FUNC.COMP ), ( FUNC ) => {
 
     var method = LIB.model.method( FUNC )
 
@@ -376,24 +419,13 @@ export class ${ getCapitalize( API.NAME ) }Service {
      ${ LIB.model.mark( FUNC.MARK ) } */
   ${ getCapitalize( FUNC.NAME, false, false ) }( req?: Req.${ FUNC.NAME } ): Observable< Res.${ FUNC.NAME } > {
 
-    this.preloaderService.start()
+    if ( !req || req?.preloader?.animate ) this.preloaderService.start()
 
     let parameters: HttpParams = new HttpParams()
 
     ${ LIB.model.paramters( FUNC.REQ ) }
 
-    return this.http.${ method.NAME } < Res.${ FUNC.NAME } > ( '${ API.BASE }/${ method.PATH }${ method.QUERY ? '?\' +' : '\',' } parameters, { headers: this.configService.headers } ).pipe( map( res => {
-
-      this.preloaderService.stop()
-
-      return res
-
-    }, ( error: any ) => {
-
-      this.preloaderService.stop()
-
-      alert( error )
-    } ) )
+    return this.http.${ method.NAME } < Res.${ FUNC.NAME } > ( environment.api.concat( '/api/${ API.BASE }/${ method.PATH }${ method.QUERY ? '?\' ).concat( parameters.toString() )' : '\' ), parameters' }, { headers: this.configService.headers } ).pipe( map( this.response ), catchError( this.error ) )
   }`
   } ).join( '\n' ) }
 }
@@ -413,7 +445,7 @@ import * as Struct from '../pub/struct'
 ${ Array.from( API.FUNC, FUNC => `
 
 /** Description: ${ FUNC.DESC } */
-export class ${ FUNC.NAME } {
+export class ${ FUNC.NAME } extends Struct.Preloader {
 
   ${ LIB.initialize( FUNC.NAME, FUNC.REQ, true ) }
 
@@ -421,19 +453,23 @@ export class ${ FUNC.NAME } {
    * @constructor
    ${ LIB.annotation( FUNC.REQ, true ) }
    */
-  constructor( ${ LIB.constructor( FUNC.REQ, true ) } ) {
+  constructor( data?: { ${ LIB.constructor( FUNC.REQ, true ) } } ) {
 
-    Struct.setAttribute( this, { ${ Array.from( FUNC?.REQ || [], ROW => `${ ROW.NAME }: ${ ROW.NAME }` ).join( ', ' ) } } )
+    super()
+
+    Struct.setAttribute( this, data )
   }
 
   /** 초기화 함수
    ${ LIB.annotation( FUNC.REQ, false, true ) }
    */
-  onInit( data?: { clear?: boolean, param?: { ${ LIB.constructor( FUNC.REQ, true ) } } } ) {
+  onInit( data?: { clear?: boolean, data?: { ${ LIB.constructor( FUNC.REQ, true ) } }, preloader?: Struct.PreloaderInterface } ) {
 
     if ( data?.clear ) Struct.setClear( this )
 
-    Struct.setAttribute( this, Struct.setClone( data?.param ) )
+    if ( data?.preloader ) this.preloader = data.preloader
+
+    Struct.setAttribute( this, Struct.setClone( data?.data ) )
 
     return this
   }
@@ -530,16 +566,32 @@ export function setAttribute( p: any, d: any ): any {
       continue
     }
 
-    p[ k ] = d[ k ]
+    p[ k ] = d[ k ] instanceof Array ? [ ...d[ k ] ] : d[ k ] instanceof Object ? { ...d[ k ] } : d[ k ]
   }
 
   return p
+}
+
+/** Description: 프리로더 설정 */
+export class Preloader {
+
+  public preloader: PreloaderInterface = {
+
+    animate: true
+  }
+}
+
+export interface PreloaderInterface {
+
+  animate: boolean
 }
 
 ${ Array.from( OBJ.STRUCT, STRUCT => `
 
 /** Description: ${ STRUCT.MARK } */
 export class ${ STRUCT.NAME } {
+
+  [ key: string ]: any
 
   ${ LIB.initialize( STRUCT.NAME, STRUCT.DATA ) }
 

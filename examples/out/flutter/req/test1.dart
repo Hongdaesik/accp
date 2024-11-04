@@ -2,14 +2,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/pub/struct.dart';
 
-part 'dev_test_1.g.dart';
+part 'test1.g.dart';
 
 /// Description: function description
 @JsonSerializable()
 class GetTest {
 
-  /// Status information *
-  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -23,17 +21,12 @@ class GetTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) RES_DATA? param7;
+  @JsonKey( name: 'param7' ) Parameter? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
-  /// int array variable
-  @JsonKey( name: 'param9' ) List< int >? param9;
-  /// struct array variable
-  @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
   GetTest( { 
 
-    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -41,9 +34,7 @@ class GetTest {
     this.param5,
     this.param6,
     this.param7,
-    this.param8,
-    this.param9,
-    this.param10
+    this.param8
    } );
 
   factory GetTest.fromJson( Map< String, dynamic > json ) => _$GetTestFromJson( json );
@@ -55,8 +46,6 @@ class GetTest {
 @JsonSerializable()
 class PostTest {
 
-  /// Status information *
-  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -70,17 +59,12 @@ class PostTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) RES_DATA? param7;
+  @JsonKey( name: 'param7' ) Parameter? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
-  /// int array variable
-  @JsonKey( name: 'param9' ) List< int >? param9;
-  /// struct array variable
-  @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
 
   PostTest( { 
 
-    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -88,9 +72,7 @@ class PostTest {
     this.param5,
     this.param6,
     this.param7,
-    this.param8,
-    this.param9,
-    this.param10
+    this.param8
    } );
 
   factory PostTest.fromJson( Map< String, dynamic > json ) => _$PostTestFromJson( json );

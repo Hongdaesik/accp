@@ -1,53 +1,96 @@
-import { Observable, map } from 'rxjs'
+import {
+  map, 
+  catchError,
+  Observable, 
+  ObservableInput
+} from 'rxjs'
 
+import { 
+  Injectable 
+} from '@angular/core'
 import { 
   HttpClient, 
   HttpParams,
   HttpHeaders
 } from '@angular/common/http'
 
-import { 
-  Injectable 
-} from '@angular/core'
-
-/* Virtual file for writing example code. */
 import {
   ConfigService
 } from 'src/app/service/config.service'
 import {
+  Modal,
+  ModalService
+} from 'src/app/service/modal.service'
+import {
   PreloaderService
 } from 'src/app/service/preloader.service'
 
+import { 
+  Config 
+} from 'src/app/app.config'
+
+import {
+  environment
+} from 'src/environments/environment'
+
 /* import request */
-import * as Req from '../req/dev_test_2'
+import * as Req from '../req/test2'
 
 /* import response */
-import * as Res from '../res/dev_test_2'
+import * as Res from '../res/test2'
 
 @Injectable( {
 
   providedIn: 'root'
 } )
-export class Dev_test_2Service {
+export class Test2Service {
 
   constructor(
 
     private http: HttpClient,
-    
-    /* Virtual file for writing example code. */
-    private configService: ConfigService,
-    private preloaderService: PreloaderService
-  ) {}
 
-  setReq( param: any, encode: boolean = false ) {
+    private modalService: ModalService,
+    private configService: ConfigService,
+    private preloaderService: PreloaderService ) {}
+
+  /**
+   * Description: API 요청 결과 공용 콜백 설정
+   */
+  private error = ( error: any ): ObservableInput< any > => {
+  
+    this.preloaderService.stop()
+
+    this.modalService.modal( new Modal( error ) )
+
+    return error
+  }
+
+  private response = ( response: any ): void => {
+
+    this.preloaderService.stop()
+
+    return response
+  }
+  
+  /**
+   * Description: 요청 파라미터 확인
+   * @param { any } param - 파라미터 
+   * @param { boolean } [encode=false] - 인코드 여부
+   */
+  setReq( param: any, encode: boolean = false ): any {
 
     try {
 
-      if ( param == null || param == 'null' || param == undefined || param == 'undefined' ) return ''
+      if ( 
+      
+        param == null || 
+        param == 'null' || 
+        param == undefined || 
+        param == 'undefined' ) return ''
 
       return encode ? encodeURIComponent( param ) : param
 
-    } catch ( _ ) {
+    } catch {
 
       return ''
     }
@@ -65,7 +108,7 @@ export class Dev_test_2Service {
      - param1 mark variable explain */
   putTest( req?: Req.PutTest ): Observable< Res.PutTest > {
 
-    this.preloaderService.start()
+    if ( !req || req?.preloader?.animate ) this.preloaderService.start()
 
     let parameters: HttpParams = new HttpParams()
 
@@ -78,18 +121,7 @@ export class Dev_test_2Service {
     .set( 'param7', encodeURIComponent( JSON.stringify( req?.param7 ) ) )
     .set( 'param8', this.setReq( req?.param8 ) )
 
-    return this.http.put < Res.PutTest > ( 'http://localhost:8080/test2/test', parameters, { headers: this.configService.headers } ).pipe( map( res => {
-
-      this.preloaderService.stop()
-
-      return res
-
-    }, ( error: any ) => {
-
-      this.preloaderService.stop()
-
-      alert( error )
-    } ) )
+    return this.http.put < Res.PutTest > ( environment.api.concat( '/api/http://localhost:8080/test2/test' ), parameters, { headers: this.configService.headers } ).pipe( map( this.response ), catchError( this.error ) )
   }
 
   /** 
@@ -104,7 +136,7 @@ export class Dev_test_2Service {
      - param1 mark variable explain */
   deleteTest( req?: Req.DeleteTest ): Observable< Res.DeleteTest > {
 
-    this.preloaderService.start()
+    if ( !req || req?.preloader?.animate ) this.preloaderService.start()
 
     let parameters: HttpParams = new HttpParams()
 
@@ -117,17 +149,6 @@ export class Dev_test_2Service {
     .set( 'param7', encodeURIComponent( JSON.stringify( req?.param7 ) ) )
     .set( 'param8', this.setReq( req?.param8 ) )
 
-    return this.http.delete < Res.DeleteTest > ( 'http://localhost:8080/test2/test?' + parameters, { headers: this.configService.headers } ).pipe( map( res => {
-
-      this.preloaderService.stop()
-
-      return res
-
-    }, ( error: any ) => {
-
-      this.preloaderService.stop()
-
-      alert( error )
-    } ) )
+    return this.http.delete < Res.DeleteTest > ( environment.api.concat( '/api/http://localhost:8080/test2/test?' ).concat( parameters.toString() ), { headers: this.configService.headers } ).pipe( map( this.response ), catchError( this.error ) )
   }
 }

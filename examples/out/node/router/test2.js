@@ -4,7 +4,7 @@ const ROUTER = require( 'express' ).Router()
 /* Virtual file for writing example code. */
 const FUNC = require( '..' )
 
-const MODEL = require( '../model/dev_test_2' )
+const MODEL = require( '../model/test2' )
 
 /** 
  * Code: 200

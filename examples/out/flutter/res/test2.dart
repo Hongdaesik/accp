@@ -2,12 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/pub/struct.dart';
 
-part 'dev_test_1.g.dart';
+part 'test2.g.dart';
 
 /// Description: function description
 @JsonSerializable()
-class GetTest {
+class PutTest {
 
+  /// Status information *
+  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -21,12 +23,17 @@ class GetTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) PARAM_DATA? param7;
+  @JsonKey( name: 'param7' ) Response? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
+  /// int array variable
+  @JsonKey( name: 'param9' ) List< int >? param9;
+  /// struct array variable
+  @JsonKey( name: 'param10' ) List< Parameter >? param10;
 
-  GetTest( { 
+  PutTest( { 
 
+    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -34,18 +41,22 @@ class GetTest {
     this.param5,
     this.param6,
     this.param7,
-    this.param8
+    this.param8,
+    this.param9,
+    this.param10
    } );
 
-  factory GetTest.fromJson( Map< String, dynamic > json ) => _$GetTestFromJson( json );
+  factory PutTest.fromJson( Map< String, dynamic > json ) => _$PutTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$GetTestToJson( this );
+  Map< String, dynamic > toJson() => _$PutTestToJson( this );
 }
 
 /// Description: function description
 @JsonSerializable()
-class PostTest {
+class DeleteTest {
 
+  /// Status information *
+  @JsonKey( name: 'status' ) Status? status;
   /// int variable
   @JsonKey( name: 'param1' ) int? param1;
   /// data variable
@@ -59,12 +70,17 @@ class PostTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) PARAM_DATA? param7;
+  @JsonKey( name: 'param7' ) Response? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
+  /// int array variable
+  @JsonKey( name: 'param9' ) List< int >? param9;
+  /// struct array variable
+  @JsonKey( name: 'param10' ) List< Parameter >? param10;
 
-  PostTest( { 
+  DeleteTest( { 
 
+    this.status,
     this.param1,
     this.param2,
     this.param3,
@@ -72,11 +88,13 @@ class PostTest {
     this.param5,
     this.param6,
     this.param7,
-    this.param8
+    this.param8,
+    this.param9,
+    this.param10
    } );
 
-  factory PostTest.fromJson( Map< String, dynamic > json ) => _$PostTestFromJson( json );
+  factory DeleteTest.fromJson( Map< String, dynamic > json ) => _$DeleteTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$PostTestToJson( this );
+  Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
 }
 

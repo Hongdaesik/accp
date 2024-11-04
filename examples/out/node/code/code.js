@@ -2,12 +2,12 @@
 
 function CODE() {
 
-  /* TEST_CODE_1 */
-  this.TEST_CODE_1_error_1 = 1
-  this.TEST_CODE_1_error_2 = 2
-  /* TEST_CODE_2 */
-  this.TEST_CODE_2_error_1 = 1
-  this.TEST_CODE_2_error_2 = 2
+  /* API */
+  this.API_ERROR1 = 1
+  this.API_ERROR2 = 2
+  /* SYSTEM */
+  this.SYSTEM_ERROR1 = 1
+  this.SYSTEM_ERROR2 = 2
 
   /**
    * Error message returned according to user language settings.
@@ -23,10 +23,10 @@ function CODE() {
 
         switch ( code ) {
 
-          /* TEST_CODE_1 */
+          /* API */
           case 1: return 'Korean description'
           case 2: return 'Korean description'
-          /* TEST_CODE_2 */
+          /* SYSTEM */
           case 1: return 'Korean description'
           case 2: return 'Korean description'
         }
@@ -37,10 +37,10 @@ function CODE() {
 
         switch ( code ) {
 
-          /* TEST_CODE_1 */
+          /* API */
           case 1: return 'Japanese description'
           case 2: return 'Japanese description'
-          /* TEST_CODE_2 */
+          /* SYSTEM */
           case 1: return 'Japanese description'
           case 2: return 'Japanese description'
         }
@@ -51,10 +51,10 @@ function CODE() {
 
         switch ( code ) {
 
-          /* TEST_CODE_1 */
+          /* API */
           case 1: return 'English description'
           case 2: return 'English description'
-          /* TEST_CODE_2 */
+          /* SYSTEM */
           case 1: return 'English description'
           case 2: return 'English description'
         }

@@ -15,14 +15,14 @@ export class PutTest {
   public param5?: string
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
-  /** @type { Struct.RES_DATA } struct variable */
-  public param7: Struct.RES_DATA = new Struct.RES_DATA()
+  /** @type { Struct.Response } struct variable */
+  public param7: Struct.Response = new Struct.Response()
   /** @type { number } description of the value */
   public param8?: number
   /** @type { number[] } int array variable */
   public param9?: number[]
-  /** @type { Struct.PARAM_DATA[] } struct array variable */
-  public param10: Struct.PARAM_DATA[] = []
+  /** @type { Struct.Parameter[] } struct array variable */
+  public param10: Struct.Parameter[] = []
 
   /** @type { Struct.Status | undefined } 상태 정보 */
   public status?: Struct.Status
@@ -36,12 +36,12 @@ export class PutTest {
    * @param { number } data.param4 double variable
    * @param { string } data.param5 string variable
    * @param { boolean | number } data.param6 boolean variable
-   * @param { Struct.RES_DATA } data.param7 struct variable
+   * @param { Struct.Response } data.param7 struct variable
    * @param { number } data.param8 description of the value
    * @param { number[] } data.param9 int array variable
-   * @param { Struct.PARAM_DATA[] } data.param10 struct array variable
+   * @param { Struct.Parameter[] } data.param10 struct array variable
    */
-  constructor( data?: { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: Struct.RES_DATA, param8?: number, param9?: number[], param10?: Struct.PARAM_DATA[] } ) {
+  constructor( data?: { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: Struct.Response, param8?: number, param9?: number[], param10?: Struct.Parameter[] } ) {
 
     Struct.setAttribute( this, data )
   }
@@ -61,14 +61,14 @@ export class DeleteTest {
   public param5?: string
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
-  /** @type { Struct.RES_DATA } struct variable */
-  public param7: Struct.RES_DATA = new Struct.RES_DATA()
+  /** @type { Struct.Response } struct variable */
+  public param7: Struct.Response = new Struct.Response()
   /** @type { number } description of the value */
   public param8?: number
   /** @type { number[] } int array variable */
   public param9?: number[]
-  /** @type { Struct.PARAM_DATA[] } struct array variable */
-  public param10: Struct.PARAM_DATA[] = []
+  /** @type { Struct.Parameter[] } struct array variable */
+  public param10: Struct.Parameter[] = []
 
   /** @type { Struct.Status | undefined } 상태 정보 */
   public status?: Struct.Status
@@ -82,12 +82,12 @@ export class DeleteTest {
    * @param { number } data.param4 double variable
    * @param { string } data.param5 string variable
    * @param { boolean | number } data.param6 boolean variable
-   * @param { Struct.RES_DATA } data.param7 struct variable
+   * @param { Struct.Response } data.param7 struct variable
    * @param { number } data.param8 description of the value
    * @param { number[] } data.param9 int array variable
-   * @param { Struct.PARAM_DATA[] } data.param10 struct array variable
+   * @param { Struct.Parameter[] } data.param10 struct array variable
    */
-  constructor( data?: { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: Struct.RES_DATA, param8?: number, param9?: number[], param10?: Struct.PARAM_DATA[] } ) {
+  constructor( data?: { param1?: number, param2?: any, param3?: number, param4?: number, param5?: string, param6?: boolean | number, param7?: Struct.Response, param8?: number, param9?: number[], param10?: Struct.Parameter[] } ) {
 
     Struct.setAttribute( this, data )
   }

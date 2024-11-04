@@ -2,16 +2,16 @@
 CODE {
 
   /* mark 1 */
-  TEST_CODE_1 code description {
+  API code description {
 
-    1 error_1 {
+    1 ERROR1 {
 
       ko Korean description
       ja Japanese description
       en English description
     }
 
-    2 error_2 {
+    2 ERROR2 {
 
       ko Korean description
       ja Japanese description
@@ -20,16 +20,16 @@ CODE {
   }
 
   /* mark 2 */
-  TEST_CODE_2 code description {
+  SYSTEM code description {
 
-    1 error_1 {
+    1 ERROR1 {
 
       ko Korean description
       ja Japanese description
       en English description
     }
 
-    2 error_2 {
+    2 ERROR2 {
 
       ko Korean description
       ja Japanese description

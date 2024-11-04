@@ -6,7 +6,7 @@ import struct/accp.struct
 API {
 
   /* mark 1 */
-  DEV_TEST_1 class description {
+  TEST1 class description {
 
     BASE http://localhost:8080/test1
 
@@ -16,8 +16,8 @@ API {
 
       PROC {
 
-        101 DEV_TEST_1.PostTest
-        201 DEV_TEST_2.DeleteTest
+        101 TEST1.PostTest
+        201 TEST2.DeleteTest
       }
 
       GET test
@@ -35,7 +35,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 PARAM_DATA struct variable 
+        param7 Parameter struct variable 
         param8 Int description of the value {
 
           0= explain value
@@ -53,7 +53,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 RES_DATA struct variable
+        param7 Response struct variable
         param8 Int description of the value {
 
           0= explain value
@@ -62,13 +62,13 @@ API {
           3! explain value
         }
         param9 [Int] int array variable
-        param10 [PARAM_DATA] struct array variable
+        param10 [Parameter] struct array variable
       }
 
       OPT {
 
-        image true
-        option passed in the declared value
+        option1 true
+        option2 false
       }
     }
 
@@ -91,7 +91,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 PARAM_DATA struct variable 
+        param7 Parameter struct variable 
         param8 Int description of the value {
 
           0= explain value
@@ -109,7 +109,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 RES_DATA struct variable
+        param7 Response struct variable
         param8 Int description of the value {
 
           0= explain value
@@ -118,13 +118,13 @@ API {
           3! explain value
         }
         param9 [Int] int array variable
-        param10 [PARAM_DATA] struct array variable
+        param10 [Parameter] struct array variable
       }
     }
   }
 
   /* mark 2 */
-  DEV_TEST_2 class description {
+  TEST2 class description {
 
     BASE http://localhost:8080/test2
 
@@ -147,7 +147,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 PARAM_DATA struct variable 
+        param7 Parameter struct variable 
         param8 Int description of the value {
 
           0= explain value
@@ -165,7 +165,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 RES_DATA struct variable
+        param7 Response struct variable
         param8 Int description of the value {
 
           0= explain value
@@ -174,7 +174,7 @@ API {
           3! explain value
         }
         param9 [Int] int array variable
-        param10 [PARAM_DATA] struct array variable
+        param10 [Parameter] struct array variable
       }
     }
 
@@ -197,7 +197,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 PARAM_DATA struct variable 
+        param7 Parameter struct variable 
         param8 Int description of the value {
 
           0= explain value
@@ -215,7 +215,7 @@ API {
         param4 Double double variable 
         param5 String string variable
         param6 Boolean boolean variable
-        param7 RES_DATA struct variable
+        param7 Response struct variable
         param8 Int description of the value {
 
           0= explain value
@@ -224,7 +224,7 @@ API {
           3! explain value
         }
         param9 [Int] int array variable
-        param10 [PARAM_DATA] struct array variable
+        param10 [Parameter] struct array variable
       }
     }
   }

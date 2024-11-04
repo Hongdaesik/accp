@@ -4,7 +4,7 @@ const ROUTER = require( 'express' ).Router()
 /* Virtual file for writing example code. */
 const FUNC = require( '..' )
 
-const MODEL = require( '../model/dev_test_1' )
+const MODEL = require( '../model/test1' )
 
 /** 
  * Code: 100
@@ -12,12 +12,12 @@ const MODEL = require( '../model/dev_test_1' )
  * Description: function description 
  * 
  * Process: 
- * * [DEV_TEST_1.PostTest] 101
- * * [DEV_TEST_2.DeleteTest] 201
+ * * [TEST1.PostTest] 101
+ * * [TEST2.DeleteTest] 201
  *
  * Question:
  * * param1 mark variable explain */
-ROUTER.get( '/test', /* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {
+ROUTER.get( '/test', FUNC.setOption1, /* Declare a function for parameter value existence and data restriction. */ function ( req, res, next ) {
 
   let response = FUNC.chkVal( req, {
 

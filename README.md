@@ -122,7 +122,7 @@ OBJ = {
           DESC: String
       
           /* Request method: address */
-          ( GET | PUT | POST | DELETE ): String
+          ( GET | PUT | POST | PATCH | DELETE ): String
       
           /* Completion status */
           COMP: ( true | false )
@@ -278,6 +278,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 `1.2.3-beta` : Add sample pattern file (Flutter, Node JS).
 
 `1.3.0-beta` : Modified main library & example pattern code. / Added Angular example pattern file. / When creating a file with `new Gen(path)`, if there is no path corresponding to path, a folder is created.
+
+`1.3.3` : Modified Angular & NodeJS sample file and fixed issue with false value not being applied to OPT parameter.
 
 <br><br>
 

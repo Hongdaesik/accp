@@ -2,11 +2,11 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/pub/struct.dart';
 
-part 'dev_test_2.g.dart';
+part 'test1.g.dart';
 
 /// Description: function description
 @JsonSerializable()
-class PutTest {
+class GetTest {
 
   /// Status information *
   @JsonKey( name: 'status' ) Status? status;
@@ -23,15 +23,15 @@ class PutTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) RES_DATA? param7;
+  @JsonKey( name: 'param7' ) Response? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
   /// int array variable
   @JsonKey( name: 'param9' ) List< int >? param9;
   /// struct array variable
-  @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
+  @JsonKey( name: 'param10' ) List< Parameter >? param10;
 
-  PutTest( { 
+  GetTest( { 
 
     this.status,
     this.param1,
@@ -46,14 +46,14 @@ class PutTest {
     this.param10
    } );
 
-  factory PutTest.fromJson( Map< String, dynamic > json ) => _$PutTestFromJson( json );
+  factory GetTest.fromJson( Map< String, dynamic > json ) => _$GetTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$PutTestToJson( this );
+  Map< String, dynamic > toJson() => _$GetTestToJson( this );
 }
 
 /// Description: function description
 @JsonSerializable()
-class DeleteTest {
+class PostTest {
 
   /// Status information *
   @JsonKey( name: 'status' ) Status? status;
@@ -70,15 +70,15 @@ class DeleteTest {
   /// boolean variable
   @JsonKey( name: 'param6' ) int? param6;
   /// struct variable
-  @JsonKey( name: 'param7' ) RES_DATA? param7;
+  @JsonKey( name: 'param7' ) Response? param7;
   /// description of the value
   @JsonKey( name: 'param8' ) int? param8;
   /// int array variable
   @JsonKey( name: 'param9' ) List< int >? param9;
   /// struct array variable
-  @JsonKey( name: 'param10' ) List< PARAM_DATA >? param10;
+  @JsonKey( name: 'param10' ) List< Parameter >? param10;
 
-  DeleteTest( { 
+  PostTest( { 
 
     this.status,
     this.param1,
@@ -93,8 +93,8 @@ class DeleteTest {
     this.param10
    } );
 
-  factory DeleteTest.fromJson( Map< String, dynamic > json ) => _$DeleteTestFromJson( json );
+  factory PostTest.fromJson( Map< String, dynamic > json ) => _$PostTestFromJson( json );
 
-  Map< String, dynamic > toJson() => _$DeleteTestToJson( this );
+  Map< String, dynamic > toJson() => _$PostTestToJson( this );
 }
 
