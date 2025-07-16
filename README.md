@@ -1,3 +1,5 @@
+![](https://cdn.bettep.org/accp/icon.512x256.webp)
+
 ## Auto Create Code with Pattern files
 
 Built to automatically create API codes or documents using concise code. You can change the code to what you want by using the pattern.
@@ -73,7 +75,7 @@ The following code shall be included in the `pattern/*.js` file.
 
 <br>
 
-![Compile result](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/compile.jpg)
+![Compile result](https://cdn.bettep.org/accp/1.webp)
 
 <br><br>
 
@@ -203,41 +205,31 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 #### .api
 
-![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/api.jpg)
+![](https://cdn.bettep.org/accp/2.webp)
 
 ###### Usage prefix 
 
-`api` : Snippet for api.
-
-`api class` : Snippet for api class.
-
-`api function` : Snippet for api function.
+`API` : Snippet for api.
 
 <br>
 
 #### .code
 
-![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/code.jpg)
+![](https://cdn.bettep.org/accp/3.webp)
 
 ###### Usage prefix
 
-`code` : Snippet for code.
-
-`code class` : Snippet for code class.
-
-`code function` : Snippet for code function.
+`CODE` : Snippet for code.
 
 <br>
 
 #### .struct
 
-![](https://raw.githubusercontent.com/Hongdaesik/accp/master/img/struct.jpg)
+![](https://cdn.bettep.org/accp/4.webp)
 
 ###### Usage prefix
 
-`struct` : Snippet for struct.
-
-`struct function` : Snippet for struct function.
+`STRUCT` : Snippet for struct.
 
 <br><br>
 
@@ -280,6 +272,8 @@ accp language is provided as a [visual code extension program](https://marketpla
 `1.3.0-beta` : Modified main library & example pattern code. / Added Angular example pattern file. / When creating a file with `new Gen(path)`, if there is no path corresponding to path, a folder is created.
 
 `1.3.3` : Modified Angular & NodeJS sample file and fixed issue with false value not being applied to OPT parameter.
+
+`1.4.0` : Enhanced data validation features, more reliable error log output.
 
 <br><br>
 

@@ -12,7 +12,7 @@ export class GetTest extends Struct.Preloader {
   /** @type { number } double variable */
   public param4?: number
   /** @type { string } string variable */
-  public param5?: string
+  public param5?: string = ''
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
   /** @type { Struct.Parameter } struct variable */
@@ -75,7 +75,7 @@ export class PostTest extends Struct.Preloader {
   /** @type { number } double variable */
   public param4?: number
   /** @type { string } string variable */
-  public param5?: string
+  public param5?: string = ''
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
   /** @type { Struct.Parameter } struct variable */

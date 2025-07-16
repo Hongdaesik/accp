@@ -193,10 +193,13 @@ const LIB = {
         case 'Int':
         case 'Float':
         case 'Double':
-        case 'String':
         case 'Boolean': {
 
           return `/** @type { ${ getClass( ROW.CLASS, struct ) }${ getArray( ROW.ARRAY ) } } ${ ROW.MARK } */\n${ getTab( 1 ) }public ${ROW.NAME }?: ${ getClass( ROW.CLASS, struct ) }${ getArray( ROW.ARRAY ) }`
+        }
+        case 'String': {
+
+          return `/** @type { ${ getClass( ROW.CLASS, struct ) }${ getArray( ROW.ARRAY ) } } ${ ROW.MARK } */\n${ getTab( 1 ) }public ${ROW.NAME }?: ${ getClass( ROW.CLASS, struct ) }${ getArray( ROW.ARRAY ) }${ !ROW.ARRAY ? ' = \'\'' : '' }`
         }
         default: {
 

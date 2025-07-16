@@ -12,7 +12,7 @@ export class PutTest {
   /** @type { number } double variable */
   public param4?: number
   /** @type { string } string variable */
-  public param5?: string
+  public param5?: string = ''
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
   /** @type { Struct.Response } struct variable */
@@ -58,7 +58,7 @@ export class DeleteTest {
   /** @type { number } double variable */
   public param4?: number
   /** @type { string } string variable */
-  public param5?: string
+  public param5?: string = ''
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
   /** @type { Struct.Response } struct variable */

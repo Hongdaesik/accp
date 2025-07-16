@@ -69,7 +69,7 @@ export class Status {
   /** @type { number } Error code */
   public code?: number
   /** @type { string } Error message */
-  public message?: string
+  public message?: string = ''
 
   /**
    * @constructor
@@ -108,7 +108,7 @@ export class Response {
   /** @type { number } double variable */
   public param4?: number
   /** @type { string } string variable */
-  public param5?: string
+  public param5?: string = ''
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
   /** @type { Parameter } struct variable */
@@ -173,7 +173,7 @@ export class Parameter {
   /** @type { number } double variable */
   public param4?: number
   /** @type { string } string variable */
-  public param5?: string
+  public param5?: string = ''
   /** @type { boolean | number } boolean variable */
   public param6?: boolean | number
   /** @type { number } description of the value */

@@ -723,7 +723,7 @@
           },
           "message": {
             "type": "string",
-            "description": "* 1: Korean description\n* 2: Korean description\n* 1: Korean description\n* 2: Korean description",
+            "description": "* 1: Korean description\n* 2: Korean description\n* 3: Korean description\n* 4: Korean description",
             "default": "null"
           }
         },
