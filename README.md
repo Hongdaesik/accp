@@ -273,7 +273,7 @@ accp language is provided as a [visual code extension program](https://marketpla
 
 `1.3.3` : Modified Angular & NodeJS sample file and fixed issue with false value not being applied to OPT parameter.
 
-`1.4.1` : Enhanced data validation features, more reliable error log output.
+`1.4.3` : Enhanced data validation features, more reliable error log output.
 
 <br><br>
 
